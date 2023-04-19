@@ -1,0 +1,721 @@
+{
+    "test": true,
+    "gaga" : "xxxx",
+    "wines": [
+      {
+        "title": "Amazon Anmelden",
+        "login": "pius.graber@gmail.com",
+        "password": "zorro4W5",
+        "login_url": "https://www.amazon.com/ap/signin"
+      },
+      {
+        "title": "Anmelden - Buchungen verwalten - easyJet.com",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "claudia.graber@bluemail.ch",
+        "password": "]uO7tw,71LWApWioLU[I",
+        "login_url": "https://www.easyjet.com/mylogin/de-DE/LogOn"
+      },
+      {
+        "title": "app.aldi-mobile.ch",
+        "login": "0787080809",
+        "password": "zorro@al",
+        "login_url": "https://app.aldi-mobile.ch/html2/de/app2.html"
+      },
+      {
+        "title": "appleid.apple.com",
+        "login": "pg@webdata.ch",
+        "password": "Zorro417",
+        "login_url": "https://appleid.apple.com/auth/authorize?client_id=ch.srgssr.login.b2c.srgssrlogin&redirect_uri=https%3a%2f%2fsrgssrlogin.b2clogin.com%2fsrgssrlogin.onmicrosoft.com%2foauth2%2fauthresp&response_type=code&scope=email&response_mode=form_post&nonce=lmnk6o4oj1tcyDmTe7xHoQ%3d%3d&state=StateProperties%3deyJTSUQiOiJ4LW1zLWNwaW0tcmM6ZDllZTZhNjUtZTdiMC00ZjZkLWIzMWUtMWFmNDAyZWFmNDA0IiwiVElEIjoiMjcyZDE1ZmMtNjQzZi00MzRkLWIyYzYtMjQ1NDEyODExMjllIiwiVE9JRCI6ImFjNmIwZDQxLTliY2UtNGNlYi04MTFkLTQ3ZjJiZjc1OTE4ZCJ9"
+      },
+      {
+        "title": "ASP SMS",
+        "login": "pius.graber@ceweb.ch",
+        "password": "Zorro4asp",
+        "login_url": "https://www.aspsms.com/de/login/"
+      },
+      {
+        "title": "aspsms.ch - Login",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pius.graber@ceweb.ch",
+        "password": "Zorro4asp",
+        "login_url": "https://aspsms.ch/de/login/"
+      },
+      {
+        "title": "auth.kaercher.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@krch",
+        "login_url": "https://auth.kaercher.com/login?signin=2a98c4df31747de0141042b833f0429d"
+      },
+      {
+        "title": "AWS Chregu",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "c.daengeli@gmail.com",
+        "password": "LqJy3?QEdMQdoh#?",
+        "login_url": "https://aws.amazon.com/de/console/"
+      },
+      {
+        "title": "AWS Gmail",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pius.graber@gmail.com",
+        "password": "zorro@4W5",
+        "login_url": "https://aws.amazon.com/de/console/"
+      },
+      {
+        "title": "AWS Pius",
+        "login": "pius@ceweb.ch",
+        "password": "zorro@4W5",
+        "login_url": "https://aws.amazon.com/de/console/"
+      },
+      {
+        "title": "AWS Workmail",
+        "login": "pg",
+        "password": "zorro@W0rK",
+        "login_url": "https://ce.awsapps.com/auth/"
+      },
+      {
+        "title": "Bestellvorgang",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "G7ru$etSZH[DFpsf{3t^",
+        "login_url": "https://www.teleskopschienen24.de/Bestellvorgang"
+      },
+      {
+        "title": "bitiba.ch | Tierbedarf & Tierfutter zu TOP-Preisen",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "7QDX}]S{(dxM0y1T)OmK",
+        "login_url": "https://www.bitiba.ch/checkout/login.htm"
+      },
+      {
+        "title": "BRACK.CH - besser online einkaufen",
+        "login": "pius.graber@webdata.ch",
+        "password": "zorro@Brck",
+        "login_url": "https://www.brack.ch/anmelden"
+      },
+      {
+        "title": "BuyIn",
+        "login": "pg@webdata.ch",
+        "password": "pkr@2007",
+        "login_url": "https://buy-in.info/tournament/90731"
+      },
+      {
+        "title": "CH-LOGIN - Anmeldung",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "Zorro@MW57",
+        "login_url": "https://idp-egov-private.gate.eiam.admin.ch/auth/saml2/broker/"
+      },
+      {
+        "title": "contrustfinance.immomigsa.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@sms",
+        "login_url": "https://contrustfinance.immomigsa.ch/de/users/invite/?route=pdf%2Fdossier%2F2590785%2F2590785_contrustfinance.pdf"
+      },
+      {
+        "title": "Crush With Us",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "ZAr.}eT!B70pRjC?udzV",
+        "login_url": "https://crushwithus-70cb5.firebaseapp.com/rangeview.html"
+      },
+      {
+        "title": "Einloggen | Etsy",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "zorro@etsy",
+        "login_url": "https://www.etsy.com/ch/signin"
+      },
+      {
+        "title": "eTermin",
+        "login": "Pius.Graber",
+        "password": "hrdrqs2y",
+        "login_url": "https://termin.e-app.eu/plan-c-fitness"
+      },
+      {
+        "title": "eTermin",
+        "login": "Pius.Graber",
+        "password": "zorro@pcf",
+        "login_url": "https://termin.e-app.eu/plan-c-fitness"
+      },
+      {
+        "title": "Fortigate",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "admin",
+        "password": "zorro@gs3",
+        "login_url": "https://192.168.1.99/login"
+      },
+      {
+        "title": "FSCH - loginoutline",
+        "login": "22640000",
+        "password": "igNb4UE8",
+        "login_url": "https://test-fsch.abacuscity.ch/de/loginoutline"
+      },
+      {
+        "title": "github.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@8th",
+        "login_url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fusers%2Fpiusgraber%2Femails%2F101270633%2Fconfirm_verification%2F8ebaf0676189716479e57e2374d53ef4f7ddea79%3Futm_campaign%3Dgithub-email-verification%26utm_content%3Dhtml%26utm_medium%3Demail%26utm_source%3Dverification-email"
+      },
+      {
+        "title": "Google-Konto erstellen",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "etzmatt1",
+        "password": "charly01",
+        "login_url": "https://accounts.google.com/signup/v2/webcreateaccount"
+      },
+      {
+        "site": "galaxus",
+        "title": "id.digitecgalaxus.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@67X",
+        "login_url": "https://id.digitecgalaxus.ch/login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fclient_id%3Dshau.galaxus.ch%26redirect_uri%3Dhttps%253A%252F%252Fwww.galaxus.ch%252Fauth%252Fsignin-oidc%26response_type%3Dcode%26scope%3Dopenid%2520profile%2520customerinfo%2520email%2520roles%2520custom.profile%2520offline_access%26code_challenge%3DT34ibqWLCVblBi9RNOzIVIHLAoZkcJTKr6rpNCkthps%26code_challenge_method%3DS256%26response_mode%3Dform_post%26nonce%3D637558949565522135.YTJjMzMzMGItM2Q3NC00Y2VjLTk0ZDQtMGU5OTdlNzBmMmEyMDdhNzgwNzAtZDMzOC00NzZlLThiZTctMDM0ODQwM2E5ZmNi%26acr_values%3Dtenant%253Agalaxus.ch%26ui_locales%3Dde-CH%26state%3DCfDJ8GduDLIdSRlMk2hsq6TTKnKkbuNn_nFJNOCMXM8Hx-dqdoTuN7tN24N5vUIDjLIp3TllpnkQgtVvV1obb1iMb21OvSQRDYRlTTK2sNpo46aRnKoEVriYUbTjYxaoyS-Qd_VOXl84RAfd9ZfZT9DPNGaD1thVDNyzmXgGmu1gk05rdyd3YiwFW11clVGkazuZdgIMhrYQs8FpC83m26MgfW0kRsGOLGbTPdm0jOsTNARrS0zC9enOzRPuw6Zlr5GBAoHneibqPzzO4Nk7T6RbvKcgaK1BXp4KK6JnjWQNwwQcxHDGhxf8jAscUTBR6hTCzHVnQU6HK3DNlCGRhimm9U6gfRVgcvDVhherbbmiI-xEx0KS4c3Vn-9Orf8ySXAIOFrUEpL983GF2M9GhI24qr0"
+      },
+      {
+        "title": "id.docker.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@dkr",
+        "login_url": "https://id.docker.com/login/?next=%2Fid%2Foauth%2Fauthorize%2F%3Fclient_id%3D43f17c5f-9ba4-4f13-853d-9d0074e349a7%26next%3D%252F%253Foverlay%253Dbilling%26nonce%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI0M2YxN2M1Zi05YmE0LTRmMTMtODUzZC05ZDAwNzRlMzQ5YTciLCJleHAiOjE1ODk2Mjg1MjIsImlhdCI6MTU4OTYyODIyMiwicmZwIjoick9UbVNwY1E3WV9oZTlmVlYtUmxldz09IiwidGFyZ2V0X2xpbmtfdXJpIjoiLz9vdmVybGF5PWJpbGxpbmcifQ.lw1j4cBLtTNGy2rbU3t3bcTdzU3uIqSoXrNfulyLwn8%26redirect_uri%3Dhttps%253A%252F%252Fhub.docker.com%252Fsso%252Fcallback%26ref%3Dlogin%26response_type%3Dcode%26scope%3Dopenid%26state%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI0M2YxN2M1Zi05YmE0LTRmMTMtODUzZC05ZDAwNzRlMzQ5YTciLCJleHAiOjE1ODk2Mjg1MjIsImlhdCI6MTU4OTYyODIyMiwicmZwIjoick9UbVNwY1E3WV9oZTlmVlYtUmxldz09IiwidGFyZ2V0X2xpbmtfdXJpIjoiLz9vdmVybGF5PWJpbGxpbmcifQ.lw1j4cBLtTNGy2rbU3t3bcTdzU3uIqSoXrNfulyLwn8"
+      },
+      {
+        "title": "Konto - Vinazion",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "graber.pius",
+        "password": "zorro@v1Nz",
+        "login_url": "https://vinazion.ch/my-account/"
+      },
+      {
+        "title": "Kundenlogin",
+        "login": "pg@webdata.ch",
+        "password": "zorro@RFS",
+        "login_url": "https://shop.motisan.ch/customer/account/login/"
+      },
+      {
+        "title": "Kundenlogin",
+        "login": "pg@webdata.ch",
+        "password": "zorro@RFS",
+        "login_url": "https://shop.motisan.ch/customer/account/login/"
+      },
+      {
+        "title": "lead.car-ware.ch",
+        "login": "ad@webdata.ch",
+        "password": "ad",
+        "login_url": "https://lead.car-ware.ch/carware/"
+      },
+      {
+        "title": "Login zum persönlichen Bereich - Mein Pixum | Pixum",
+        "login": "pg@webdata.ch",
+        "password": "zorro@p1x",
+        "login_url": "https://www.pixum.ch/mein-pixum-login"
+      },
+      {
+        "title": "login.live.com",
+        "login": "ms@webdata.ch",
+        "password": "zorro@micros",
+        "login_url": "https://login.live.com/oauth20_authorize.srf?client_id=00000000480728C5&response_type=token&redirect_uri=https://login.live.com/oauth20_desktop.srf&lw=1&nopa=1&noauthcancel=1&scope=service::officeapps.live.com::MBI_SSL_SHORT&haschrome=1&display=ios_phone&username=ms@webdata.ch&mkt=de-DE&av=1044942.1.2&uaid=a2d62b07b8946d45a9636395099bf198&fl=flname"
+      },
+      {
+        "title": "login.migros.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@M16",
+        "login_url": "https://login.migros.ch/login"
+      },
+      {
+        "title": "login.scl.swisscom.ch",
+        "login": "pius.graber",
+        "password": "zorrosc1",
+        "login_url": "https://login.scl.swisscom.ch/submit-username"
+      },
+      {
+        "title": "map.schweizmobil.ch",
+        "login": "pg@webdata.ch",
+        "password": "ac5l1twp",
+        "login_url": "https://map.schweizmobil.ch/?language=de&lang=de&photos=yes&logo=yes&season=summer&resolution=1.5&E=2670549&N=1202496&bgLayer=pk&layers=Wanderland"
+      },
+      {
+        "title": "Mein Konto",
+        "login": "pg@webdata.ch",
+        "password": "zorro@sm",
+        "login_url": "https://www.schweizmobilplus.ch/schweizmobilplus/service/login.html"
+      },
+      {
+        "title": "Member Benefits",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "zorro@5E00",
+        "login_url": "https://sedo.com/member/register.php"
+      },
+      {
+        "title": "mrvegan.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@mrv",
+        "login_url": "https://mrvegan.ch/checkout/shippingPayment"
+      },
+      {
+        "title": "MWST",
+        "login": "pius.graber",
+        "password": "Zorro@MW57",
+        "login_url": "https://idp-base.gate.eiam.admin.ch/auth/saml2/sso/ESTV"
+      },
+      {
+        "title": "mycasino – Mein Schweizer Online-Casino",
+        "login": "pg@webdata.ch",
+        "password": "t1T7$c6vNZbqjPGUA0G3",
+        "login_url": "https://www.mycasino.ch/"
+      },
+      {
+        "title": "npm | Sign Up",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "s3m>6AfApVS=G!?kPfNM",
+        "login_url": "https://www.npmjs.com/signup"
+      },
+      {
+        "title": "Online Casino Schweiz | Casino Online Spielen | Casino777",
+        "login": "isibub",
+        "password": "16pm;P(,(eN^Dl36wYX,",
+        "login_url": "https://www.casino777.ch/"
+      },
+      {
+        "title": "Online Casino Schweiz | Casino Online Spielen | Casino777",
+        "login": "pius.graber@webdata.ch",
+        "password": "Zorro@957",
+        "login_url": "https://www.casino777.ch/"
+      },
+      {
+        "title": "Online-Kurse: Wann und wo immer es dir gefällt | Udemy",
+        "login": "pg@webdata.ch",
+        "password": "zorro@udm",
+        "login_url": "https://www.udemy.com/join/login-popup/"
+      },
+      {
+        "title": "online.swisscasinos.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@5c5",
+        "login_url": "https://online.swisscasinos.ch/?action=login"
+      },
+      {
+        "title": "Oracle Login - Single Sign-on",
+        "login": "pg@webdata.ch",
+        "password": "zorroggl",
+        "login_url": "https://login.oracle.com/mysso/signon.jsp"
+      },
+      {
+        "title": "Passwortänderung | Nespresso",
+        "login": "pg@webdata.ch",
+        "password": "Zorro@N59",
+        "login_url": "https://www.nespresso.com/ch/de/resetPassword"
+      },
+      {
+        "title": "PC-Ostschweiz Computer Online Shop",
+        "login": "pg@webdata.ch",
+        "password": "zorro@pco",
+        "login_url": "https://www.pc-ostschweiz.ch/RequestPassword.htm"
+      },
+      {
+        "title": "PC-Ostschweiz.ch: Elektronik günstig einkaufen seit 2003",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "Pius.graber",
+        "password": "zorro@960",
+        "login_url": "https://www.pc-ostschweiz.ch/de/"
+      },
+      {
+        "title": "peoplepowerco.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@prs",
+        "login_url": "https://peoplepowerco.com"
+      },
+      {
+        "title": "pg@webdata.ch",
+        "login": "pg@webdata.ch",
+        "password": "Zorro@364",
+        "login_url": "https://"
+      },
+      {
+        "title": "pg@webdata.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@C64",
+        "login_url": "https://"
+      },
+      {
+        "title": "pg@webdata.ch",
+        "login": "pg@webdata.ch",
+        "password": "Zorro@364",
+        "login_url": "https://"
+      },
+      {
+        "title": "portainer.webdata.ch",
+        "login": "admin",
+        "password": "zorro@ptn",
+        "login_url": "https://portainer.webdata.ch/#!/auth"
+      },
+      {
+        "title": "Raise Your Edge!",
+        "login": "pg@webdata.ch",
+        "password": "zorro@rye",
+        "login_url": "https://www.raiseyouredge.com/amember/login"
+      },
+      {
+        "title": "re-entry.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@pkr",
+        "login_url": "https://re-entry.ch/"
+      },
+      {
+        "title": "Registrierung | Perlsacktiere.de",
+        "login": "pg@webdata.ch",
+        "password": "Gh4Ry!Uzobv@xeYh0o0k",
+        "login_url": "https://perlsacktiere.de/checkout/shippingPayment"
+      },
+      {
+        "title": "service-login.sso.bluewin.ch",
+        "login": "pius.graber",
+        "password": "zorrosc1",
+        "login_url": "https://service-login.sso.bluewin.ch/submit-username"
+      },
+      {
+        "title": "Servus!Apotheke – wir pulverisieren Preise!",
+        "login": "pg@webdata.ch",
+        "password": "zorro@sva",
+        "login_url": "https://www.servusapotheke.at/onestepcheckout/"
+      },
+      {
+        "title": "shop.heilkundeinstitut.at",
+        "login": "pg@webdata.ch",
+        "password": "#!LEB#Tz",
+        "login_url": "https://shop.heilkundeinstitut.at/index.php?page=customer&page_action=login"
+      },
+      {
+        "title": "shop.motisan.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@R0F",
+        "login_url": "https://shop.motisan.ch/customer/account/login/"
+      },
+      {
+        "title": "shop.robert-franz-naturversand.ch",
+        "login": "pg@webdata.ch",
+        "password": "Zorro@rfs",
+        "login_url": "https://shop.robert-franz-naturversand.ch/customer/account/login/"
+      },
+      {
+        "title": "shop0004.zattoo.com",
+        "login": "pg@webdata.ch",
+        "password": "p<OpxnCDxn2$.i.Ogp?y",
+        "login_url": "https://shop0004.zattoo.com/start/signup"
+      },
+      {
+        "title": "Sign up New - Clickatell | Clickatell",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "zorro@C47",
+        "login_url": "https://www.clickatell.com/sign-up/"
+      },
+      {
+        "title": "SSL-Zertifikate kaufen | DigiCert",
+        "login": "piusgraber",
+        "password": "Zorro@d9c7",
+        "login_url": "https://order.digicert.com/step2"
+      },
+      {
+        "title": "swizzonic Login",
+        "login": "3637072",
+        "password": "Zorro@sw2204",
+        "login_url": "https://login.swizzonic.ch/Login.aspx"
+      },
+      {
+        "title": "Testplattform",
+        "login": "pg@webdata.ch",
+        "password": "zorro@qr",
+        "login_url": "https://isotestsec.postfinance.ch/corporates/"
+      },
+      {
+        "title": "Testplattform",
+        "login": "pg@webdata.ch",
+        "password": "txsW8nOUbMf!h07%v6T4",
+        "login_url": "https://isotestsec.postfinance.ch/corporates/"
+      },
+      {
+        "title": "Testplattform",
+        "login": "pg@webdata.ch",
+        "password": "zorro@0r",
+        "login_url": "https://isotestsec.postfinance.ch/corporates/"
+      },
+      {
+        "title": "Testplattform",
+        "login": "pg@webdata.ch",
+        "password": "Zorro@p0fi",
+        "login_url": "https://isotestsec.postfinance.ch/banks/"
+      },
+      {
+        "title": "Vaccine Control Group: Request ID Cards",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "=4Y#F83749G4aBpS;LRd",
+        "login_url": "https://members.vaxcontrolgroup.com/passwordreset/577b5f5ae8ef438abc102cd58d9d9028"
+      },
+      {
+        "title": "Vielen Dank - microspot.ch",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "[AC!UW^I>B!Z<9m+cITs",
+        "login_url": "https://www.microspot.ch/de/orderconfirmation"
+      },
+      {
+        "title": "vinazion.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@w1n€",
+        "login_url": "https://vinazion.ch/my-account/?password-reset=true"
+      },
+      {
+        "title": "Warenkorb - Falconeri",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": ",n.@HNPGxA+%Z?T4(0gv",
+        "login_url": "https://www.falconeri.com/ch/cart/"
+      },
+      {
+        "title": "Webmin",
+        "login": "pius.graber",
+        "password": "zorroce",
+        "login_url": "https://ns1.comtronic.ch:10001/"
+      },
+      {
+        "title": "Wein-Sortiment online kaufen | coop.ch",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "pg@webdata.ch",
+        "password": "zorro@3009",
+        "login_url": "https://www.coop.ch/de/weine/wein-sortiment/c/m_2508"
+      },
+      {
+        "title": "www.amazon.de",
+        "login": "pius@ceweb.ch",
+        "password": "zorroam",
+        "login_url": "https://www.amazon.de/ap/signin?clientContext=262-2033184-6442946&openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.audible.de%2Faccount%2Fsettings%3Fref%3Dleftnav_account%26ref%3Da_search_t1_navLeft_s1r1%26pf_rd_p%3D4be2edde-7d59-45b8-92f0-393b075bc13d%26pf_rd_r%3DK6HSA6D6ER4WBFMJ81K4&forceMobileLayout=true&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=audible_shared_web_de&openid.mode=checkid_setup&siteState=audibleid.userType%3Damzn%2Caudibleid.mode%3Did_res&marketPlaceId=AN7V1F1VY261K&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=amzn_audible_de&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+      },
+      {
+        "title": "www.casino777.ch",
+        "login": "isibub",
+        "password": "Zorro@957",
+        "login_url": "https://www.casino777.ch/api_ps/v1/getLogin?language=de"
+      },
+      {
+        "title": "www.danieleganser.online",
+        "login": "pg@webdata.ch",
+        "password": "uE6Bm3mT4",
+        "login_url": "https://www.danieleganser.online/anmelden"
+      },
+      {
+        "title": "www.minnig-metzgerei.ch",
+        "login": "pius.graber@bluewin.ch",
+        "password": "zorro@mng",
+        "login_url": "https://www.minnig-metzgerei.ch/checkout/shippingPayment/sTarget/checkout"
+      },
+      {
+        "title": "www.netflix.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@nfx",
+        "login_url": "https://www.netflix.com"
+      },
+      {
+        "title": "www.pokergo.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@960",
+        "login_url": "https://www.pokergo.com/login"
+      },
+      {
+        "title": "www.raiseyouredge.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@rye",
+        "login_url": "https://www.raiseyouredge.com/amember/login?_amember_redirect_url=aHR0cHM6Ly93d3cucmFpc2V5b3VyZWRnZS5jb206NDQzL2xlc3NvbnMvY3J1c2hpbmctc2F0ZWxsaXRlcy1zb21lLWF1ZGlvLWlzc3Vlcw%3D%3D"
+      },
+      {
+        "title": "www.swisslos.ch",
+        "login": "PiusGraber",
+        "password": "Zorro@57",
+        "login_url": "https://www.swisslos.ch/de/tech/login.html;jsessionid=8BD7EC2EEF8027D188334E6D9324E2D6-n1"
+      },
+      {
+        "title": "medion.com",
+        "login": "pius.graber@webdata.ch",
+        "password": "Charly*03",
+        "login_url": "https://www.medion.com/ch/de/"
+      },
+      {
+        "title": "www.udemy.com",
+        "login": "pg@webdata.ch",
+        "password": "zorro@udm",
+        "login_url": "https://www.udemy.com/join/login-popup/?locale=de_DE&response_type=html&next=https%3A%2F%2Fwww.udemy.com%2Fcourse%2Fdeep-learning-grundlagen-neuronale-netzwerke-mit-tensorflow%2F%3Fdeal_code%3DBRANDPILLAR0520%26utm_source%3Demail-Adhoc%26utm_campaign%3D2020-05-27_._cn_BRAND_PILLAR_05_2020_REDUCED_._en_TOP_._us_AllAlltl_T1_._tg_n_.__._la_de_._rn_2020-05-27_._%26utm_medium%3D2020-05-27_BRAND_PILLAR_05_2020_TOP_AllAll_T1_n%26utm_content%3Dudemy.17036685%26data_h%3DAkIScllVRnQ%253D%26utm_term%3DUSER_SEARCH_RECOM_2%26xref%3Dwish%26courseId%3D1404090&return_link=https%3A%2F%2Fwww.udemy.com%2Fcourse%2Fdeep-learning-grundlagen-neuronale-netzwerke-mit-tensorflow%2F%3Fdeal_code%3DBRANDPILLAR0520%26utm_source%3Demail-Adhoc%26utm_campaign%3D2020-05-27_._cn_BRAND_PILLAR_05_2020_REDUCED_._en_TOP_._us_AllAlltl_T1_._tg_n_.__._la_de_._rn_2020-05-27_._%26utm_medium%3D2020-05-27_BRAND_PILLAR_05_2020_TOP_AllAll_T1_n%26utm_content%3Dudemy.17036685%26data_h%3DAkIScllVRnQ%253D%26utm_term%3DUSER_SEARCH_RECOM_2&source=course_landing_page"
+      },
+      {
+        "title": "www.zooplus.ch",
+        "login": "pg@webdata.ch",
+        "password": "zorro@zpl",
+        "login_url": "https://www.zooplus.ch/account"
+      },
+      {
+        "title": "www.zweifel.ch",
+        "login": "pg@webdata.ch",
+        "password": "tkf+.j[SBgd!EWvsc9z8",
+        "login_url": "https://www.zweifel.ch/ch_de/profile/?display=editProfile&returnURL=https://www.zweifel.ch/ch_de/index.cfm/wettbewerbe/champion-chips-2022/?action=verify&promotionId=57&refresh=&promoCode=Kshureampr&agree=1?registered=1"
+      },
+      {
+        "title": "XFact 2019",
+        "$type": "login",
+        "schema": [
+          "$login::1",
+          "$password::1",
+          "$url::1",
+          "$fileRef::1",
+          "$oneTimeCode::1"
+        ],
+        "login": "ce",
+        "password": "zorrox",
+        "login_url": "http://localhost:5000/"
+      },
+      {
+        "title": "xfact.ch",
+        "login": "ce",
+        "password": "zorrox",
+        "login_url": "http://xfact.ch/"
+      }
+    ]
+  }
