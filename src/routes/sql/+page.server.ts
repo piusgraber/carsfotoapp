@@ -15,6 +15,8 @@ const config = {
 
 
 const fetch = sqlString => {
+    console.log("HI")
+    console.log(sqlString)
     return new Promise(
         function (resolve, reject) {
 //            var sql = require("mssql");
