@@ -20,7 +20,9 @@
 		state?: number;
 		status?: string;
 		abgabe?: Date;
+		datumerf?: Date;
 		abgabeDatum?: string;
+		erfasst?: string;
 		kunde?: string;
 		garage?: string;
 	};
@@ -46,6 +48,8 @@
 		filteredList.map((z) => {
 			try {
 				z.abgabeDatum = z.abgabe ? formatter.format(new Date(z.abgabe)) : '';
+				z.erfasst = z.datumerf ? formatter.format(new Date(z.datumerf)) : '';
+				
 			} catch (err) {}
 		});
 	}
@@ -66,10 +70,9 @@
 			{zeile.id}
 		</div>
 	-->
-		<div class="link" on:click={() => showLead(zeile.guid)} on:keydown={() => showLead(zeile.guid)}>
-			{zeile.spracheid}
+		<div class="link" on:click={() => showLead(zeile.guid)} on:keydown={() => showLead(zeile.guid)} title="{zeile.erfasst}">
 			{#if zeile.service}
-				.
+				S
 			{/if}
 		</div>
 		<div class="cell-kunde"><span> {zeile.kunde}</span></div>

@@ -45,10 +45,15 @@ let lpsrc = null
 </script>
 
 <div>
+    <a href="/liste/offene">Liste</a>
 </div>
 <div class="grid">
 	<div class="kunde">
 		<h1>Lead</h1>
+		{#if !lead.service}
+		<span class="alert">KEIN SERVICE !!!!</span>
+		<br/>
+		{/if}
 		{#if mitarbeiter.id == lead.recallmaid}
 			-> für mich reserviert
 		{:else if lead.recallmaid != 0}
@@ -79,7 +84,11 @@ let lpsrc = null
 		<h1>&#160;</h1>
 		Garage
 		<br/>
-		{lead.garage}
+		<b>{lead.garage}</b>
+		<br/>
+		Fahrzeug
+		<br/>
+		<b>{lead.marke} {lead.modell} {lead.typ}</b>
 	</div>
 <div>
 	<button on:click={showLanding}>Landing-Page {lpsrc ? 'ausblenden' : 'ausfüllen'}</button>
@@ -124,5 +133,9 @@ let lpsrc = null
 
 	.kunde {
 		font-size: 1.2rem;
+	}
+	.alert {
+		background-color: rgb(230, 86, 86);
+		color:rgb(255, 255, 255);
 	}
 </style>

@@ -12,7 +12,7 @@
 </script>
 <body>
 <div>
-    Benutzer: {data.user.name}
+    Benutzer: {data.user.name}  
 </div>
 <slot />
 </body>
