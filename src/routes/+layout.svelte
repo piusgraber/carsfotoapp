@@ -1,20 +1,23 @@
 <script lang="ts">
-    import Menuitem from "../lib/Menuitem.svelte";
-	import Titel from "../lib/Titel.svelte";
-	import type { LayoutData } from "./$types";
+	import type { LayoutData } from './$types';
+    import {goto} from '$app/navigation';
+	export let data: LayoutData;
 
-    export let data : LayoutData;
+
+    let listName = '';
+
+    const showList = () => {
+        goto('/liste/' + listName)
+    }
 </script>
-<Titel caption="Mein Weinkeller" />
+<body>
 <div>
-<menubar>
-    <Menuitem caption="Uebersicht" path="/"/>
-    <Menuitem caption="Rotwein" path="/red"/>
-    <Menuitem caption="Weisswein" path="/white"/>
-</menubar>
+    Benutzer: {data.user.name}
 </div>
-<slot></slot>
-
+<slot />
+</body>
 <style>
-
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
 </style>
