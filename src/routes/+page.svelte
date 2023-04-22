@@ -1,27 +1,9 @@
 <script lang="ts">
-	type Zeile = {
-		abgabe: Date;
-	};
+	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 
-	let liste: Zeile[] = [
-		{
-			abgabe: new Date()
-		},
-		{
-			abgabe: new Date()
-		},
-		{
-			abgabe: new Date()
-		},
-		{
-			abgabe: new Date()
-		}
-	];
+	onMount(() => {
+        goto('/liste/open')
+	})
 </script>
 
-<div>Liste</div>
-{#each liste as zeile}
-<div>
-	{zeile.abgabe}
-</div>
-{/each}

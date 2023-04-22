@@ -1,4 +1,6 @@
+import { goto } from '$app/navigation';
 import { fetchLeadsByRecallStatus } from '$lib/fetch';
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
@@ -18,40 +20,30 @@ export const load: PageServerLoad = async ({ params }) => {
     let status: number;
     console.log(listName)
     switch (listName) {
-        case 'Leads':
+        case 'leads':
             status = 9;
             break;
-        case 'offene':
+        case 'open':
             status = 1;
             break;
-        case 'kein Service':
+        case 'noservice':
             status = -1;
             break;
-        case 'History':
+        case 'history':
             status = 7;
             break;
-        case 'reserviert':
+        case 'res':
             status = 8;
             break;
-        default:
+        case 'all':
             status = 0;
+            break;
+        default:
+            status=0;
+            throw redirect(302, '/liste/open');
+
     }
-    /*
-        type Lead = {
-            id: string;
-            guid: string;
-            state?: number;
-            status?: string;
-            abgabe?: Date;
-            abgabeDatum?: string;
-        }
-        let lead: Lead[] = await fetchLeadsByRecallStatus(status);
-        lead.map(l => {
-            console.log(l.abgabe)
-            l.abgabeDatum = l.abgabe ? formatter.format(new Date(l.abgabe)) : '';
-        })
-    */
+
     let lead: [] = await fetchLeadsByRecallStatus(status);
-    //    console.log(lead)
-    return { leads: lead };
+    return { liste: listName,  leads: lead };
 }

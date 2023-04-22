@@ -45,7 +45,7 @@ let lpsrc = null
 </script>
 
 <div>
-    <a href="/liste/offene">Liste</a>
+    <a href="/liste/open">Liste</a>
 </div>
 <div class="grid">
 	<div class="kunde">

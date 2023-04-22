@@ -10,14 +10,17 @@
         goto('/liste/' + listName)
     }
 </script>
-<body>
+<main>
 <div>
-    Benutzer: {data.user.name}  
+    Benutzer: {data.user.name}  ( {data.user.initialen} {data.user.cwTelefon} )
+    {#if data.user.sprachen.de}DE {/if}
+    {#if data.user.sprachen.fr}FR {/if}
+    {#if data.user.sprachen.it}IT {/if}
 </div>
 <slot />
-</body>
+</main>
 <style>
-    body {
+    main {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
 </style>

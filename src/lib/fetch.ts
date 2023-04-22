@@ -14,13 +14,16 @@ export const fetchALead: FetchALead = async guid => {
 
 
 export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async type => {
-    const url = 'https://api.car-ware.ch/recallLeads?type=' + type
+    let url = 'https://api.car-ware.ch/recallLeads?type=' + type
+    if (type==0) {
+        url += '&all=1'
+    }
     //const url = 'http://localhost:3344/recallLeads?type=' + type
     console.log(url);
     const resp = await fetch(url);
     let listeL = await resp.json();
     let liste: [] = listeL;
-//    console.log(liste);
+    console.log(liste.length);
     return liste;
 };
 
