@@ -12,7 +12,7 @@ export const GET: RequestHandler = async (event) => {
 }
 
 export const POST: RequestHandler = async (event) => {
-    console.log('POST')
+    console.log('POSTs')
     const data = await event.request.json();
     console.log(data)
     return new Response(JSON.stringify({ success: data.user }), {
