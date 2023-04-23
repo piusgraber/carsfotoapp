@@ -18,11 +18,14 @@
 		status?: string;
 		abgabe?: Date;
 		datumerf?: Date;
+		leadDatum?: Date;
 		abgabeDatum?: string;
 		erfasst?: string;
 		kunde?: string;
 		garage?: string;
 		marke?: string;
+		typ: string;
+		vertragnr: string;
 	};
 
 	const locale = 'de-CH';
@@ -55,6 +58,7 @@
 		filteredList.map((z) => {
 			try {
 				z.abgabeDatum = z.abgabe ? formatter.format(new Date(z.abgabe)) : '';
+				z.leadDatum = z.datumlead ? formatter.format(new Date(z.datumlead)) : '';
 				z.erfasst = z.datumerf ? formatter.format(new Date(z.datumerf)) : '';
 				
 			} catch (err) {}
@@ -112,13 +116,20 @@ const filterList = () => {
 	<div class="titel">dfi</div>
 	<div class="titel">Kunde</div>
 	<div class="titel">Garage</div>
+	<div class="titel">Vertrag</div>
 	<div class="titel">Fahrzeug</div>
 	<div class="titel"></div>
 	
 	
 	{#each filteredList as zeile}
 		<div>
+			{#if data.liste=='leads'}
+			{zeile.leadDatum}
+
+			{:else}
 			{zeile.abgabeDatum}
+
+			{/if}
 		</div>
 		<!--	
 	<div on:click={() => showLead(zeile.guid)} on:keydown={() => showLead(zeile.guid)}>
@@ -133,7 +144,8 @@ const filterList = () => {
 		<div>{zeile.spracheid==3?'IT': zeile.spracheid==2?'FR' : 'DE'} </div>
 		<div class="cell-kunde"><span> {zeile.kunde}</span></div>
 		<div class="cell-kunde"><span> {zeile.garage}</span></div>
-		<div class="cell-kunde"><span> {zeile.marke}</span></div>
+		<div><span> {zeile.vertragnr}</span></div>
+		<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.typ}</span></div>
 		<div />
 	{/each}
 </div>
@@ -141,10 +153,16 @@ const filterList = () => {
 <style>
 	.panel {
 		display: grid;
-		grid-template-columns: 100px 20px 30px 340px 500px 40px auto;
+		grid-template-columns: 100px 20px 30px 340px 500px 90px 360px auto;
 	}
 
 	.cell-kunde {
+		width: 322px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.cell-fahrzeug {
 		width: 322px;
 		white-space: nowrap;
 		overflow: hidden;
