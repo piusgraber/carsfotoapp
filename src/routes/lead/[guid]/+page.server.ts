@@ -42,7 +42,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     const guid = params.guid;
     const prnt = await parent();
     let lead = await fetchALead(guid);
-    const url = "http://localhost:3344/reserveLead?guid='" + lead.guid + "'"
+    const url = "https://api.car-ware.ch/reserveLead?guid='" + lead.guid + "'"
 
     if (lead.recallmaid == prnt.user.id || !lead.recallmaid) {
         // Lead reservieren

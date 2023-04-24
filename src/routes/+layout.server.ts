@@ -5,7 +5,8 @@ export const load: LayoutServerLoad = async () => {
 
 
 
-    const url = 'http://127.0.0.1:3344/cwuser?name=pg&pwd=adam';
+    const url = 'https://api.car-ware.ch/cwuser?name=pg&pwd=adam';
+    console.log(url)
     const res = await fetch(url);
     const userData = await res.json();
     let user = {}

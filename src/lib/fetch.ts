@@ -15,8 +15,8 @@ export const fetchALead: FetchALead = async guid => {
 
 
 export const reserveALead: ReserveALead = async (guid, userid) => {
-//    const url = "https://api.car-ware.ch/recallLead?gid=" + guid + ""
-    const url = "http://localhost:3344/reserveLead?gid=" + guid + "&userid=" + userid
+    const url = "https://api.car-ware.ch/reserveLead?gid=" + guid + "&userid=" + userid
+//    const url = "http://localhost:3344/reserveLead?gid=" + guid + "&userid=" + userid
     console.log(url);
 	const resp = await fetch(url);
     let leads = await resp.json();
