@@ -12,7 +12,7 @@ let listName = '';
     }
 </script>
 
-<div>
+<div class="header">
     Liste auswählen: <select bind:value={listName} on:change= {showList}>
         <option value="open">offene Verkäufe</option>
         <option value="history">History (abgelaufene)</option>
@@ -25,4 +25,7 @@ let listName = '';
 <slot />
 
 <style>
+    .header {
+        padding: 5px;
+    }
 </style>

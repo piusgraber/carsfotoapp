@@ -113,7 +113,7 @@ let lpsrc = null
 </div>
 
 <br />
-{JSON.stringify(lead)}
+{JSON.stringify(data)}
 
 <style>
 	.grid {

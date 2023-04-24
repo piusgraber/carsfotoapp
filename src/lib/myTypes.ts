@@ -1,0 +1,20 @@
+export type Zeile = {
+    service: boolean;
+    spracheid?: number;
+    id: string;
+    guid: string;
+    state?: number;
+    status?: string;
+    abgabe?: Date;
+    datumerf: Date;
+    datumlead?: Date;
+    leadDatum?: String;
+    abgabeDatum?: string;
+    erfasst?: string;
+    kunde?: string;
+    garage?: string;
+    marke?: string;
+    typ: string;
+    vertragnr: string;
+    histtext: string;
+};
