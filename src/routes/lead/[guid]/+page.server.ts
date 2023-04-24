@@ -1,4 +1,4 @@
-import { fetchALead } from '$lib/fetch';
+import { fetchALead, reserveALead } from '$lib/fetch';
 import type { PageServerLoad } from './$types';
 
 const setTelefon = (lead) => {
@@ -37,14 +37,23 @@ const setTelefon = (lead) => {
     }
 }
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, parent }) => {
 
     const guid = params.guid;
+    const prnt = await parent();
     let lead = await fetchALead(guid);
+    const url = "http://localhost:3344/reserveLead?guid='" + lead.guid + "'"
 
-    let leadRes = {}
-    //    leadRes.guid = lead.guid;
-    // die Daten zurückgeben -> $page.data
-    setTelefon(lead)
+    if (lead.recallmaid == prnt.user.id || !lead.recallmaid) {
+        // Lead reservieren
+        let rLead = await reserveALead(guid, prnt.user.id);
+        lead.recallmaid = prnt.user.id;
+        let leadRes = {}
+        //    leadRes.guid = lead.guid;
+        // die Daten zurückgeben -> $page.data
+        setTelefon(lead)
+    } else {
+        lead = {}
+    }
     return { lead: lead };
 }

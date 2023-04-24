@@ -2,6 +2,7 @@ import { goto } from '$app/navigation';
 import { fetchLeadsByRecallStatus } from '$lib/fetch';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import type { Zeile } from '$lib/myTypes';
 
 export const load: PageServerLoad = async ({ params }) => {
 
@@ -44,6 +45,6 @@ export const load: PageServerLoad = async ({ params }) => {
 
     }
 
-    let lead: [] = await fetchLeadsByRecallStatus(status);
+    let lead: Zeile[] = await fetchLeadsByRecallStatus(status);
     return { liste: listName,  leads: lead };
 }
