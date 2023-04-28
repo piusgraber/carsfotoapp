@@ -6,23 +6,11 @@
 	import type { PageData } from './$types';
 	import type { Zeile } from '$lib/myTypes';
 
+	import { timeSecFormatter } from '$lib/myfuncs';
+	import { dateFormatter } from '$lib/myfuncs';
 	export let data: PageData;
 
 	let sprachen = data.user.sprachen;
-
-	const locale = 'de-CH';
-	const options: Intl.DateTimeFormatOptions = {
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
-		//		timeZone: 'Europe/Zurich'
-		timeZone: 'UTC'
-	};
-
-	const formatter = new Intl.DateTimeFormat(locale, options);
 
 	let filteredList: Zeile[];
 	$: {
@@ -48,19 +36,25 @@
 		});
 		filteredList.map((z) => {
 			try {
-				z.abgabeDatum = z.abgabe ? formatter.format(new Date(z.abgabe)) : '';
-				z.leadDatum = z.datumlead ? formatter.format(new Date(z.datumlead)) : '';
-				z.erfasst = z.datumerf ? formatter.format(new Date(z.datumerf)) : '';
+				z.abgabeDatum = z.abgabe ? dateFormatter.format(new Date(z.abgabe)) : '';
+				z.leadDatum = z.datumlead ? timeSecFormatter.format(new Date(z.datumlead)) : '';
+				z.erfasst = z.datumerf ? timeSecFormatter.format(new Date(z.datumerf)) : '';
+
+				if (z.recallmaid == data.user.id) {
+					z.zclass = 'resme';
+				} else {
+					if (z.recallmaid != 0) {
+						z.zclass = 'res';
+					}
+				}
 			} catch (err) {}
 		});
 	}
 	//	console.log(data)
 	const showLead = (z) => {
 		if (z.recallmaid && z.recallmaid != data.user.id) {
-
 		} else {
 			goto('/lead/' + z.guid);
-
 		}
 	};
 
@@ -106,95 +100,113 @@
 <div>{JSON.stringify(data.user)}</div>
 
 -->
-<div>
-	Liste [{data.liste}] {#if srch}Suche: <input bind:value={filter} type="text" use:init />
-		{#if filter}Filter: "{filter}" -- {/if} abbrechen mit ESC{:else}
-		Suche mit CTRL-F{/if}
-</div>
-<div class="panel">
-	<div class="titel">
-		{#if data.liste == 'leads'}
-			Datum Lead
-		{:else}
-			Verkauf
-		{/if}
+<div class="liste">
+	<div>
+		Liste [{data.liste}] {#if srch}Suche: <input bind:value={filter} type="text" use:init />
+			{#if filter}Filter: "{filter}" -- {/if} abbrechen mit ESC{:else}
+			Suche mit CTRL-F{/if}
 	</div>
-	<div class="titel">S</div>
-	<div class="titel">dfi</div>
-	<div class="titel">Kunde</div>
-	<div class="titel">Garage</div>
-	<div class="titel">Vertrag</div>
-	<div class="titel">Fahrzeug</div>
-	<div class="titel">Log</div>
-	<div class="titel" />
+	{#if !filterList.length}<div>loading {JSON.stringify(filterList)}</div>{/if}
 
-	{#each filteredList as zeile}
-		<div
-			class="link"
-			class:res={zeile.recallmaid != 0}
-			class:resme={zeile.recallmaid == data.user.id}
-			on:click={() => showLead(zeile)}
-			on:keydown={() => showLead(zeile)}
+	<div class="panel">
+		<div class="panel-row"
 		>
-			{#if data.liste == 'leads'}
-				{zeile.leadDatum}
-			{:else}
-				{zeile.erfasst}
-			{/if}
+			<div class="titel">Abgabe</div>
+			<div class="titel">
+				{#if data.liste == 'leads'}
+					Datum Lead
+				{:else}
+					Verkauf
+				{/if}
+			</div>
+			<div class="titel">dfi</div>
+			<div class="titel">Kunde</div>
+			<div class="titel">Fahrzeug</div>
+			<div class="titel">Verkäufer</div>
+			<div class="titel">Log</div>
+			<div class="titel">S</div>
+			<div class="titel" />
 		</div>
-		<!--	
-	<div on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
-			{zeile.id}
-		</div>
-	-->
-		<div
-			class:res={zeile.recallmaid != 0}
-			class:resme={zeile.recallmaid == data.user.id}
-			class="link"
-			on:click={() => showLead(zeile)}
-			on:keydown={() => showLead(zeile)}
-		>
-			{#if zeile.service}
-				S
-			{/if}
-		</div>
-		<div
-			class:res={zeile.recallmaid != 0}
-			class:resme={zeile.recallmaid == data.user.id}
-			title={JSON.stringify(zeile)}
-		>
-			{zeile.spracheid == 3 ? 'IT' : zeile.spracheid == 2 ? 'FR' : 'DE'}
-		</div>
-		<div
-			class="cell-kunde"
-			class:res={zeile.recallmaid != 0}
-			class:resme={zeile.recallmaid == data.user.id}
-		>
-			<span> {zeile.kunde}</span>
-		</div>
-		<div class="cell-kunde"><span> {zeile.garage}</span></div>
-		<div><span> {zeile.vertragnr}</span></div>
-		<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.typ}</span></div>
-		<div class="cell-fahrzeug"><span> {zeile.histtext ? zeile.histtext : ''}</span></div>
-		<div />
-	{/each}
+		{#each filteredList as zeile}
+			<div
+				class="panel-row"
+				class:res={zeile.recallmaid != 0}
+				class:resme={zeile.recallmaid == data.user.id}
+				on:click={() => showLead(zeile)}
+				on:keydown={() => showLead(zeile)}
+				title={JSON.stringify(zeile)}
+			>
+				<div			>
+					{zeile.abgabeDatum}
+				</div>
+				<div
+				>
+					{#if data.liste == 'leads' || data.liste == 'noservice'}
+						{zeile.leadDatum}L
+					{:else}
+						{zeile.erfasst}
+					{/if}
+				</div>
+				<div
+				>
+					{zeile.spracheid == 3 ? 'IT' : zeile.spracheid == 2 ? 'FR' : 'DE'}
+				</div>
+				<div
+					class="cell-kunde"
+				>
+					<span> {zeile.kunde}</span>
+				</div>
+				<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.typ}</span></div>
+				<div class="cell-garage"><span> {zeile.garage}</span></div>
+				<div class="cell-log">
+					<span>
+						{zeile.histtext
+							? timeSecFormatter.format(new Date(zeile.histdatum)) + ' ' + zeile.histtext
+							: ''}</span
+					>
+				</div>
+				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
+					{#if zeile.service}
+						S
+					{/if}
+				</div>
+				<div />
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
-	.panel {
+	.liste {
+		font-size: 0.9rem;
+	}
+	.panel-row {
+		cursor: pointer;
 		display: grid;
-		grid-template-columns: 150px 20px 30px 340px 500px 90px 360px 200px auto;
+		grid-template-columns: 90px 145px 30px 240px 250px 350px 300px 20px auto;
 		user-select: none;
 	}
 
 	.cell-kunde {
-		width: 322px;
+		width: 240px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.cell-fahrzeug {
-		width: 322px;
+		width: 240px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.cell-garage {
+		width: 340px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.cell-log {
+		width: 290px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -209,11 +221,15 @@
 	.res {
 		font-style: italic;
 		background-color: rgb(255, 176, 176);
-		cursor:no-drop
+		cursor: no-drop;
 	}
 	.resme {
 		cursor: pointer;
 		font-style: italic;
 		background-color: rgb(194, 236, 183);
 	}
+	.zc {
+		font-weight: bold;
+	}
+
 </style>

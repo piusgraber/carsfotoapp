@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import type { Zeile } from '$lib/myTypes';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, cookies, parent }) => {
 
 
     const locale = 'de-CH';
@@ -15,7 +15,14 @@ export const load: PageServerLoad = async ({ params }) => {
     };
 
     const formatter = new Intl.DateTimeFormat(locale, options);
-
+    const sessionid = cookies.get('sessionid')
+    //    const session = await event.locals.getSession()
+    if (!sessionid) {
+        cookies.set('sessionid', 'dddsssssssh')
+    }
+    console.log('session: ' + sessionid);
+    const prnt = await parent()
+    let userid = prnt.user.id;
 
     const listName = params.list;
     let status: number;
@@ -27,24 +34,41 @@ export const load: PageServerLoad = async ({ params }) => {
         case 'open':
             status = 1;
             break;
+        case 'waiting':
+            status = 2;
+            break;
         case 'noservice':
             status = -1;
             break;
+        case 'company':
+            status = 8;
+            break;
         case 'history':
-            status = 7;
+            status = 6;
+            break;
+        case 'all':
+            status = 99;
             break;
         case 'res':
-            status = 8;
+            status = 4;
+            userid = prnt.user.id;
+            break;
+        case 'resall':
+            status = 4;
+            userid = 0;
             break;
         case 'all':
             status = 0;
             break;
+            break;
         default:
-            status=0;
+            status = 0;
             throw redirect(302, '/liste/open');
 
     }
 
-    let lead: Zeile[] = await fetchLeadsByRecallStatus(status);
-    return { liste: listName,  leads: lead };
+    let lead: Zeile[] = await fetchLeadsByRecallStatus(status, userid);
+    console.log('loaded')
+    console.log(prnt)
+    return { liste: listName, leads: lead };
 }

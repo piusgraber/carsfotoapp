@@ -12,15 +12,7 @@
 
 	const mitarbeiter = $page.data.user;
 
-	const locale = 'de-CH';
-	const options: Intl.DateTimeFormatOptions = {
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit'
-	};
-
-	const formatter = new Intl.DateTimeFormat(locale, options);
-
+	import { dateTimeFormatter } from '$lib/myfuncs';
 	let lead: Lead;
 
 	type Lead = {
@@ -30,90 +22,115 @@
 		telefong?: string;
 		abgabedatum: Date;
 		recallmaid: number;
+		abgabe: string;
 	};
 
+	let leadLogRecs: [];
 	$: lead = data.lead;
+$: leadLogRecs = data.leadlog;
 
-let lpsrc = null
-	const showLanding = () =>{
+	let lpsrc = null;
+	const showLanding = () => {
 		if (!lpsrc) {
-			lpsrc = 'https://lead.car-ware.ch/landing/#/' + lead.guid
+			lpsrc = 'https://lead.car-ware.ch/landing/#/' + lead.guid;
 		} else {
-			lpsrc = null
+			lpsrc = null;
 		}
-	}
+	};
+
+
+	let showJSON: boolean=false;
 </script>
 
+<div
+class:forelsa={mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0}
+class:forme={mitarbeiter.id == lead.recallmaid}
+>
 <div>
-    <a href="/liste/open">Liste</a>
+	<a href="/liste/open">Liste</a>
 </div>
-<div class="grid">
+<div
+	class="grid"
+>
 	<div class="kunde">
 		<h1>Lead</h1>
 		{#if !lead.service}
-		<span class="alert">KEIN SERVICE !!!!</span>
-		<br/>
+			<span class="alert">KEIN SERVICE !!!!</span>
+			<br />
 		{/if}
 		{#if mitarbeiter.id == lead.recallmaid}
 			-> für mich reserviert
 		{:else if lead.recallmaid != 0}
 			-> für jemand reserviert
 		{/if}
-	
+
 		{lead.id}
 		<br />
 		{lead.anrede}
 		<br />
-		{lead.vorname} {lead.nachname}
+		{lead.vorname}
+		{lead.nachname}
 		<br />
-		{lead.strasse} {lead.hausnummer}
+		{lead.strasse}
+		{lead.hausnummer}
 		<br />
-		{lead.plz} {lead.ort}
+		{lead.plz}
+		{lead.ort}
 		<br />
 		{#if lead.telefonm}
-		{lead.telefonm} M<br/>
+			{lead.telefonm} M<br />
 		{/if}
 		{#if lead.telefonp}
-		{lead.telefonp} P<br/>
+			{lead.telefonp} P<br />
 		{/if}
 		{#if lead.telefong}
-		{lead.telefong} G<br/>
+			{lead.telefong} G<br />
 		{/if}
 	</div>
 	<div>
 		<h1>&#160;</h1>
 		Garage
-		<br/>
+		<br />
 		<b>{lead.garage}</b>
-		<br/>
+		<br />
 		Fahrzeug
-		<br/>
+		<br />
 		<b>{lead.marke} {lead.modell} {lead.typ}</b>
+		<br />
+		<b>Abgabe: {dateTimeFormatter.format(new Date(lead.abgabedatum))}</b>
 	</div>
-<div>
-	<button on:click={showLanding}>Landing-Page {lpsrc ? 'ausblenden' : 'ausfüllen'}</button>
-	<br/>
-	<br/>
-	<button>nicht erreicht</button>
-	<br/>
-	<br/>
-	<button>bereits versichert</button>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<button>....</button>
-	<br/>
-</div>	
-<div>
-	{#if lpsrc}
-	<iframe class="lpframe" title="land" src={lpsrc}></iframe>
-	{/if}
+	<div>
+		<button on:click={showLanding}>Landing-Page {lpsrc ? 'ausblenden' : 'ausfüllen'}</button>
+		<br />
+		<br />
+		<button>nicht erreicht</button>
+		<br />
+		<br />
+		<button>bereits versichert</button>
+		<br />
+		<br />
+		<br />
+		<br />
+		<button on:click={() => showJSON=!showJSON}>....</button>
+		<br />
+	</div>
+	<div>
+		{#if lpsrc}
+			<iframe class="lpframe" title="land" src={lpsrc} />
+		{/if}
+	</div>
 </div>
 </div>
-
 <br />
+{#each leadLogRecs as log}
+	<div>{dateTimeFormatter.format(new  Date(log.datum))} : {log.bemerkung}</div>
+{/each}
+{#if showJSON}
+<br/>
+Datum formatieren generell Funktion wo? Formatierung wo?<br/>
+<br/>
 {JSON.stringify(data)}
+{/if}
 
 <style>
 	.grid {
@@ -136,6 +153,13 @@ let lpsrc = null
 	}
 	.alert {
 		background-color: rgb(230, 86, 86);
-		color:rgb(255, 255, 255);
+		color: rgb(255, 255, 255);
+	}
+
+	.forme {
+		background-color: rgb(194, 236, 183);
+	}
+	.forelsa {
+		background-color: rgb(255, 176, 176);
 	}
 </style>

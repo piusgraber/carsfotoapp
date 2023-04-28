@@ -1,4 +1,4 @@
-import { fetchALead, reserveALead } from '$lib/fetch';
+import { fetchALead, reserveALead, getLeadLog } from '$lib/fetch';
 import type { PageServerLoad } from './$types';
 
 const setTelefon = (lead) => {
@@ -41,19 +41,11 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 
     const guid = params.guid;
     const prnt = await parent();
-    let lead = await fetchALead(guid);
-    const url = "https://api.car-ware.ch/reserveLead?guid='" + lead.guid + "'"
-
-    if (lead.recallmaid == prnt.user.id || !lead.recallmaid) {
-        // Lead reservieren
-        let rLead = await reserveALead(guid, prnt.user.id);
-        lead.recallmaid = prnt.user.id;
-        let leadRes = {}
-        //    leadRes.guid = lead.guid;
-        // die Daten zurückgeben -> $page.data
-        setTelefon(lead)
-    } else {
-        lead = {}
-    }
-    return { lead: lead };
+    // Lead reservieren
+    let lead = await reserveALead(guid, prnt.user.id);
+    // die Daten zurückgeben -> $page.data
+    let leadLog = await getLeadLog(lead.id);
+    console.log(leadLog)
+    setTelefon(lead)
+    return { lead: lead, leadlog: leadLog };
 }

@@ -1,10 +1,15 @@
 type FetchALead = (guid: string) => Promise<{}>;
 type ReserveALead = (guid: string, userid: number) => Promise<{}>;
-type FetchLeadsByRecallStatus = (type: number) => Promise<[]>;
+type getLeadLog = (id: number) => Promise<{}>;
+type FetchLeadsByRecallStatus = (type: number, userid: number) => Promise<[]>;
+
+
+const prod = false;
+
+export const urlBase = prod? 'https://api.car-ware.ch/' : 'http://localhost:3344/';
 
 export const fetchALead: FetchALead = async guid => {
-    const url = "https://api.car-ware.ch/recallLead?gid=" + guid + ""
-//    const url = "http://localhost:3344/recallLead?gid=" + guid + ""
+    const url = urlBase + "recallLead?gid=" + guid + ""
     console.log(url);
 	const resp = await fetch(url);
     let leads = await resp.json();
@@ -15,8 +20,7 @@ export const fetchALead: FetchALead = async guid => {
 
 
 export const reserveALead: ReserveALead = async (guid, userid) => {
-    const url = "https://api.car-ware.ch/reserveLead?gid=" + guid + "&userid=" + userid
-//    const url = "http://localhost:3344/reserveLead?gid=" + guid + "&userid=" + userid
+    let url = urlBase + "reserveLead?gid=" + guid + "&userid=" + userid
     console.log(url);
 	const resp = await fetch(url);
     let leads = await resp.json();
@@ -26,12 +30,22 @@ export const reserveALead: ReserveALead = async (guid, userid) => {
 }
 
 
-export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async type => {
-    let url = 'https://api.car-ware.ch/recallLeads?type=' + type
+export const getLeadLog: ReserveALead = async (id) => {
+    let url = urlBase + "recallLeadHistory?id=" + id
+    console.log(url);
+	const resp = await fetch(url);
+    let leads = await resp.json();
+//    console.log(lead);
+    return leads;
+}
+
+
+export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, userid) => {
+    let url = urlBase + 'recallLeads?type=' + type
     if (type==0) {
         url += '&all=1'
     }
-    //const url = 'http://localhost:3344/recallLeads?type=' + type
+    url += '&userid=' + userid
     console.log(url);
     const resp = await fetch(url);
     let listeL = await resp.json();

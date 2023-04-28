@@ -14,11 +14,14 @@ let listName = '';
 
 <div class="header">
     Liste auswählen: <select bind:value={listName} on:change= {showList}>
-        <option value="open">offene Verkäufe</option>
-        <option value="history">History (abgelaufene)</option>
-        <option value="leads">gemachte Leads</option>
-        <option value="noservice">kein Service</option>
-        <option value="res">reservierte Verkäufe</option>
+        <option value="waiting">wartende (7)</option>
+        <option value="open">offene Verkäufe (0)</option>
+        <option value="history">History (3)</option>
+        <option value="leads">gemachte Leads (5)</option>
+        <option value="noservice">kein Service (-1)</option>
+        <option value="company">Firma (8)</option>
+        <option value="res">meine reservierten Verkäufe (4) (userid)</option>
+        <option value="resall">alle reservierte Verkäufe (4) </option>
         <option value="all">alle Datensätze</option>
     </select>
 </div>
