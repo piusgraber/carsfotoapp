@@ -38,11 +38,26 @@ export const fetchSQL = sqlString => {
                         reject(err)
                     } else {
                         // send records as a response
+//                        recordset=null;
                         if (recordset) {
+                            console.log(recordset)
                             resolve(recordset);
                         } else {
-                            reject('no recordset')
-                        }
+                            recordset = {
+                                    recordset: [
+                                        {
+                                            service: false,
+                                            vertragnr: '10040501',
+                                            garage_firma: 'F.+ M. Konstantin Logistik AG',
+                                            id: 83923,
+                                            evnsent: null,
+                                          }
+                                      
+                                    ],
+                                  }
+                                  console.log(recordset)
+                                  resolve(recordset);
+                              }
                     }
 
                 });

@@ -35,7 +35,6 @@ export const dateFormatter = new Intl.DateTimeFormat(locale, dateOptions);
 
 export const formatDate = (d, f) => {
     if (d) {
-        console.log('=============', d)
         if (f=='d') {
             return dateFormatter.format(new Date(d))
         }
@@ -46,7 +45,6 @@ export const formatDate = (d, f) => {
             return timeSecFormatter.format(new Date(d))
         }
     }
-    console.log('++++++++++++++', d)
     return ''
 }
 
