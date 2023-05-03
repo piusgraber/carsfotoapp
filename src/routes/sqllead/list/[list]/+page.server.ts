@@ -1,11 +1,11 @@
-import { fetchSQL } from "$lib/sqlFetch";
+import { fetchSQL_DB } from "$lib/sqlFetch";
 import type { PageServerData } from "../../$types";
 
 
 
 const setStatuzs = async () => {
 const     sqlString = 'EXEC usp_setLeadRecallStatus'
-const data = await fetchSQL(sqlString)
+const data = await fetchSQL_DB(sqlString)
 }
 export const load: PageServerData = async ({ params, parent }) => {
 
@@ -47,7 +47,7 @@ export const load: PageServerData = async ({ params, parent }) => {
     */
     let sqlString = 'select * from fcn_recallLead(' + type + ', ' + userid + ', ' + count + ')';
     //    console.log(sqlString)
-    const data = await fetchSQL(sqlString)
+    const data = await fetchSQL_DB(sqlString)
     //    console.log(data)
     return { records: data.recordset };
 };

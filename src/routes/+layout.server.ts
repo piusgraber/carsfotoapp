@@ -2,10 +2,10 @@ import { urlBase } from "$lib/fetch";
 import type { LayoutServerLoad } from "./$types";
 import storeData from "./+layout.svelte";
 
-export const load: LayoutServerLoad = async () => {
+export const load: LayoutServerLoad = async ({cookies}) => {
 
-
-
+    console.log('COOOOKIES', cookies.get('authRoot'))
+const token = cookies.get('authRoot');
     const url = urlBase + 'cwuser?name=pg&pwd=adam';
     console.log(url)
     let user = {}
@@ -20,7 +20,7 @@ export const load: LayoutServerLoad = async () => {
             const sprachen = settings.sprachen;
 //            console.log(sprachen)
             user = {
-                name: user.vorname + ' ' + user.nachname, id: user.id, cwTelefon: settings.telefon, initialen: 'pg', sprachen: sprachen
+                name: cookies.get('authRoot') + ' ' + user.nachname, id: user.id, cwTelefon: settings.telefon, initialen: 'pg', sprachen: sprachen
             }
             //        storeData.set({ user: user })
             //        console.log('xxxxxxxxxxxxxxx', user)

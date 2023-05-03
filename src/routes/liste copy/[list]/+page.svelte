@@ -102,27 +102,15 @@
 -->
 <div class="liste">
 	<div>
-		{#if data.liste=='all'}
-		<b>Alle Datensätze </b>
-		{/if}
-		{#if data.liste=='waiting'}
-		<b>wartende</b>
-		{/if}
-		{#if data.liste=='open'}
-		<b>offene Datensätze</b>
-		{/if}
-		{#if srch}
-			Suche: <input bind:value={filter} type="text" use:init />
-			{#if filter}
-				Filter: "{filter}" --
-			{/if}
-			abbrechen mit ESC
-		{:else}
+		Liste [{data.liste}] {#if srch}Suche: <input bind:value={filter} type="text" use:init />
+			{#if filter}Filter: "{filter}" -- {/if} abbrechen mit ESC{:else}
 			Suche mit CTRL-F{/if}
 	</div>
+	{#if !filterList.length}<div>loading {JSON.stringify(filterList)}</div>{/if}
 
 	<div class="panel">
-		<div class="panel-row">
+		<div class="panel-row"
+		>
 			<div class="titel">Abgabe</div>
 			<div class="titel">
 				{#if data.liste == 'leads'}
@@ -149,25 +137,32 @@
 				on:keydown={() => showLead(zeile)}
 				title={JSON.stringify(zeile)}
 			>
-				<div>
+				<div			>
 					{zeile.abgabeDatum}
 				</div>
-				<div>
+				<div
+				>
 					{#if data.liste == 'leads' || data.liste == 'noservice'}
 						{zeile.leadDatum}L
 					{:else}
 						{zeile.erfasst}
 					{/if}
 				</div>
-				<div>
+				<div
+				>
 					{zeile.spracheid == 3 ? 'IT' : zeile.spracheid == 2 ? 'FR' : 'DE'}
 				</div>
-				<div class="cell-kunde">
-					<span> {zeile.kunde}</span>
+			<div
+				class="cell-kunde"
+			>
+				<span> {zeile.kunde}</span>
 				</div>
-				<div class="cell-telefon">
-					<span> {zeile.telefon}</span>
-				</div>
+				<div
+					class="cell-telefon"
+				>
+				<span> {zeile.telefon}</span>
+				
+			</div>
 				<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.typ}</span></div>
 				<div class="cell-garage"><span> {zeile.garage}</span></div>
 				<div class="cell-log">
@@ -199,16 +194,16 @@
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
-		background-color: #f9f9f9;
-		grid-row: auto / span 1;
-	}
+background-color: #f9f9f9;
+  grid-row: auto / span 1;
+}
 
-	.panel-row:nth-child(even) {
-		background-color: #e5e5e5;
-		grid-row: auto / span 1;
-	}
+.panel-row:nth-child(even) {
+  background-color: #e5e5e5;
+  grid-row: auto / span 1;
+}
 
-	.cell-kunde {
+.cell-kunde {
 		width: 240px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -258,4 +253,5 @@
 	.zc {
 		font-weight: bold;
 	}
+
 </style>

@@ -64,7 +64,7 @@ class:forme={mitarbeiter.id == lead.recallmaid}
 			-> für jemand reserviert
 		{/if}
 
-		{lead.id}
+		Lead ID: {lead.id}
 		<br />
 		{lead.anrede}
 		<br />
@@ -86,12 +86,18 @@ class:forme={mitarbeiter.id == lead.recallmaid}
 		{#if lead.telefong}
 			{lead.telefong} G<br />
 		{/if}
+		<input type="email" bind:value={lead.email}/>
+		<button>Email verifizieren</button>
 	</div>
 	<div>
 		<h1>&#160;</h1>
 		Garage
 		<br />
 		<b>{lead.garage}</b>
+		<br />
+		Verkäufer
+		<br />
+		<b>{lead.verkaeufer}</b>
 		<br />
 		Fahrzeug
 		<br />
@@ -100,7 +106,7 @@ class:forme={mitarbeiter.id == lead.recallmaid}
 		<b>Abgabe: {dateTimeFormatter.format(new Date(lead.abgabedatum))}</b>
 	</div>
 	<div>
-		<button on:click={showLanding}>Landing-Page {lpsrc ? 'ausblenden' : 'ausfüllen'}</button>
+		<button on:click={showLanding}>Landing-Page {lpsrc ? '' : ''}</button>
 		<br />
 		<br />
 		<button>nicht erreicht</button>
@@ -146,10 +152,15 @@ Datum formatieren generell Funktion wo? Formatierung wo?<br/>
 		color: #1329f0;
 		height: 40px;
 		width: 180px;
+		font-size: 1.2rem;
 	}
 
 	.kunde {
 		font-size: 1.2rem;
+	}
+	input[type='email'] {
+		font-size: 1.2rem;
+		width: 400px;
 	}
 	.alert {
 		background-color: rgb(230, 86, 86);

@@ -14,7 +14,7 @@ const config = {
 };
 
 
-export const fetchSQL = sqlString => {
+export const fetchSQL_DB = sqlString => {
     console.log("HI")
     console.log(sqlString)
     return new Promise(
@@ -33,6 +33,7 @@ export const fetchSQL = sqlString => {
 //                console.log(sqlString);
 //                console.log('----------');
                 // query to the database and get the records
+                console.log(sqlString);
                 request.query(sqlString, function (err, recordset) {
                     if (err) {
                         reject(err)
@@ -40,6 +41,7 @@ export const fetchSQL = sqlString => {
                         // send records as a response
 //                        recordset=null;
                         if (recordset) {
+                            console.log('====================================')
                             console.log(recordset)
                             resolve(recordset);
                         } else {

@@ -9,6 +9,7 @@ export type Zeile = {
     datumerf: Date;
     datumlead?: Date;
     leadDatum?: String;
+    telefon?: string;
     abgabeDatum?: string;
     erfasst?: string;
     kunde?: string;
