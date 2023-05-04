@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-    import {goto} from '$app/navigation';
+    import {goto, invalidateAll} from '$app/navigation';
 	export let data: LayoutData;
 
 //	import { storeData } from '$lib/mystore';
@@ -10,11 +10,18 @@
     const showList = () => {
         goto('/liste/' + listName)
     }
+
+    const refresh = () => {
+        invalidateAll()
+    }
+
 </script>
 <main>
     <div class="titlegrid">
         <div>
             Kundendienstportal
+            <button on:click={refresh}> neu laden </button>
+
         </div>
         <div><b>
             {data.user.name}<br/>
@@ -30,7 +37,8 @@
 
         </div>
         <div>
-            [abmelden]
+
+           <a href="/logon">[abmelden]</a>
         </div>
     
     </div>

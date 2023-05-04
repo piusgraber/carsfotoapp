@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { prevent_default } from 'svelte/internal';
 
 	let username = '';
@@ -12,9 +12,9 @@
 		});
 		const resJson = await response.json();
 		console.log('response: ', resJson);
-        if (response.ok) {
-            goto('/topf1');
-        }
+		if (response.ok) {
+			goto('/topf1');
+		}
 	};
 </script>
 

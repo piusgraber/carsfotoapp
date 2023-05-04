@@ -14,6 +14,7 @@ let listName = '';
 {#if listName=='open'}
 <button on:click={() => {goto ('/liste/all')}}> Alle Leads</button>
 {/if}
+<button on:click={refresh}> neu laden </button>
 <slot />
 
 <style>
