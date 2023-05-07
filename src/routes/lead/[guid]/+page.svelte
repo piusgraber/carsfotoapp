@@ -121,7 +121,8 @@
 	$: reservedForMe = false; // mitarbeiter.id == lead.recallmaid
 
 const verify = async () => {
-	await verifyEmail(lead.id);
+	console.log('xxx')
+	await verifyEmail(lead.id, lead.email);
 	invalidateAll();
 }
 </script>
