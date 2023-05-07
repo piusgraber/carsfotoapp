@@ -304,6 +304,7 @@
 		background-color: rgb(255, 176, 176);
 */
 		font-style: italic;
+		color: #999999;
 		cursor: no-drop;
 	}
 	.recall {
