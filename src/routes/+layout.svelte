@@ -1,48 +1,80 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-    import {goto, invalidateAll} from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { navigating, page } from '$app/stores';
+	import { redirect } from '@sveltejs/kit';
 	export let data: LayoutData;
 
-//	import { storeData } from '$lib/mystore';
+	//	import { storeData } from '$lib/mystore';
 
-    let listName = '';
+	let listName = '';
 
-    const showList = () => {
-        goto('/liste/' + listName)
-    }
+	const showList = () => {
+		goto('/liste/' + listName);
+	};
 
-    const refresh = () => {
-        invalidateAll()
-    }
+	const showLogin = () => {
+		goto('/logon');
+	};
 
+	const showTopf1 = () => {
+		goto('/topf1');
+	};
+
+	const showOpenLeads = () => {
+		goto('/liste/open');
+	};
+
+	const showHistoryLeads = () => {
+		goto('/liste/all');
+	};
+
+	const refresh = () => {
+		invalidateAll();
+	};
 </script>
+
 <main>
-    <div class="titlegrid">
-        <div>
-            Kundendienstportal
-            <button on:click={refresh}> neu laden </button>
-
-        </div>
-        <div><b>
-            {data.user.name}<br/>
-            {data.user.cwTelefon}<br/>
-        </b>
-        </div>
-        <div>
-                        
-            Sprachfilter: 
-            {#if data.user.sprachen.de}DE {/if}
-            {#if data.user.sprachen.fr}FR {/if}
-            {#if data.user.sprachen.it}IT {/if}
-
-        </div>
-        <div>
-
-           <a href="/logon">[abmelden]</a>
-        </div>
-    
-    </div>
-<!--
+	<div class="titlegrid">
+		<div>
+			Kundendienstportal
+		</div>
+		{#if data.user && data.user.name}
+			<div>
+				<b>
+					{data.user.name} ({data.user.login}) <br />
+					{data.user.cwTelefon}<br />
+				</b>
+			</div>
+			<div>
+				Sprachfilter:
+				{#if data.user.sprachen.de}DE {/if}
+				{#if data.user.sprachen.fr}FR {/if}
+				{#if data.user.sprachen.it}IT {/if}<br />
+				{#if data.user.admin}
+					<button on:click={showTopf1}>SST</button>
+				{/if}
+				{#if !$navigating && $page.params.list != 'open'}
+				<button on:click={showOpenLeads}>offene Datenstze anzeigen</button>
+				{/if}
+				{#if !$navigating && $page.params.list != 'all'}
+				<button on:click={showHistoryLeads}>History anzeigen	</button>
+				{/if}
+			</div>
+			<div>
+				<button
+					on:click={async () => {
+						const response = await fetch('/api/logout');
+						if (response.ok) {
+							goto('/logon', { invalidateAll: true });
+							//                invalidateAll();
+						}
+					}}>abmelden</button
+				>
+			</div>
+		{/if}
+	</div>
+	<!--
 <div>
     Benutzer: 
     {data.user.initialen} <i>{data.user.name}</i>  ( {data.user.initialen} {data.user.cwTelefon} )
@@ -52,18 +84,28 @@
 
     {JSON.stringify(data.user)}
 </div>
--->    
+
+
+{JSON.stringify($navigating)}<br/>
+{#if $navigating}
+......
+{:else}
+<slot />
+{/if}
+
+-->
 <slot />
 </main>
+
 <style>
-    .titlegrid {
-        padding: 5px;
-        font-size: 1.3rem;
-        background-color: rgb(192, 192, 192);
-        display: grid;
-        grid-template-columns: 222px 299px 250px auto;
-    }
-    main {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-    }
+	.titlegrid {
+		padding: 5px;
+		font-size: 1.3rem;
+		background-color: rgb(192, 192, 192);
+		display: grid;
+		grid-template-columns: 222px 359px 350px auto;
+	}
+	main {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	}
 </style>

@@ -7,14 +7,16 @@
 let listName = '';
     $: listName = $page.params.list;
 
-    const refresh = () => {
-        invalidateAll()
-    }
 </script>
+
+<!--
 {#if listName=='open'}
-<button on:click={() => {goto ('/liste/all')}}> Alle Leads</button>
+<button on:click={() => {goto ('/liste/all')}}> Alle Leads.</button>
 {/if}
-<button on:click={refresh}> neu laden </button>
+{#if listName=='all'}
+<button on:click={() => {goto ('/liste/open')}}> Offene Leads.</button>
+{/if}
+-->
 <slot />
 
 <style>

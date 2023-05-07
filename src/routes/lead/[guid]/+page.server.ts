@@ -1,4 +1,5 @@
 import { fetchALead, reserveALead, getLeadLog } from '$lib/fetch';
+import { dateTimeFormatterMEZ, dateTimeFormatterMEZT, formatDate } from '$lib/myfuncs';
 import type { PageServerLoad } from './$types';
 
 const setTelefon = (lead) => {
@@ -45,6 +46,24 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     let lead = await reserveALead(guid, prnt.user.id);
     // die Daten zurückgeben -> $page.data
     let leadLog = await getLeadLog(lead.id);
+    if (leadLog.length) {
+        const log = leadLog[leadLog.length - 1]
+        const ldate = new Date(log.datum);
+        console.log('log', ldate);
+        const now = new Date();
+        console.log('jetzt', new Date(formatDate(now, 'm')));
+
+
+        const options = { timeZone: 'Europe/Berlin' };
+        const mezNow = now.toLocaleString('de-DE', options);
+        console.log(mezNow);
+
+        if( log.datum) {
+            lead.available = false;
+        }
+    } else {
+        lead.available = true;
+    }
     console.log(leadLog)
     setTelefon(lead)
     return { lead: lead, leadlog: leadLog };

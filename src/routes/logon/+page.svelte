@@ -1,27 +1,66 @@
 <script lang="ts">
-	import { goto, invalidateAll } from '$app/navigation';
-	import { prevent_default } from 'svelte/internal';
+	import { goto } from '$app/navigation';
+	import { navigating } from '$app/stores';
 
 	let username = '';
 	let password = '';
+	let error = '';
 
 	const login = async () => {
+		error = '';
 		const response = await fetch('api/login', {
 			method: 'POST',
 			body: JSON.stringify({ username: username, password: password })
 		});
 		const resJson = await response.json();
-		console.log('response: ', resJson);
+		if (response.status != 200) {
+			error = JSON.stringify(resJson);
+		}
+		console.log('theUser is : ', resJson);
 		if (response.ok) {
-			goto('/topf1');
+			goto('/liste/open', {
+				invalidateAll: true
+			});
+			// await invalidateAll()
 		}
 	};
 </script>
-
+<div class="page">
+<!--	--{JSON.stringify($navigating)} -- -->
+	{#if $navigating}
+logon loading...
+{:else}
 <form on:submit|preventDefault={login}>
-	<label for="username">Benutzer</label>
-	<input id="userneme" bind:value={username} /><br />
-	<label for="username">Passwort: </label>
-	<input id="password" type="password" bind:value={password} /><br />
-	<button type="submit">anmelden</button>
+	<div class="grid">
+		<div>
+			<label for="username">Benutzer</label>
+		</div>
+		<div>
+			<input id="userneme" bind:value={username} />
+		</div>
+		<div>
+			<label for="username">Passwort: </label>
+		</div>
+		<div>
+			<input id="password" type="password" bind:value={password} />
+		</div>
+		<div>
+		</div>
+		<div>
+			<button type="submit">anmelden</button>
+		</div>
+	</div>
+	{error}
 </form>
+{/if}
+</div>
+<style>
+	.page {
+		margin: 30px;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 200px auto;
+		row-gap: 7px;
+	}
+</style>

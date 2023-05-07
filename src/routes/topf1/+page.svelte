@@ -4,9 +4,6 @@
 	import Search from '$lib/Search.svelte';
 	import { formatDate } from '$lib/myfuncs';
 
-
-	invalidateAll();
-
 	$: liste = allRecs.filter((r) => r.vertragnr);
 	$: allRecs = $page.data.records;
 	let fl = [];
@@ -33,6 +30,27 @@
 			return true;
 		});
 	}
+
+	let flag = false;
+
+	$: {if(flag) {
+		invalidateAll()
+	}}
+
+/*	
+	const loop = async () => {
+		while (true) {
+			await new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve(0);
+				}, 30000);
+			});
+			flag = !flag;
+		}
+	};
+
+	loop();
+*/
 </script>
 
 <div>
@@ -41,7 +59,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<span on:click={filtereVn}>evn</span>&#160;&#160;&#160;
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<span on:click={filterall}>alle</span>
+	<span on:click={filterall}>alle.</span>
 </div>
 
 <Search bind:filter />
@@ -61,14 +79,14 @@
 			<div class="cell" title={JSON.stringify(rec)}>
 				{rec.garage_firma}, {rec.garage_ort}
 			</div>
-			<div class="cell" title={JSON.stringify(rec)}>
+			<div class="cell" title={rec.reason}>
 				{rec.whitelabel ? 'WL' : ''}
 				{#if rec.firma}
 					F
 				{:else}
 					{rec.gemail ? 'GM' : ''}
-					{rec.konfliktV ? 'KV' : ''}
-					{rec.konfliktG ? 'KG' : ''}
+					{rec.konfliktKV ? 'KV' : ''}
+					{rec.konfliktKG ? 'KG' : ''}
 				{/if}
 			</div>
 			<div class="cell" title={JSON.stringify(rec)}>
@@ -76,11 +94,11 @@
 					{#if rec.gemail}
 						{rec.garage_email}
 					{:else}
-						{#if rec.konfliktV}
+						{#if rec.konfliktKV}
 							{rec.user_email}
 							{rec.email}
 						{/if}
-						{#if rec.konfliktG}
+						{#if rec.konfliktKG}
 							{rec.garage_email}
 							{rec.email}
 						{/if}
