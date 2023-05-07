@@ -18,7 +18,7 @@
 	$: {
 		if (data.user) {
 			filteredList = data.leads;
-/*
+			/*
 			filteredList = data.leads.sort((a, b) => {
 				console.log('id: ', a.id, b.id)
 				console.log('recall: ', new Date(a.recall).getTime() - new Date(b.recall).getTime())
@@ -45,7 +45,18 @@
 			});
 			filteredList = filteredList.filter((l) => {
 				if (filter) {
-					const srchString = l.telefon + '#' + l.garage + '#' + l.kunde + '#' + l.marke + '#' + l.modell + '#' + l.typ;
+					const srchString =
+						l.telefon +
+						'#' +
+						l.garage +
+						'#' +
+						l.kunde +
+						'#' +
+						l.marke +
+						'#' +
+						l.modell +
+						'#' +
+						l.typ;
 					if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
 					//				if (l.kunde && l.kunde.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
 					return false;
@@ -81,6 +92,7 @@
 	};
 
 	let srch = false;
+	let filter = '';
 	const filterList = () => {
 		filteredList;
 		console.log(filter);
@@ -113,7 +125,6 @@
 	function init(el) {
 		el.focus();
 	}
-	let filter = '';
 
 	let loading = false;
 </script>
@@ -134,26 +145,27 @@
 		*{data}*
 		{loading}{data.liste} {data}
 	-->
-	<span class="header">
-
-			{#if data.liste == 'all'}
-				<b>History </b>
+			<span class="header">
+				{#if data.liste == 'all'}
+					<b>History </b>
+				{/if}
+				{#if data.liste == 'waiting'}
+					<b>wartende</b>
+				{/if}
+				{#if data.liste == 'open'}
+					<b>offene Datensätze</b>
+				{/if}
+				&#160;&#160;&#160;&#160;&#160;&#160;
 				{#if srch}
-					Suche: <input class="header" bind:value={filter} type="text" use:init />
-					{#if filter}
-						Filter: "{filter}" --
-					{/if}
-					abbrechen mit ESC
-				{:else}
-					Suche mit CTRL-F{/if}
+				Suche: <input class="header" bind:value={filter} type="text" use:init />
+				{#if filter}
+					Filter: "{filter}" --
+				{/if}
+				abbrechen mit ESC
+			{:else}
+				Suche mit CTRL-F
 			{/if}
-			{#if data.liste == 'waiting'}
-				<b>wartende</b>
-			{/if}
-			{#if data.liste == 'open'}
-				offene Datensätze
-			{/if}
-		</span>
+			</span>
 		</div>
 
 		<div class="panel">
@@ -175,60 +187,58 @@
 				<div class="titel" />
 			</div>
 			<div class="scrollable">
-
-			{#each filteredList as zeile}
-				<div
-					class="panel-row"
-					class:recall={zeile.recall}
-					class:res={zeile.recallmaid != 0 && zeile.recallmaid != data.user.id}
-					class:resme={zeile.recallmaid == data.user.id}
-					on:click={() => showLead(zeile)}
-					on:keydown={() => showLead(zeile)}
-				>
-					<div>
-						{zeile.abgabeDatum}
+				{#each filteredList as zeile}
+					<div
+						class="panel-row"
+						class:recall={zeile.recall}
+						class:res={zeile.recallmaid != 0 && zeile.recallmaid != data.user.id}
+						class:resme={zeile.recallmaid == data.user.id}
+						on:click={() => showLead(zeile)}
+						on:keydown={() => showLead(zeile)}
+					>
+						<div>
+							{zeile.abgabeDatum}
+						</div>
+						<div>
+							{#if data.liste == 'leads' || data.liste == 'noservice'}
+								{zeile.leadDatum}L
+							{:else}
+								{zeile.erfasst}
+							{/if}
+						</div>
+						<div>
+							{zeile.spracheid == 3 ? 'IT' : zeile.spracheid == 2 ? 'FR' : 'DE'}
+						</div>
+						<div class="cell-kunde">
+							<span> {zeile.kunde}</span>
+						</div>
+						<div class="cell-telefon">
+							<span> {zeile.telefon}</span>
+						</div>
+						<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.modell} {zeile.typ}</span></div>
+						<div class="cell-garage"><span> {zeile.garage}</span></div>
+						<div class="cell-log">
+							<span>
+								{zeile.histtext
+									? timeSecFormatter.format(new Date(zeile.histdatum)) + ' ' + zeile.histtext
+									: ''}</span
+							>
+						</div>
+						<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
+							{#if zeile.service}
+								&#160;
+							{/if}
+						</div>
+						<div />
 					</div>
-					<div>
-						{#if data.liste == 'leads' || data.liste == 'noservice'}
-							{zeile.leadDatum}L
-						{:else}
-							{zeile.erfasst}
-						{/if}
-					</div>
-					<div>
-						{zeile.spracheid == 3 ? 'IT' : zeile.spracheid == 2 ? 'FR' : 'DE'}
-					</div>
-					<div class="cell-kunde">
-						<span> {zeile.kunde}</span>
-					</div>
-					<div class="cell-telefon">
-						<span> {zeile.telefon}</span>
-					</div>
-					<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.modell} {zeile.typ}</span></div>
-					<div class="cell-garage"><span> {zeile.garage}</span></div>
-					<div class="cell-log">
-						<span>
-							{zeile.histtext
-								? timeSecFormatter.format(new Date(zeile.histdatum)) + ' ' + zeile.histtext
-								: ''}</span
-						>
-					</div>
-					<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
-						{#if zeile.service}
-							&#160;
-						{/if}
-					</div>
-					<div />
-				</div>
-			{/each}
+				{/each}
 			</div>
 		</div>
 	</div>
 {/if}
 
 <style>
-
-div.scrollable {
+	div.scrollable {
 		height: calc(100vh - 133px);
 		overflow: auto;
 	}
@@ -309,6 +319,6 @@ div.scrollable {
 		font-weight: bold;
 	}
 	.header {
-		font-size: 1.3rem;;
+		font-size: 1.3rem;
 	}
 </style>
