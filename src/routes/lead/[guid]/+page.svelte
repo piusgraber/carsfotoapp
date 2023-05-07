@@ -117,7 +117,7 @@
 	let remindertime = ''; //formatDate(new Date(), 't');
 	$: reminder = reminderdate + ' ' + remindertime;
 
-	$: reserved = false; //  mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0
+	$: reserved = mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0
 	$: reservedForMe = false; // mitarbeiter.id == lead.recallmaid
 
 const verify = async () => {
