@@ -17,11 +17,26 @@
 
 	$: {
 		if (data.user) {
+			filteredList = data.leads;
+/*
 			filteredList = data.leads.sort((a, b) => {
-				if (a.datumerf < b.datumerf) return 11;
+				console.log('id: ', a.id, b.id)
+				console.log('recall: ', new Date(a.recall).getTime() - new Date(b.recall).getTime())
+				console.log('erf: ', new Date(a.datumerf).getTime() - new Date(b.datumerf).getTime())
+
+				if (a.recall && !b.recall) {
+					return -12;
+				}
+				if (b.recall && a.recall) {
+					if (a.datumerf < b.datumerf) return -9;
+					if (a.datumerf > b.datumerf) return -11;
+					return -10;
+				}
+				if (a.datumerf < b.datumerf) return 1;
 				if (a.datumerf > b.datumerf) return -1;
 				return 0;
 			});
+*/
 			filteredList = filteredList.filter((l) => {
 				if (sprachen.de && l.spracheid == 1) return true;
 				if (sprachen.fr && l.spracheid == 2) return true;
@@ -119,10 +134,12 @@
 		*{data}*
 		{loading}{data.liste} {data}
 	-->
+	<span class="header">
+
 			{#if data.liste == 'all'}
 				<b>History </b>
 				{#if srch}
-					Suche: <input bind:value={filter} type="text" use:init />
+					Suche: <input class="header" bind:value={filter} type="text" use:init />
 					{#if filter}
 						Filter: "{filter}" --
 					{/if}
@@ -134,8 +151,9 @@
 				<b>wartende</b>
 			{/if}
 			{#if data.liste == 'open'}
-				<b>offene Datensätze</b>
+				offene Datensätze
 			{/if}
+		</span>
 		</div>
 
 		<div class="panel">
@@ -156,9 +174,12 @@
 				<div class="titel">Log</div>
 				<div class="titel" />
 			</div>
+			<div class="scrollable">
+
 			{#each filteredList as zeile}
 				<div
 					class="panel-row"
+					class:recall={zeile.recall}
 					class:res={zeile.recallmaid != 0 && zeile.recallmaid != data.user.id}
 					class:resme={zeile.recallmaid == data.user.id}
 					on:click={() => showLead(zeile)}
@@ -200,18 +221,25 @@
 					<div />
 				</div>
 			{/each}
+			</div>
 		</div>
 	</div>
 {/if}
 
 <style>
+
+div.scrollable {
+		height: calc(100vh - 130px);
+		overflow: auto;
+	}
+
 	.liste {
 		font-size: 0.9rem;
 	}
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 90px 145px 30px 240px 145px 250px 350px 400px 20px auto;
+		grid-template-columns: 90px 145px 30px 250px 200px 250px 350px 400px 20px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
@@ -231,7 +259,7 @@
 		text-overflow: ellipsis;
 	}
 	.cell-telefon {
-		width: 140px;
+		width: 190px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -268,6 +296,9 @@
 		font-style: italic;
 		cursor: no-drop;
 	}
+	.recall {
+		color: red;
+	}
 	.resme {
 		cursor: pointer;
 		/*
@@ -276,5 +307,8 @@
 	}
 	.zc {
 		font-weight: bold;
+	}
+	.header {
+		font-size: 1.3rem;;
 	}
 </style>

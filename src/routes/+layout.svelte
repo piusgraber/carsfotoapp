@@ -43,7 +43,17 @@
 			<div>
 				<b>
 					{data.user.name} ({data.user.login}) <br />
-					{data.user.cwTelefon}<br />
+					{data.user.cwTelefon}&#160;&#160;
+					<button
+					on:click={async () => {
+						const response = await fetch('/api/logout');
+						if (response.ok) {
+							goto('/logon', { invalidateAll: true });
+							//                invalidateAll();
+						}
+					}}>abmelden</button
+				>
+<br />
 				</b>
 			</div>
 			<div>
@@ -55,22 +65,13 @@
 					<button on:click={showTopf1}>SST</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'open'}
-				<button on:click={showOpenLeads}>offene Datenstze anzeigen</button>
+				<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'all'}
 				<button on:click={showHistoryLeads}>History anzeigen	</button>
 				{/if}
 			</div>
 			<div>
-				<button
-					on:click={async () => {
-						const response = await fetch('/api/logout');
-						if (response.ok) {
-							goto('/logon', { invalidateAll: true });
-							//                invalidateAll();
-						}
-					}}>abmelden</button
-				>
 			</div>
 		{/if}
 	</div>
@@ -98,12 +99,15 @@
 </main>
 
 <style>
+	button {
+		font-size: 1.2rem;;
+	}
 	.titlegrid {
 		padding: 5px;
 		font-size: 1.3rem;
 		background-color: rgb(192, 192, 192);
 		display: grid;
-		grid-template-columns: 222px 359px 350px auto;
+		grid-template-columns: 300px 400px 500px auto;
 	}
 	main {
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

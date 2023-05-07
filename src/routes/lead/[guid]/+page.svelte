@@ -166,8 +166,14 @@ class="main"
 <div>Datum Vertrag</div>
 <div>{formatDate(new Date(lead.datumerf), 'm')}</div>
 <div>Datum Abgabe</div>
-<div>{formatDate(new Date(lead.abgabedatum), 'm')}</div>
-<div>Datum Fahrzeug</div>
+<div>
+	{#if lead.abgabedatum}
+	{formatDate(new Date(lead.abgabedatum), 'm')}
+{/if}
+</div>
+<div>Vertragnr</div>
+<div>{lead.vertragnr}</div>
+<div>Fahrzeug</div>
 <div>{lead.marke} {lead.typ} {lead.modell}</div>
 <div>Versicherungen</div>
 <div>{lead.versicherungenmail}</div>

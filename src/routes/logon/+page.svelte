@@ -28,7 +28,7 @@
 <div class="page">
 <!--	--{JSON.stringify($navigating)} -- -->
 	{#if $navigating}
-logon loading...
+	Seite wird geladen...
 {:else}
 <form on:submit|preventDefault={login}>
 	<div class="grid">
