@@ -38,6 +38,9 @@
 	<div class="titlegrid">
 		<div>
 			Kundendienstportal
+			<!--
+			<br/>Version 1.0
+-->
 		</div>
 		{#if data.user && data.user.name}
 			<div>
@@ -45,15 +48,15 @@
 					{data.user.name} ({data.user.login}) <br />
 					{data.user.cwTelefon}&#160;&#160;
 					<button
-					on:click={async () => {
-						const response = await fetch('/api/logout');
-						if (response.ok) {
-							goto('/logon', { invalidateAll: true });
-							//                invalidateAll();
-						}
-					}}>abmelden</button
-				>
-<br />
+						on:click={async () => {
+							const response = await fetch('/api/logout');
+							if (response.ok) {
+								goto('/logon', { invalidateAll: true });
+								//                invalidateAll();
+							}
+						}}>abmelden</button
+					>
+					<br />
 				</b>
 			</div>
 			<div>
@@ -65,14 +68,13 @@
 					<button on:click={showTopf1}>SST</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'open'}
-				<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
+					<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'all'}
-				<button on:click={showHistoryLeads}>History anzeigen	</button>
+					<button on:click={showHistoryLeads}>History anzeigen </button>
 				{/if}
 			</div>
-			<div>
-			</div>
+			<div />
 		{/if}
 	</div>
 	<!--
@@ -95,12 +97,12 @@
 {/if}
 
 -->
-<slot />
+	<slot />
 </main>
 
 <style>
 	button {
-		font-size: 1.2rem;;
+		font-size: 1.2rem;
 	}
 	.titlegrid {
 		padding: 5px;

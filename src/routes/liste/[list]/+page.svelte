@@ -45,7 +45,7 @@
 			});
 			filteredList = filteredList.filter((l) => {
 				if (filter) {
-					const srchString = l.telefon + '#' + l.garage + '#' + l.kunde + '#' + l.marke;
+					const srchString = l.telefon + '#' + l.garage + '#' + l.kunde + '#' + l.marke + '#' + l.modell + '#' + l.typ;
 					if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
 					//				if (l.kunde && l.kunde.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
 					return false;
@@ -204,7 +204,7 @@
 					<div class="cell-telefon">
 						<span> {zeile.telefon}</span>
 					</div>
-					<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.typ}</span></div>
+					<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.modell} {zeile.typ}</span></div>
 					<div class="cell-garage"><span> {zeile.garage}</span></div>
 					<div class="cell-log">
 						<span>
@@ -229,7 +229,7 @@
 <style>
 
 div.scrollable {
-		height: calc(100vh - 130px);
+		height: calc(100vh - 133px);
 		overflow: auto;
 	}
 
@@ -239,7 +239,7 @@ div.scrollable {
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 90px 145px 30px 250px 200px 250px 350px 400px 20px auto;
+		grid-template-columns: 90px 145px 30px 250px 200px 310px 350px 400px 20px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
@@ -265,7 +265,7 @@ div.scrollable {
 		text-overflow: ellipsis;
 	}
 	.cell-fahrzeug {
-		width: 240px;
+		width: 300px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

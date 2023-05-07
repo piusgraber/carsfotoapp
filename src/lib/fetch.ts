@@ -64,8 +64,9 @@ export const getLeadLog: ReserveALead = async (id) => {
 
 
 
-export const verifyEmail :any = async (leadid: number) => {
-    let url = urlBase + `sql?sql=update lead set emailverified=1 where id=${leadid}`
+export const verifyEmail :any = async (leadid: number, email: string) => {
+    console.log('verify')
+    let url = urlBase + `sql?sql=update lead set emailverified=1, email='${email}' where id=${leadid}`
     console.log(url)
     const resp = await fetch(url);
     let lead = await resp.json();
