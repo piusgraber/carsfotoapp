@@ -3,9 +3,10 @@
 </script>
 
 <main>
-	<h1>Fehler aufgetreten</h1>
+	<p>Es ist ein Fehler aufgetreten 
+		<span title="{JSON.stringify($page)}">!</span></p>
 	<p>
-		{JSON.stringify($page)}
+		
 	</p>
 </main>
 
@@ -13,4 +14,5 @@
 	main {
 		padding: 10px;
 	}
-</style>
+	
+	</style>

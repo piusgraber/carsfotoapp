@@ -1,15 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
-/*
-	import { onMount } from 'svelte';
-	onMount (() => {
-		console.log(document.getElementById("username"))
-		if (document) {
-			document.getElementById("username").focus();
-		}
-	})
-*/
 
 	let username = '';
 	let password = '';
@@ -34,41 +25,39 @@
 		}
 	};
 </script>
+
 <div class="page">
-<!--	--{JSON.stringify($navigating)} -- -->
+	<!--	--{JSON.stringify($navigating)} -- -->
 	{#if $navigating}
-	Seite wird geladen...
-{:else}
-<form on:submit|preventDefault={login}>
-	<div class="grid">
-		<div>
-			<label for="username">Benutzer</label>
-		</div>
-		<div>
-			<input id="username" bind:value={username} autofocus=true />
-		</div>
-		<div>
-			<label for="password">Passwort: </label>
-		</div>
-		<div>
-			<input id="password" type="password" bind:value={password} />
-		</div>
-		<div>
-		</div>
-		<div>
-			<button type="submit">anmelden</button>
-		</div>
-	{#if error}
-	<div>
-	</div>
-	<div title="{error}">
-		Fehler bei der Anmeldung
-	</div>
+		Seite wird geladen...
+	{:else}
+		<form on:submit|preventDefault={login}>
+			<div class="grid">
+				<div>
+					<label for="username">Benutzer</label>
+				</div>
+				<div>
+					<input id="username" bind:value={username} autofocus="true" />
+				</div>
+				<div>
+					<label for="password">Passwort: </label>
+				</div>
+				<div>
+					<input id="password" type="password" bind:value={password} />
+				</div>
+				<div />
+				<div>
+					<button type="submit">anmelden</button>
+				</div>
+				{#if error}
+					<div />
+					<div title={error}>Fehler bei der Anmeldung</div>
+				{/if}
+			</div>
+		</form>
 	{/if}
 </div>
-</form>
-{/if}
-</div>
+
 <style>
 	.page {
 		margin: 30px;

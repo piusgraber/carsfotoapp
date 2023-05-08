@@ -64,6 +64,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     } else {
         lead.available = true;
     }
+    lead.tip = 'User: ' + prnt.user.id + '\n' + 'Res: ' + lead.recallmaid
     console.log(leadLog)
     setTelefon(lead)
     return { lead: lead, leadlog: leadLog };

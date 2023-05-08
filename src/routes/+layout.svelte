@@ -25,6 +25,10 @@
 		goto('/liste/open');
 	};
 
+	const showTopf = () => {
+		goto('/topf1');
+	};
+
 	const showHistoryLeads = () => {
 		goto('/liste/all');
 	};
@@ -70,6 +74,9 @@
 				{#if data.user.sprachen.it}IT {/if}<br />
 				{#if data.user.admin}
 					<button on:click={showTopf1}>SST</button>
+				{/if}
+				{#if data.user.id==4533 && !$navigating}
+					<button on:click={showTopf}>Topf anzeigen</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'open'}
 					<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
@@ -118,7 +125,9 @@
 		display: grid;
 		grid-template-columns: 300px 400px 620px auto;
 	}
+/*
 	main {
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}
+*/	
 </style>

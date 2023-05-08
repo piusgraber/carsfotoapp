@@ -17,7 +17,7 @@
 	onMount(() => console.log('Mounted home page'));
 	onDestroy(() => console.log('Unmounted guid page'));
 
-	const mitarbeiter = $page.data.user;
+	$: user = $page.data.user;
 
 	import { dateTimeFormatter, dateTimeFormatterMEZ, formatDate } from '$lib/myfuncs';
 	import { goto, invalidate, invalidateAll } from '$app/navigation';
@@ -106,7 +106,7 @@
 		});
 	};
 
-	$: autocall = data.user.id == 1;
+	$: autocall = data.user.id == 4533;
 	const notThere = () => {
 		addLog(1);
 	};
@@ -125,8 +125,8 @@
 	let remindertime = ''; //formatDate(new Date(), 't');
 	$: reminder = reminderdate + ' ' + remindertime;
 
-	$: reserved = mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0;
-	$: reservedForMe = false; // mitarbeiter.id == lead.recallmaid
+	$: reserved = user.id != lead.recallmaid ? lead.recallmaid : 0;
+	$: reservedForMe = user.id == lead.recallmaid;
 
 	const verify = async () => {
 		console.log('xxx');
@@ -142,20 +142,13 @@
 {lead.available}
 -->
 
-	<div class="main" class:forelsa={reserved} class:forme={reservedForMe}>
-		<!--
-{JSON.stringify(mitarbeiter)}
-{lead.recallmaid}
-
-<div>
-		<a href="/liste/open">Liste</a>
-	</div>
-	
--->
-
+	<div class="main" class:forelsa={reserved} class:forme={user.id == 4533 && reservedForMe}>
 		<div class="grid">
 			<div class="xgrid">
-				<div>Lead ID</div>
+				<div>
+					Lead
+					<span title={lead.tip}>ID</span>
+				</div>
 				<div>{lead.id}</div>
 
 				<div>Garage</div>
@@ -211,7 +204,7 @@
 						{:else}
 							{lead.telefonp}
 						{/if}
-						P <br/>
+						P <br />
 					{/if}
 					{#if lead.telefong}
 						{#if autocall}
@@ -360,7 +353,9 @@
 	input[type='date'],
 	input[type='time'] {
 		font-size: 1rem;
+/*
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+*/
 	}
 	.xgrid {
 		height: 100px;

@@ -33,11 +33,13 @@
 
 	let flag = false;
 
-	$: {if(flag) {
-		invalidateAll()
-	}}
+	$: {
+		if (flag) {
+			invalidateAll();
+		}
+	}
 
-/*	
+	/*	
 	const loop = async () => {
 		while (true) {
 			await new Promise((resolve, reject) => {
@@ -66,7 +68,12 @@
 
 <div class="scrollable">
 	{#each liste as rec, index}
-		<div class="row" class:noservice={!rec.service}  class:pass={rec.kundenfilterpass}  class:free={rec.freiegaragenwahl}>
+		<div
+			class="row"
+			class:noservice={!rec.service}
+			class:pass={rec.kundenfilterpass}
+			class:free={rec.freiegaragenwahl}
+		>
 			<div class="cell" title={JSON.stringify(rec)}>
 				{index}
 			</div>
@@ -129,8 +136,10 @@
 		grid-template-columns: 55px 55px 140px 355px 50px 390px 120px auto auto;
 	}
 	.free {
-		font-weight: 500;
 		font-style: oblique;
+		text-decoration: dashed;
+		font-weight: bold;
+		background-color: #faf9b8;
 	}
 	.pass {
 		color: rgb(0, 68, 255);
@@ -159,14 +168,22 @@
 		background-color: #e5e5e5;
 		grid-row: auto / span 1;
 	}
-
-	.row:nth-child(odd) .pass {
-		background-color: #90ee5a;
+	.pass:nth-child(odd) {
+		background-color: #a5edfa;
 		grid-row: auto / span 1;
 	}
 
-	.row:nth-child(even) .pass {
-		background-color: #5fbb2e;
+	.pass:nth-child(even)  {
+		background-color: #7edfd7;
+		grid-row: auto / span 1;
+	}
+	.free:nth-child(odd) {
+		background-color: #a6f86f;
+		grid-row: auto / span 1;
+	}
+
+	.free:nth-child(even)  {
+		background-color: #96e76a;
 		grid-row: auto / span 1;
 	}
 </style>
