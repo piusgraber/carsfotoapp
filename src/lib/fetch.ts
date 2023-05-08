@@ -5,7 +5,7 @@ type getLeadLog = (id: number) => Promise<{}>;
 type FetchLeadsByRecallStatus = (type: number, userid: number) => Promise<[]>;
 
 
-const prod = true;
+const prod = false;
 
 export const urlBase = prod? 'https://api.car-ware.ch/' : 'http://localhost:3344/';
 

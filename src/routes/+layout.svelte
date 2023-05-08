@@ -14,7 +14,7 @@
 	};
 
 	const showLogin = () => {
-		goto('/logon');
+		goto('/login');
 	};
 
 	const showTopf1 = () => {
@@ -55,7 +55,7 @@
 						on:click={async () => {
 							const response = await fetch('/api/logout');
 							if (response.ok) {
-								goto('/logon', { invalidateAll: true });
+								goto('/login', { invalidateAll: true });
 								//                invalidateAll();
 							}
 						}}>abmelden</button
