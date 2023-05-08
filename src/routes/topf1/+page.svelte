@@ -81,6 +81,9 @@
 				{rec.id}
 			</div>
 			<div class="cell" title={JSON.stringify(rec)}>
+				{formatDate(rec.abgabedatum, 'd')}
+			</div>
+			<div class="cell" title={JSON.stringify(rec)}>
 				{formatDate(rec.stamp, 'm')}
 			</div>
 			<div class="cell" title={JSON.stringify(rec)}>
@@ -97,6 +100,7 @@
 					{rec.konfliktKG ? 'KG' : ''}
 				{/if}
 			</div>
+<!--
 			<div class="cell" title={JSON.stringify(rec)}>
 				{#if !rec.firma}
 					{#if rec.gemail}
@@ -112,10 +116,9 @@
 						{/if}
 					{/if}
 				{/if}
-				<!--
 			{rec.agent}-{rec.garage_idkey}	
--->
 			</div>
+-->
 			<div class="cell" title={JSON.stringify(rec.freiegaragenwahl)}>
 				{rec.vertragnr}
 			</div>
@@ -133,7 +136,7 @@
 <style>
 	.row {
 		display: grid;
-		grid-template-columns: 55px 55px 140px 355px 50px 390px 120px auto auto;
+		grid-template-columns: 35px 55px 95px 140px 300px 54px 90px auto auto;
 	}
 	.free {
 		font-style: oblique;
