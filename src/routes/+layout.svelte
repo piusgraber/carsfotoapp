@@ -17,8 +17,8 @@
 		goto('/login');
 	};
 
-	const showTopf1 = () => {
-		goto('/topf1');
+	const showWaiting = () => {
+		goto('/liste/waiting');
 	};
 
 	const showOpenLeads = () => {
@@ -72,11 +72,9 @@
 				{#if data.user.sprachen.de}DE {/if}
 				{#if data.user.sprachen.fr}FR {/if}
 				{#if data.user.sprachen.it}IT {/if}<br />
-				{#if data.user.admin}
-					<button on:click={showTopf1}>SST</button>
-				{/if}
 				{#if data.user.id==4533 && !$navigating}
-					<button on:click={showTopf}>Topf anzeigen</button>
+				<button on:click={showTopf}>Topf anzeigen</button>
+				<button on:click={showWaiting}>wartende anzeigen</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'open'}
 					<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
@@ -123,7 +121,7 @@
 		font-size: 1.3rem;
 		background-color: rgb(192, 192, 192);
 		display: grid;
-		grid-template-columns: 300px 400px 620px auto;
+		grid-template-columns: 300px 400px 920px auto;
 	}
 /*
 	main {
