@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
+	import { onMount } from 'svelte';
+
+	onMount (() => {
+		console.log(document.getElementById("username"))
+		document.getElementById("username").focus();
+	})
 
 	let username = '';
 	let password = '';
@@ -36,10 +42,10 @@
 			<label for="username">Benutzer</label>
 		</div>
 		<div>
-			<input id="userneme" bind:value={username} />
+			<input id="username" bind:value={username} autofocus=true />
 		</div>
 		<div>
-			<label for="username">Passwort: </label>
+			<label for="password">Passwort: </label>
 		</div>
 		<div>
 			<input id="password" type="password" bind:value={password} />

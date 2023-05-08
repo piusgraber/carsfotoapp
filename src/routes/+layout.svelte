@@ -29,6 +29,10 @@
 		goto('/liste/all');
 	};
 
+	const showLeads = () => {
+		goto('/liste/leads');
+	};
+
 	const refresh = () => {
 		invalidateAll();
 	};
@@ -72,6 +76,9 @@
 				{/if}
 				{#if !$navigating && $page.params.list != 'all'}
 					<button on:click={showHistoryLeads}>History anzeigen </button>
+				{/if}
+				{#if !$navigating && $page.params.list != 'leads'}
+					<button on:click={showLeads}>Leads anzeigen </button>
 				{/if}
 			</div>
 			<div />

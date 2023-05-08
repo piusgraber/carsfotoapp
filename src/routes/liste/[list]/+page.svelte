@@ -152,6 +152,9 @@
 				{#if data.liste == 'waiting'}
 					<b>wartende</b>
 				{/if}
+				{#if data.liste == 'leads'}
+					<b>gemachte</b>
+				{/if}
 				{#if data.liste == 'open'}
 					<b>offene Datensätze</b>
 				{/if}
@@ -187,7 +190,7 @@
 				<div class="titel" />
 			</div>
 			<div class="scrollable">
-				{#each filteredList as zeile}
+				{#each filteredList as zeile, index}
 					<div
 						class="panel-row"
 						class:recall={zeile.recall}
