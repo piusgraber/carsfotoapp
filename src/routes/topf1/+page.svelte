@@ -66,7 +66,7 @@
 
 <div class="scrollable">
 	{#each liste as rec, index}
-		<div class="row" class:pass={rec.kundenfilterpass} class:noservice={!rec.service}>
+		<div class="row" class:noservice={!rec.service}  class:pass={rec.kundenfilterpass}  class:free={rec.freiegaragenwahl}>
 			<div class="cell" title={JSON.stringify(rec)}>
 				{index}
 			</div>
@@ -80,6 +80,7 @@
 				{rec.garage_firma}, {rec.garage_ort}
 			</div>
 			<div class="cell" title={rec.reason}>
+				{rec.freiegaragenwahl ? 'FG' : ''}
 				{rec.whitelabel ? 'WL' : ''}
 				{#if rec.firma}
 					F
@@ -108,7 +109,7 @@
 			{rec.agent}-{rec.garage_idkey}	
 -->
 			</div>
-			<div class="cell" title={JSON.stringify(rec)}>
+			<div class="cell" title={JSON.stringify(rec.freiegaragenwahl)}>
 				{rec.vertragnr}
 			</div>
 			<div class="cell" title={JSON.stringify(rec)}>
@@ -126,6 +127,10 @@
 	.row {
 		display: grid;
 		grid-template-columns: 55px 55px 140px 355px 50px 390px 120px auto auto;
+	}
+	.free {
+		font-weight: 500;
+		font-style: oblique;
 	}
 	.pass {
 		color: rgb(0, 68, 255);

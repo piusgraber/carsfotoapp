@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { navigating, page } from '$app/stores';
-	import { verifyEmail, addLogEntry, fetchALead, fetchSQL_CW, getLeadLog, getLogEntry } from '$lib/fetch';
+	import {
+		verifyEmail,
+		addLogEntry,
+		fetchALead,
+		fetchSQL_CW,
+		getLeadLog,
+		getLogEntry
+	} from '$lib/fetch';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -42,7 +49,7 @@
 	let reminderOk = false;
 	$: {
 		reminderOk = remindertime ? true : false;
-/*		
+		/*		
 		if (reminderOk) {
 			const now = new Date().getTime();
 			const when = new Date(reminder).getTime();
@@ -57,48 +64,49 @@
 	}
 
 	const addLog = async (reason) => {
-
 		let text: string = '';
 		let stamp: Date = new Date();
 		let rs;
-//		console.log('======================================');
-	text = $page.data.user.login + ': '
+		//		console.log('======================================');
+		text = $page.data.user.login + ': ';
 		switch (reason) {
 			case 1:
 				// nicht erreicht
 				text += 'nicht erreicht';
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
-//				console.log(rs);
+				//				console.log(rs);
 				break;
 			case 2:
 				// kein Interesse
 				text += 'kein Interesse';
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
-//				console.log(rs);
+				//				console.log(rs);
 				break;
 			case 3:
 				// schon vers.
 				text += 'schon versichert';
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
-//				console.log(rs);
+				//				console.log(rs);
 				break;
 			case 4:
 				// nicht erreicht
 				let rm = new Date(reminder);
-//				console.log(rm);
-//				console.log('======================================');
+				//				console.log(rm);
+				//				console.log('======================================');
 				text += 'später anrufen: ' + dateTimeFormatterMEZ.format(rm);
-//				console.log(text);
+				//				console.log(text);
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, reminder);
-//				console.log(rs);
+				//				console.log(rs);
 				break;
 			default:
 			// anderer Grund
 		}
 		goto('/liste/open', {
 			invalidateAll: true
-		})
+		});
 	};
+
+	$: autocall = data.user.id == 1;
 	const notThere = () => {
 		addLog(1);
 	};
@@ -117,28 +125,25 @@
 	let remindertime = ''; //formatDate(new Date(), 't');
 	$: reminder = reminderdate + ' ' + remindertime;
 
-	$: reserved = mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0
+	$: reserved = mitarbeiter.id != lead.recallmaid && lead.recallmaid != 0;
 	$: reservedForMe = false; // mitarbeiter.id == lead.recallmaid
 
-const verify = async () => {
-	console.log('xxx')
-	await verifyEmail(lead.id, lead.email);
-	invalidateAll();
-}
+	const verify = async () => {
+		console.log('xxx');
+		await verifyEmail(lead.id, lead.email);
+		invalidateAll();
+	};
 </script>
-{#if $navigating}
-Seite wird geladen...
-{:else}
-<!--
-{lead.available}
--->	
 
-<div
-class="main"
-	class:forelsa={reserved}
-	class:forme={reservedForMe}
->
-<!--
+{#if $navigating}
+	Seite wird geladen...
+{:else}
+	<!--
+{lead.available}
+-->
+
+	<div class="main" class:forelsa={reserved} class:forme={reservedForMe}>
+		<!--
 {JSON.stringify(mitarbeiter)}
 {lead.recallmaid}
 
@@ -148,86 +153,87 @@ class="main"
 	
 -->
 
+		<div class="grid">
+			<div class="xgrid">
+				<div>Lead ID</div>
+				<div>{lead.id}</div>
 
+				<div>Garage</div>
+				<div>{lead.garage}</div>
+				<div>Verkäufer</div>
+				<div>{lead.verkaeufer}</div>
 
-<div class="grid">
+				<div>Datum Vertrag</div>
+				<div>{formatDate(new Date(lead.datumerf), 'm')}</div>
+				<div>Datum Abgabe</div>
+				<div>
+					{#if lead.abgabedatum}
+						{formatDate(new Date(lead.abgabedatum), 'm')}
+					{/if}
+				</div>
+				<div>Vertragnr</div>
+				<div>{lead.vertragnr}</div>
+				<div>Fahrzeug</div>
+				<div>{lead.marke} {lead.typ} {lead.modell}</div>
+				<div>Versicherungen</div>
+				<div>{lead.versicherungenmail}</div>
+				<div>Sprache</div>
+				<div>{lead.sprache}</div>
+				<div>Kunde</div>
+				<div>
+					{lead.anrede ? lead.anrede : ''}
+					{lead.vorname}
+					{lead.nachname}
+				</div>
+				<div />
+				<div>
+					{lead.strasse}
+					{lead.hausnummer}
+				</div>
+				<div />
+				<div>
+					{lead.plz}
+					{lead.ort}
+				</div>
+				<div>Telefon</div>
+				<div>
+					{#if lead.telefonm}
+						{#if autocall}
+							<a href="tel:{lead.telefonm}"> {lead.telefonm}</a>
+						{:else}
+							{lead.telefonm}
+						{/if}
+						M<br />
+					{/if}
+					{#if lead.telefonp}
+						{#if autocall}
+							<a href="tel:{lead.telefonp}"> {lead.telefonp}</a>
+						{:else}
+							{lead.telefonp}
+						{/if}
+						P <br/>
+					{/if}
+					{#if lead.telefong}
+						{#if autocall}
+							<a href="tel:{lead.telefong}"> {lead.telefong}</a>
+						{:else}
+							{lead.telefong}
+						{/if}
+						G<br />
+					{/if}
+				</div>
 
-
-
-<div class="xgrid">
-
-	<div>Lead ID</div>
-	<div>{lead.id}</div>
-
-	<div>Garage</div>	
-	<div>{lead.garage}</div>
-	<div>Verkäufer</div>	
-<div>{lead.verkaeufer}</div>
-
-<div>Datum Vertrag</div>
-<div>{formatDate(new Date(lead.datumerf), 'm')}</div>
-<div>Datum Abgabe</div>
-<div>
-	{#if lead.abgabedatum}
-	{formatDate(new Date(lead.abgabedatum), 'm')}
-{/if}
-</div>
-<div>Vertragnr</div>
-<div>{lead.vertragnr}</div>
-<div>Fahrzeug</div>
-<div>{lead.marke} {lead.typ} {lead.modell}</div>
-<div>Versicherungen</div>
-<div>{lead.versicherungenmail}</div>
-<div>Sprache</div>
-<div>{lead.sprache}</div>
-<div>Kunde
-
-</div>
-<div>
-{lead.anrede}
-{lead.vorname}
-{lead.nachname}
-</div>
-<div>
-</div>
-<div>
-{lead.strasse}
-{lead.hausnummer}
-</div>
-<div>
-</div>
-<div>
-{lead.plz}
-{lead.ort}
-</div>
-<div>Telefon
-</div>
-<div>
-{#if lead.telefonm}
-	{lead.telefonm} M<br />
-{/if}
-{#if lead.telefonp}
-	{lead.telefonp} P<br />
-{/if}
-{#if lead.telefong}
-	{lead.telefong} G<br />
-{/if}
-</div>
-
-
-<div>Email</div>
-<div>
-{#if !lead.emailverified}
-<input type="email" bind:value={lead.email} />
-<button on:click={verify}>Email verifizieren</button>
-{:else}
-{lead.email}
-{/if}
-</div>
-
-
-</div>
-<!--
+				<div>Email</div>
+				<div>
+					{#if !lead.emailverified}
+						<input type="email" bind:value={lead.email} />
+						<button on:click={verify}>Email verifizieren</button>
+					{:else}
+						{lead.email}
+					{/if}
+				</div>
+			</div>
+			<!--
 		<div class="kunde">
 			{#if !lead.service}
 				<span class="alert">KEIN SERVICE !!!!</span>
@@ -265,7 +271,7 @@ class="main"
 			{/if}
 		</div>
 -->
-<!--
+			<!--
 		<div>
 			<h1>&#160;</h1>
 			Garage
@@ -283,46 +289,47 @@ class="main"
 			<b>Abgabe: {dateTimeFormatter.format(new Date(lead.abgabedatum))}</b>
 		</div>
 -->
-		<div>
-			<button on:click={notThere}>nicht erreicht</button>
-			<br />
-			<br />
-			<button on:click={noInterest}>kein Interesse</button>
-			<br />
-			<br />
-			<button on:click={alreadyInsured}>bereits versichert</button>
-			<br />
-			<br />
-			<input type="date" bind:value={reminderdate} />
-			<input type="time" bind:value={remindertime} />
-			<br />
-			<button disabled={!reminderOk} on:click={whenLater}>später anrufen</button>
-			<br />
-			<br />
-			<button disabled={!lead.emailverified} on:click={showLanding}>Landing-Page {lpsrc ? '' : ''}</button>
-			<br />
-			<br />
-		</div>
-		<div>
-			{#if lpsrc}
-				<iframe class="lpframe" title="land" src={lpsrc} />
-			{/if}
+			<div>
+				<button on:click={notThere}>nicht erreicht</button>
+				<br />
+				<br />
+				<button on:click={noInterest}>kein Interesse</button>
+				<br />
+				<br />
+				<button on:click={alreadyInsured}>bereits versichert</button>
+				<br />
+				<br />
+				<input type="date" bind:value={reminderdate} />
+				<input type="time" bind:value={remindertime} />
+				<br />
+				<button disabled={!reminderOk} on:click={whenLater}>später anrufen</button>
+				<br />
+				<br />
+				<button disabled={!lead.emailverified} on:click={showLanding}
+					>Landing-Page {lpsrc ? '' : ''}</button
+				>
+				<br />
+				<br />
+			</div>
+			<div>
+				{#if lpsrc}
+					<iframe class="lpframe" title="land" src={lpsrc} />
+				{/if}
+			</div>
 		</div>
 	</div>
-</div>
-<br />
-{#each leadLogRecs as log}
-	<div>{dateTimeFormatter.format(new Date(log.datum))} : {log.bemerkung}</div>
-{/each}
-{#if showJSON}
 	<br />
-	Datum formatieren generell Funktion wo? Formatierung wo?<br />
-	<br />
-	{JSON.stringify(data)}
+	{#each leadLogRecs as log}
+		<div>{dateTimeFormatter.format(new Date(log.datum))} : {log.bemerkung}</div>
+	{/each}
+	{#if showJSON}
+		<br />
+		Datum formatieren generell Funktion wo? Formatierung wo?<br />
+		<br />
+		{JSON.stringify(data)}
+	{/if}
 {/if}
 
-
-{/if}
 <style>
 	.grid {
 		display: grid;
@@ -350,7 +357,8 @@ class="main"
 		font-size: 1.2rem;
 	}
 
-	input[type=date], 	input[type=time] {
+	input[type='date'],
+	input[type='time'] {
 		font-size: 1rem;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	}

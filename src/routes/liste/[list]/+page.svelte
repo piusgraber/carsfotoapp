@@ -228,9 +228,9 @@
 							>
 						</div>
 						<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
-							{#if zeile.service}
-								&#160;
-							{/if}
+<!--
+							{zeile.adminLead}
+-->
 						</div>
 						<div />
 					</div>
@@ -243,6 +243,7 @@
 <style>
 	div.scrollable {
 		height: calc(100vh - 133px);
+/*		width: 2000px;  */
 		overflow: auto;
 	}
 
