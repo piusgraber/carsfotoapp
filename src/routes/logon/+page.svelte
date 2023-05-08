@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
+/*
 	import { onMount } from 'svelte';
-
 	onMount (() => {
 		console.log(document.getElementById("username"))
-		document.getElementById("username").focus();
+		if (document) {
+			document.getElementById("username").focus();
+		}
 	})
+*/
 
 	let username = '';
 	let password = '';
@@ -55,8 +58,14 @@
 		<div>
 			<button type="submit">anmelden</button>
 		</div>
+	{#if error}
+	<div>
 	</div>
-	{error}
+	<div title="{error}">
+		Fehler bei der Anmeldung
+	</div>
+	{/if}
+</div>
 </form>
 {/if}
 </div>

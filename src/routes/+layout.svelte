@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 	import { goto, invalidateAll } from '$app/navigation';
-	import { navigating, page } from '$app/stores';
+	import {  navigating, page } from '$app/stores';
 	import { redirect } from '@sveltejs/kit';
 	export let data: LayoutData;
 
@@ -116,7 +116,7 @@
 		font-size: 1.3rem;
 		background-color: rgb(192, 192, 192);
 		display: grid;
-		grid-template-columns: 300px 400px 500px auto;
+		grid-template-columns: 300px 400px 620px auto;
 	}
 	main {
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
