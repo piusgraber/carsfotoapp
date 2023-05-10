@@ -16,29 +16,31 @@ const setTelefon = (lead) => {
     }
     if (lead.telefon2) {
         if (lead.telefonart2 == 'M') {
-            lead.telefonm = lead.telefon;
+            lead.telefonm = lead.telefon2;
         }
         if (lead.telefonart2 == 'G') {
-            lead.telefong = lead.telefon;
+            lead.telefong = lead.telefon2;
         }
         if (lead.telefonart2 == 'P') {
-            lead.telefonp = lead.telefon;
+            lead.telefonp = lead.telefon2;
         }
     }
     if (lead.telefon3) {
         if (lead.telefonart3 == 'M') {
-            lead.telefonm = lead.telefon;
+            lead.telefonm = lead.telefon3;
         }
         if (lead.telefonart3 == 'G') {
-            lead.telefong = lead.telefon;
+            lead.telefong = lead.telefon3;
         }
         if (lead.telefonart3 == 'P') {
-            lead.telefonp = lead.telefon;
+            lead.telefonp = lead.telefon3;
         }
     }
 }
 
 export const load: PageServerLoad = async ({ params, parent }) => {
+
+    // Daten kommen aus server.js -> reserveLead
 
     const guid = params.guid;
     const prnt = await parent();

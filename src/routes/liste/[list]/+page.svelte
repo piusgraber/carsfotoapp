@@ -8,6 +8,7 @@
 
 	import { timeSecFormatter } from '$lib/myfuncs';
 	import { dateFormatter } from '$lib/myfuncs';
+	import { extractPhoneNumberCH, extractPhoneNumberIntl } from '$lib/dbFunc';
 	export let data: PageData;
 	let filteredList: Zeile[];
 	let sprachen = [];
@@ -43,12 +44,22 @@
 				if (sprachen.it && l.spracheid == 3) return true;
 				return false;
 			});
+			/*
+			filteredList = filteredList.filter((l) => {
+				if (l.isfirma) return false;
+				return true;
+			});
+*/
 			filteredList = filteredList.filter((l) => {
 				if (filter) {
 					const srchString =
-						l.telefon +
+						//						l.telefon +
 						'#' +
 						l.garage +
+						'#' +
+						l.mainPhone +
+						'#' +
+						//						l.mainPhoneCH +
 						'#' +
 						l.kunde +
 						'#' +
@@ -57,13 +68,66 @@
 						l.modell +
 						'#' +
 						l.typ;
-					if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
+					if (srchString.includes('eizler')) {
+						//						return true;
+					}
+					if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+						return true;
+					}
 					//				if (l.kunde && l.kunde.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
 					return false;
 				}
 				return true;
 			});
 			filteredList.map((z) => {
+				//Postleitzahl
+				z.flag = '';
+				if (z.whitelabel) {
+					z.flag = 'WL';
+					if (z.isfirma) {
+						z.flag = 'WLF';
+					}
+				}
+				if (+z.plz >= 9485 && +z.plz <= 9499) {
+					z.flag = 'FL';
+				}
+				if (z.age && z.age > 70) {
+					z.flag = '70+';
+				}
+				if (z.isfirma) {
+					z.flag = 'FI';
+				}
+				if (z.dublette==1) {
+					z.flag = 'EM'
+				}
+				if (z.dublette==2) {
+					z.flag = 'SN'
+				}
+				if (z.dublette==3) {
+					z.flag = 'SE'
+				}
+				if (z.dublette>3) {
+					z.flag = 'XXX'
+				}
+
+				if (z.telefonm) {
+					z.mainPhone = z.telefonm;
+				} else {
+					if (z.telefonp) {
+						z.mainPhone = z.telefonp;
+					} else {
+						if (z.telefong) {
+							z.mainPhone = z.telefong;
+						} else {
+							z.mainPhone = 'xx';
+						}
+					}
+				}
+				let phoneIntl = extractPhoneNumberIntl(z.mainPhone);
+				z.mainPhone = phoneIntl ? phoneIntl : '--';
+				let phoneCH = extractPhoneNumberCH(z.mainPhone);
+				z.mainPhoneCH = phoneCH ? phoneCH : '--';
+
 				try {
 					z.abgabeDatum = z.abgabe ? dateFormatter.format(new Date(z.abgabe)) : '';
 					z.leadDatum = z.datumlead ? timeSecFormatter.format(new Date(z.datumlead)) : '';
@@ -76,6 +140,23 @@
 					if (z.recallmaid != 0) {
 						z.zclass = 'res';
 					}
+					z.srch =
+//						z.telefonm +
+						'#' +
+						z.garage +
+						'#' +
+						z.mainPhone +
+						'#' +
+						z.mainPhoneCH +
+						'#' +
+						z.kunde +
+						'#' +
+						z.marke +
+						'#' +
+						z.modell +
+						'#' +
+						z.typ;
+
 					/*
 					}
 				*/
@@ -160,19 +241,20 @@
 				{/if}
 				&#160;&#160;&#160;&#160;&#160;&#160;
 				{#if srch}
-				Suche: <input class="header" bind:value={filter} type="text" use:init />
-				{#if filter}
-					Filter: "{filter}" --
+					Suche: <input class="header" bind:value={filter} type="text" use:init />
+					{#if filter}
+						Filter: "{filter}" --
+					{/if}
+					abbrechen mit ESC
+				{:else}
+					Suche mit CTRL-F
 				{/if}
-				abbrechen mit ESC
-			{:else}
-				Suche mit CTRL-F
-			{/if}
 			</span>
 		</div>
 
 		<div class="panel">
 			<div class="panel-row">
+				<div class="titel" title="FL Liechtenstein, EM Email, SN Stammnr, SE Stammnr+Email, 70+ über 70, WL whitelabel">FL</div>
 				<div class="titel">Abgabe</div>
 				<div class="titel">
 					{#if data.liste == 'leads'}
@@ -200,6 +282,9 @@
 						on:keydown={() => showLead(zeile)}
 					>
 						<div>
+							{zeile.flag}
+						</div>
+						<div>
 							{zeile.abgabeDatum}
 						</div>
 						<div>
@@ -215,8 +300,11 @@
 						<div class="cell-kunde">
 							<span> {zeile.kunde}</span>
 						</div>
-						<div class="cell-telefon">
-							<span> {zeile.telefon}</span>
+						<div class="cell-telefon" title={$page.data.user.id==4533 ? zeile.srch : ''}>
+							<span
+								>{zeile.mainPhone}
+								<!--{zeile.telefon}--></span
+							>
 						</div>
 						<div class="cell-fahrzeug"><span> {zeile.marke} {zeile.modell} {zeile.typ}</span></div>
 						<div class="cell-garage"><span> {zeile.garage}</span></div>
@@ -228,7 +316,7 @@
 							>
 						</div>
 						<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)}>
-<!--
+							<!--
 							{zeile.adminLead}
 -->
 						</div>
@@ -243,7 +331,7 @@
 <style>
 	div.scrollable {
 		height: calc(100vh - 133px);
-/*		width: 2000px;  */
+		/*		width: 2000px;  */
 		overflow: auto;
 	}
 
@@ -253,7 +341,7 @@
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 90px 145px 30px 250px 200px 310px 350px 400px 20px auto;
+		grid-template-columns: 35px 90px 145px 30px 250px 140px 310px 350px 400px 20px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {

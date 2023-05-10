@@ -3,6 +3,8 @@
 	import { goto, invalidateAll } from '$app/navigation';
 	import {  navigating, page } from '$app/stores';
 	import { redirect } from '@sveltejs/kit';
+	import '../app.css'
+
 	export let data: LayoutData;
 
 	//	import { storeData } from '$lib/mystore';
@@ -40,7 +42,8 @@
 	const refresh = () => {
 		invalidateAll();
 	};
-</script>
+
+  </script>
 
 <main>
 	<div class="titlegrid">
@@ -111,7 +114,6 @@
 -->
 	<slot />
 </main>
-
 <style>
 	button {
 		font-size: 1.2rem;

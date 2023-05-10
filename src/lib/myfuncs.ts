@@ -39,7 +39,7 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 const timeOptions: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
     minute: '2-digit',
-    timeZone: 'UTC'
+    timeZone: 'Europe/Zurich'
 };
 
 export const timeSecFormatter = new Intl.DateTimeFormat(locale, options);

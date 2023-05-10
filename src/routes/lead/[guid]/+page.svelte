@@ -21,6 +21,8 @@
 
 	import { dateTimeFormatter, dateTimeFormatterMEZ, formatDate } from '$lib/myfuncs';
 	import { goto, invalidate, invalidateAll } from '$app/navigation';
+	import { extractPhoneNumberIntl } from '$lib/dbFunc';
+	import { json } from '@sveltejs/kit';
 	//	import { addLogEntry } from '$lib/dbFunc';
 	let lead: Lead;
 
@@ -35,6 +37,9 @@
 	};
 
 	let leadLogRecs: [];
+	$: mobile = extractPhoneNumberIntl(lead.telefonm)
+	$: privat = extractPhoneNumberIntl(lead.telefonp)
+	$: business = extractPhoneNumberIntl(lead.telefong)
 	$: lead = data.lead;
 	$: leadLogRecs = data.leadlog;
 
@@ -122,7 +127,7 @@
 	let showJSON: boolean = false;
 
 	let reminderdate = new Date().toISOString().substring(0, 10);
-	let remindertime = ''; //formatDate(new Date(), 't');
+	let remindertime = formatDate(new Date(), 't');
 	$: reminder = reminderdate + ' ' + remindertime;
 
 	$: reserved = user.id != lead.recallmaid ? lead.recallmaid : 0;
@@ -168,6 +173,8 @@
 				<div>{lead.vertragnr}</div>
 				<div>Fahrzeug</div>
 				<div>{lead.marke} {lead.typ} {lead.modell}</div>
+				<div>Stammnummer</div>
+				<div>{lead.stammnr}</div>
 				<div>Versicherungen</div>
 				<div>{lead.versicherungenmail}</div>
 				<div>Sprache</div>
@@ -188,33 +195,59 @@
 					{lead.plz}
 					{lead.ort}
 				</div>
-				<div>Telefon</div>
+				<div>Geburtstag
+				</div>
 				<div>
-					{#if lead.telefonm}
+					{formatDate(lead.geburtstag, 'd')}
+				</div>
+				<div>&#160;</div>
+				<div>
+				</div>
+				<div>Telefon</div>
+				<div class="phonegrid">
+					{#if true || mobile}
+					<div>
+					M</div>
+					<div>
 						{#if autocall}
-							<a href="tel:{lead.telefonm}"> {lead.telefonm}</a>
+							<a href="tel:{mobile}"> {mobile}</a>
 						{:else}
-							{lead.telefonm}
+							{mobile}
 						{/if}
-						M<br />
+					</div>
+					<div>{lead.telefonm}</div>
 					{/if}
-					{#if lead.telefonp}
+					{#if true || privat && privat != mobile}
+					<div>
+					P</div><div>
 						{#if autocall}
-							<a href="tel:{lead.telefonp}"> {lead.telefonp}</a>
+							<a href="tel:{privat}"> {privat}</a>
 						{:else}
-							{lead.telefonp}
-						{/if}
-						P <br />
+							{privat}
+						{/if}</div>
+						<div>{lead.telefonp}</div>
 					{/if}
-					{#if lead.telefong}
+					{#if true ||  business && business != mobile && business != privat}
+					<div>G</div>
+					<div>
 						{#if autocall}
-							<a href="tel:{lead.telefong}"> {lead.telefong}</a>
+							<a href="tel:{business}"> {business}</a>
 						{:else}
-							{lead.telefong}
+							{business}
 						{/if}
-						G<br />
+					</div><div>{lead.telefong}</div>
 					{/if}
 				</div>
+				<div>&#160;</div>
+				<div>
+				</div>
+				<div>
+					Verkäufer Email
+				</div>
+				<div>
+					{lead.verkaeuferemail}
+				</div>
+
 
 				<div>Email</div>
 				<div>
@@ -227,6 +260,7 @@
 				</div>
 			</div>
 			<!--
+			{JSON.stringify(lead)}
 		<div class="kunde">
 			{#if !lead.service}
 				<span class="alert">KEIN SERVICE !!!!</span>
@@ -289,9 +323,6 @@
 				<button on:click={noInterest}>kein Interesse</button>
 				<br />
 				<br />
-				<button on:click={alreadyInsured}>bereits versichert</button>
-				<br />
-				<br />
 				<input type="date" bind:value={reminderdate} />
 				<input type="time" bind:value={remindertime} />
 				<br />
@@ -327,6 +358,7 @@
 	.grid {
 		display: grid;
 		grid-template-columns: 700px 400px 200px auto;
+		height: 500px;
 	}
 
 	.main {
@@ -380,5 +412,9 @@
 	}
 	.forelsa {
 		background-color: rgb(255, 176, 176);
+	}
+	.phonegrid {
+		display: grid;
+		grid-template-columns: 30px 150px auto;
 	}
 </style>
