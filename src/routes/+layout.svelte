@@ -46,9 +46,13 @@
   </script>
 
 <main>
-	<div class="titlegrid">
+	<div class="titlegrid" 
+	class:open={$page.params.list=='open'}
+	class:history={$page.params.list=='all'}
+	class:leads={$page.params.list=='leads'}
+	>
 		<div>
-			Kundendienstportal
+			Kundendienstportal 
 			<!--
 			<br/>Version 1.0
 -->
@@ -133,9 +137,18 @@
 	.titlegrid {
 		padding: 5px;
 		font-size: 1.3rem;
-		background-color: rgb(192, 192, 192);
 		display: grid;
 		grid-template-columns: 300px 400px 920px auto;
+	}
+
+	.open {
+		background-color: rgb(192, 192, 192);
+	}
+	.history {
+		background-color: rgb(91, 159, 223);
+	}
+	.leads {
+		background-color: rgb(174, 219, 185);
 	}
 /*
 	main {

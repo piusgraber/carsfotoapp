@@ -326,7 +326,7 @@
 		</div>
 -->
 			<div>
-				<button on:click={cleanAway}>wegputzen</button>
+				<button on:click={cleanAway}>wegklicken</button>
 				<br />
 				<br />
 				<button on:click={notThere}>nicht erreicht</button>
