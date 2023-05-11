@@ -90,6 +90,18 @@
 				{/if}
 			</div>
 			<div />
+		{:else}
+		<div>
+		<button
+						on:click={async () => {
+							const response = await fetch('/api/logout');
+							if (response.ok) {
+								goto('/login', { invalidateAll: true });
+								//                invalidateAll();
+							}
+						}}>abmelden</button
+					>
+			</div>
 		{/if}
 	</div>
 	<!--
