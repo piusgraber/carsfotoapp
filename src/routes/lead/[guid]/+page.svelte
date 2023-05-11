@@ -87,9 +87,15 @@
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
 				//				console.log(rs);
 				break;
-			case 3:
+				case 3:
 				// schon vers.
 				text += 'schon versichert';
+				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
+				//				console.log(rs);
+				break;
+				case 5:
+				// weg
+				text += 'weggeklickt';
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
 				//				console.log(rs);
 				break;
@@ -123,6 +129,9 @@
 	};
 	const whenLater = () => {
 		addLog(4);
+	};
+	const cleanAway = () => {
+		addLog(5);
 	};
 	let showJSON: boolean = false;
 
@@ -317,6 +326,9 @@
 		</div>
 -->
 			<div>
+				<button on:click={cleanAway}>wegputzen</button>
+				<br />
+				<br />
 				<button on:click={notThere}>nicht erreicht</button>
 				<br />
 				<br />

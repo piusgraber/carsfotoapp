@@ -52,22 +52,7 @@
 */
 			filteredList = filteredList.filter((l) => {
 				if (filter) {
-					const srchString =
-						//						l.telefon +
-						'#' +
-						l.garage +
-						'#' +
-						l.mainPhone +
-						'#' +
-						//						l.mainPhoneCH +
-						'#' +
-						l.kunde +
-						'#' +
-						l.marke +
-						'#' +
-						l.modell +
-						'#' +
-						l.typ;
+					const srchString = l.srch;
 					if (srchString.includes('eizler')) {
 						//						return true;
 					}
@@ -91,23 +76,23 @@
 				if (+z.plz >= 9485 && +z.plz <= 9499) {
 					z.flag = 'FL';
 				}
-				if (z.age && z.age > 70) {
-					z.flag = '70+';
+				if (z.age && z.age > 75) {
+					z.flag = '75+';
 				}
 				if (z.isfirma) {
 					z.flag = 'FI';
 				}
-				if (z.dublette==1) {
-					z.flag = 'EM'
+				if (z.dublette == 1) {
+					z.flag = 'EM';
 				}
-				if (z.dublette==2) {
-					z.flag = 'SN'
+				if (z.dublette == 2) {
+					z.flag = 'SN';
 				}
-				if (z.dublette==3) {
-					z.flag = 'SE'
+				if (z.dublette == 3) {
+					z.flag = 'SE';
 				}
-				if (z.dublette>3) {
-					z.flag = 'XXX'
+				if (z.dublette > 3) {
+					z.flag = 'XXX';
 				}
 
 				if (z.telefonm) {
@@ -141,13 +126,13 @@
 						z.zclass = 'res';
 					}
 					z.srch =
-//						z.telefonm +
+						//						z.telefonm +
 						'#' +
 						z.garage +
 						'#' +
-						z.mainPhone +
+						z.mainPhone + // Intl Telefonnummer
 						'#' +
-						z.mainPhoneCH +
+						//						z.mainPhoneCH +   // CH Telefonnummer
 						'#' +
 						z.kunde +
 						'#' +
@@ -166,9 +151,13 @@
 	}
 	//	console.log(data)
 	const showLead = (z) => {
-		if (z.recallmaid && z.recallmaid != data.user.id) {
-		} else {
+		if (data.liste == 'all') {
 			goto('/lead/' + z.guid);
+		} else {
+			if (z.recallmaid && z.recallmaid != data.user.id) {
+			} else {
+				goto('/lead/' + z.guid);
+			}
 		}
 	};
 
@@ -254,7 +243,12 @@
 
 		<div class="panel">
 			<div class="panel-row">
-				<div class="titel" title="FL Liechtenstein, EM Email, SN Stammnr, SE Stammnr+Email, 70+ über 70, WL whitelabel">FL</div>
+				<div
+					class="titel"
+					title="FL Liechtenstein, EM Email, SN Stammnr, SE Stammnr+Email, 70+ über 70, WL whitelabel"
+				>
+					FL
+				</div>
 				<div class="titel">Abgabe</div>
 				<div class="titel">
 					{#if data.liste == 'leads'}
@@ -276,7 +270,9 @@
 					<div
 						class="panel-row"
 						class:recall={zeile.recall}
-						class:res={zeile.recallmaid != 0 && zeile.recallmaid != data.user.id}
+						class:res={data.liste != 'all' &&
+							zeile.recallmaid != 0 &&
+							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}
 						on:click={() => showLead(zeile)}
 						on:keydown={() => showLead(zeile)}
@@ -300,7 +296,7 @@
 						<div class="cell-kunde">
 							<span> {zeile.kunde}</span>
 						</div>
-						<div class="cell-telefon" title={$page.data.user.id==4533 ? zeile.srch : ''}>
+						<div class="cell-telefon" title={$page.data.user.id == 4533 ? zeile.srch : ''}>
 							<span
 								>{zeile.mainPhone}
 								<!--{zeile.telefon}--></span
