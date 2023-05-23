@@ -166,7 +166,7 @@
 				<div>{lead.id}</div>
 
 				<div>Garage</div>
-				<div>{lead.garage}</div>
+				<div>{lead.garagename}</div>
 				<div>Verkäufer</div>
 				<div>{lead.verkaeufer}</div>
 
@@ -268,8 +268,8 @@
 					{/if}
 				</div>
 			</div>
-			<!--
 			{JSON.stringify(lead)}
+			<!--
 		<div class="kunde">
 			{#if !lead.service}
 				<span class="alert">KEIN SERVICE !!!!</span>
