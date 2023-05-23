@@ -268,8 +268,8 @@
 					{/if}
 				</div>
 			</div>
-			{JSON.stringify(lead)}
 			<!--
+			{JSON.stringify(lead)}
 		<div class="kunde">
 			{#if !lead.service}
 				<span class="alert">KEIN SERVICE !!!!</span>
