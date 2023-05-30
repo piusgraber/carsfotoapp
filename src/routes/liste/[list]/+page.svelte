@@ -19,53 +19,27 @@
 	$: {
 		if (data.user) {
 			filteredList = data.leads;
-			/*
-			filteredList = data.leads.sort((a, b) => {
-				console.log('id: ', a.id, b.id)
-				console.log('recall: ', new Date(a.recall).getTime() - new Date(b.recall).getTime())
-				console.log('erf: ', new Date(a.datumerf).getTime() - new Date(b.datumerf).getTime())
-
-				if (a.recall && !b.recall) {
-					return -12;
-				}
-				if (b.recall && a.recall) {
-					if (a.datumerf < b.datumerf) return -9;
-					if (a.datumerf > b.datumerf) return -11;
-					return -10;
-				}
-				if (a.datumerf < b.datumerf) return 1;
-				if (a.datumerf > b.datumerf) return -1;
-				return 0;
-			});
-*/
 			filteredList = filteredList.filter((l) => {
 				if (sprachen.de && l.spracheid == 1) return true;
 				if (sprachen.fr && l.spracheid == 2) return true;
 				if (sprachen.it && l.spracheid == 3) return true;
 				return false;
 			});
-			/*
-			filteredList = filteredList.filter((l) => {
-				if (l.isfirma) return false;
-				return true;
-			});
-*/
 			filteredList = filteredList.filter((l) => {
 				if (filter) {
-					const srchString = l.srch;
-					if (srchString.includes('eizler')) {
-						//						return true;
+					if (l.srch) {
+						const srchString = l.srch;
+						if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+							return true;
+						}
+						return false;
 					}
-					if (srchString.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
-						return true;
-					}
-					//				if (l.kunde && l.kunde.toLowerCase().indexOf(filter.toLowerCase()) >= 0) return true;
-					return false;
 				}
 				return true;
 			});
 			filteredList.map((z) => {
 				//Postleitzahl
+				z.hide = false
 				z.flag = '';
 				if (z.whitelabel) {
 					z.flag = 'WL';
@@ -75,24 +49,30 @@
 				}
 				if (+z.plz >= 9485 && +z.plz <= 9499) {
 					z.flag = 'FL';
+					z.hide = true
 				}
 				if (z.age && z.age > 75) {
 					z.flag = '75+';
 				}
 				if (z.isfirma) {
 					z.flag = 'FI';
+					z.hide = true
 				}
 				if (z.dublette == 1) {
 					z.flag = 'EM';
+					z.hide = true
 				}
 				if (z.dublette == 2) {
 					z.flag = 'SN';
+					z.hide = true
 				}
 				if (z.dublette == 3) {
 					z.flag = 'SE';
+					z.hide = true
 				}
 				if (z.dublette > 3) {
 					z.flag = 'XXX';
+					z.hide = true
 				}
 
 				if (z.telefonm) {
@@ -125,6 +105,7 @@
 					if (z.recallmaid != 0) {
 						z.zclass = 'res';
 					}
+					//z.freiegaragenwahl = true;
 					z.srch =
 						//						z.telefonm +
 						'#' +
@@ -147,6 +128,11 @@
 				*/
 				} catch (err) {}
 			});
+			filteredList = filteredList.filter((l) => {
+				if (!l.hide) return true;
+				return false;
+			});
+
 		}
 	}
 	//	console.log(data)
@@ -274,6 +260,7 @@
 							zeile.recallmaid != 0 &&
 							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}
+						class:fgw = {zeile.freiegaragenwahl}
 						on:click={() => showLead(zeile)}
 						on:keydown={() => showLead(zeile)}
 					>
@@ -410,4 +397,15 @@
 	.header {
 		font-size: 1.3rem;
 	}
+
+	.fgw:nth-child(odd) {
+		background-color: #a5edfa;
+		grid-row: auto / span 1;
+	}
+
+	.fgw:nth-child(even)  {
+		background-color: #7edfd7;
+		grid-row: auto / span 1;
+	}
+
 </style>

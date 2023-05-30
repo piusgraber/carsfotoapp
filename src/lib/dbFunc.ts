@@ -20,12 +20,10 @@ export const extractPhoneNumberCH = (phone: string) => {
 
 export const extractPhoneNumberIntl = (phone: string) => {
    if (!phone) return ''
-//   console.log(phone)
    const numbersArray = phone.match(/\d+/g);
-//   console.log(numbersArray)
    if (!numbersArray) return ''
    let numbersString = numbersArray.join("");
-   console.log(numbersString); // Output: "123456"
+//   console.log(numbersString); // Output: "123456"
    if (phone.startsWith('+')) {
 //      console.log('+')
       numbersString = '+' + numbersString;

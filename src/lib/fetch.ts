@@ -131,7 +131,7 @@ export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, u
         url += '&all=1'
     }
     url += '&userid=' + userid
-    console.log(url);
+//    console.log(url);
     const resp = await fetch(url);
     let listeL = await resp.json();
 //    console.log(listeL[0])

@@ -14,13 +14,13 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
         // cookie gesetzt -> User eingeloggt
         const token = cookies.get('authRoot');
         const url = urlBase + `cwuser?name=${token}`;
-        console.log(url)
+//        console.log(url)
         try {
-            console.log('fetch')
+//            console.log('fetch')
             const res = await fetch(url);
             // User aus DB holen
             const userData = await res.json();
-            console.log(userData)
+//            console.log(userData)
             if (userData.length) {
                 user = userData[0];
                 // Settings aus DB-Feld cwsetings
@@ -30,10 +30,10 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
                     login: cookies.get('authRoot'),
                     name: user.vorname + ' ' + user.nachname, id: user.id, cwTelefon: settings.telefon, initialen: 'pg', sprachen: sprachen
                 }
-                console.log(user)
+//                console.log(user)
                 return { user }
             } else {
-                console.log('not foiûnd')
+                console.log('not found')
                 return { }
             }
         } catch (err) {

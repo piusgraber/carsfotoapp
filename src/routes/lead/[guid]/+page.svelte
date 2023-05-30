@@ -181,7 +181,7 @@
 				<div>Vertragnr</div>
 				<div>{lead.vertragnr}</div>
 				<div>Fahrzeug</div>
-				<div>{lead.marke} {lead.typ} {lead.modell}</div>
+				<div>{lead.marke} {lead.modell} {lead.typ} </div>
 				<div>Stammnummer</div>
 				<div>{lead.stammnr}</div>
 				<div>Versicherungen</div>

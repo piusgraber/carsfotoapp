@@ -1,12 +1,15 @@
-FROM node:14
-
+FROM node:16
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 
-COPY ./build ./build
+COPY . .
 
-EXPOSE 3000
+RUN npm run build && npm prune --production
+ENV PORT 5050
+EXPOSE 5050
 
-CMD [ "npm", "start" ]
+CMD [ "node","build" ]
+
+
