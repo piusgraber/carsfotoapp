@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import BounceInput from '$lib/BounceInput.svelte';
+//	import BounceInput from '$lib/BounceInput.svelte';
 	import { fetchLeadsHistory } from '$lib/fetch';
 	import type { Zeile } from '$lib/myTypes';
 	import { missing_component } from 'svelte/internal';
@@ -19,15 +19,27 @@
 	let validSrch = false;
 	let lead: Zeile[] = [];
 	let showAll = false;
+	let filterSet = false;
+
+	let myTimeout = setTimeout(() => {
+			getData('#ieruzeruzewr');
+	}, 1000);
+
+
 	$: {
+	}
+	$: {
+		clearTimeout(myTimeout);
 		theFilter = filter;
-		if (filter) {
+		if (theFilter) {
 			showAll = false;
 		}
 		lead = [];
 		console.log(validSrch);
 		if (validSrch || showAll) {
-			getData(filter);
+			myTimeout = setTimeout(() => {
+				getData(theFilter);
+			}, 600);
 		}
 	}
 	$: {
@@ -60,7 +72,7 @@
 
 <svelte:window on:keydown={on_key_down} />
 Suche:
-<BounceInput placeholder="suchen..." id="filter" bind:value={filter} />
+<input placeholder="suchen..." id="filter" bind:value={filter} />
 {#if !validSrch}
 	Bitte mindestens {minZch} Zeichen eingeben
 <!--
