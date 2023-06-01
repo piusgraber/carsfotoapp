@@ -117,7 +117,7 @@
 		});
 	};
 
-	$: autocall = data.user.id == 4533;
+	$: autocall = true; //data.user.id == 4533;
 	const notThere = () => {
 		addLog(1);
 	};
