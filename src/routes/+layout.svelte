@@ -32,7 +32,7 @@
 	};
 
 	const showHistoryLeads = () => {
-		goto('/liste/all');
+		goto('/liste/history');
 	};
 
 	const showLeads = () => {
@@ -44,11 +44,10 @@
 	};
 
   </script>
-
 <main>
 	<div class="titlegrid" 
 	class:open={$page.params.list=='open'}
-	class:history={$page.params.list=='all'}
+	class:history={$page.route.id?.includes('history')}
 	class:leads={$page.params.list=='leads'}
 	>
 		<div>
@@ -86,7 +85,7 @@
 				{#if !$navigating && $page.params.list != 'open'}
 					<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
 				{/if}
-				{#if !$navigating && $page.params.list != 'all'}
+				{#if !$navigating && !$page.route.id?.includes('history')}
 					<button on:click={showHistoryLeads}>History anzeigen </button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'leads'}

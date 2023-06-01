@@ -19,6 +19,12 @@
 	$: {
 		if (data.user) {
 			filteredList = data.leads;
+			if (data.liste=='leads' && data.user.id > 1000 && data.user.id != 4533) {
+				console.log('uuuuuuuuuuuuuuuuuuu', data.user.id)
+				filteredList = filteredList.filter((l) => {
+					return l.recallmaid==data.user.id;
+				})
+			}
 			filteredList = filteredList.filter((l) => {
 				if (sprachen.de && l.spracheid == 1) return true;
 				if (sprachen.fr && l.spracheid == 2) return true;
