@@ -117,7 +117,7 @@
 		{Boolean($navigating)}
 		{data.loading}{data.leads.length}
 		{loading}{data.loading}
-		{#if data.liste=='all'}
+		{#if data.liste=='allil'}
 		<b>Alle Datensätze </b>
 		{#if srch}
 		Suche: <input bind:value={filter} type="text" use:init />

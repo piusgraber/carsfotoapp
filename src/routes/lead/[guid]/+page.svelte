@@ -144,7 +144,7 @@
 
 	const verify = async () => {
 		console.log('xxx');
-		await verifyEmail(lead.id, lead.email);
+		await verifyEmail(lead.id, user.id, lead.email);
 		invalidateAll();
 	};
 </script>

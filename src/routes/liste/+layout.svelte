@@ -9,14 +9,6 @@ let listName = '';
 
 </script>
 
-<!--
-{#if listName=='open'}
-<button on:click={() => {goto ('/liste/all')}}> Alle Leads.</button>
-{/if}
-{#if listName=='all'}
-<button on:click={() => {goto ('/liste/open')}}> Offene Leads.</button>
-{/if}
--->
 <slot />
 
 <style>

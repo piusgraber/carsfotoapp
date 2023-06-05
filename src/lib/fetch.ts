@@ -4,7 +4,7 @@ type ReserveALead = (guid: string, userid: number) => Promise<{}>;
 type getLeadLog = (id: number) => Promise<{}>;
 export type FetchLeadsByRecallStatus = (type: number, userid: number) => Promise<[]>;
 type FetchLeadsHistory = (srch: string) => Promise<[]>;
-
+import { dateTimeFormatterMEZ, dateTimeFormatterMEZT, formatDate } from '$lib/myfuncs';
 
 const prod = true;
 
@@ -65,9 +65,9 @@ export const getLeadLog: ReserveALead = async (id) => {
 
 
 
-export const verifyEmail :any = async (leadid: number, email: string) => {
+export const verifyEmail :any = async (leadid: number, userid: number, email: string) => {
     // console.log('verify')
-    let url = urlBase + `sql?sql=update lead set emailverified=1, email='${email}' where id=${leadid}`
+    let url = urlBase + `sql?sql=update lead set emailverified=1, email='${email}', recallmaid=${userid} where id=${leadid}`
     // console.log(url)
     const resp = await fetch(url);
     let lead = await resp.json();
@@ -133,9 +133,38 @@ return leads;
     }
 //    url += '&userid=' + userid
     console.log(url);
-    const resp = await fetch(url);
+    let resp = await fetch(url);
     let listeL = await resp.json();
-//    // console.log(listeL[0])
+    console.log(type)
+    console.log(listeL[0])
+    listeL.sort((a,b) => {
+        const atime = new Date(a.histdatum);
+        const btime = new Date(b.histdatum);
+        return btime - atime;
+    })
+
+    if (type==0) {
+        let url = urlBase + 'recallLeads?type=' + 9
+        console.log(url);
+        let resp = await fetch(url);
+        let liste2 = await resp.json();
+        liste2.map(z => {
+            z.histdatum = z.datumlead
+            z.histtext = 'Lead: ' + z.datumlead
+//            z.histdatum = z.datumlead
+        })
+        listeL = listeL.concat(liste2)
+    }
+//    url += '&userid=' + userid
+
+
+    if (type==0) {
+        listeL.sort((a,b) => {
+            const atime = new Date(a.histdatum);
+            const btime = new Date(b.histdatum);
+            return btime - atime;
+        })
+    }
     let liste: [] = listeL;
 //    // console.log(liste.length);
     return liste;

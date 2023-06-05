@@ -57,7 +57,7 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
             status = 4;
             userid = 0;
             break;
-        case 'all':
+        case 'allil':
             status = 0;
             break;
             break;

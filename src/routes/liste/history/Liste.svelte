@@ -189,7 +189,7 @@ const showLead = (z) => {
             <div
                 class="panel-row"
                 class:recall={zeile.recall}
-                class:res={$page.data.liste != 'all' &&
+                class:res={$page.data.liste != 'allil' &&
                     zeile.recallmaid != 0 &&
                     zeile.recallmaid != $page.data.user.id}
                 class:resme={zeile.recallmaid == $page.data.user.id}
