@@ -38,6 +38,9 @@
 	const showLeads = () => {
 		goto('/liste/leads');
 	};
+	const showLog = () => {
+		goto('/liste/log');
+	};
 
 	const refresh = () => {
 		invalidateAll();
@@ -90,6 +93,12 @@
 				{/if}
 				{#if !$navigating && $page.params.list != 'leads'}
 					<button on:click={showLeads}>Leads anzeigen </button>
+				{/if}
+
+				{#if !$navigating && $page.params.list != 'log'}
+				{#if data.user.id==15 || data.user.id==1  || data.user.id==20  || data.user.id==4533 }
+				<button on:click={showLog}>Verlauf </button>
+				{/if}
 				{/if}
 			</div>
 			<div />

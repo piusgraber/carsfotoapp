@@ -136,7 +136,7 @@ return leads;
     let resp = await fetch(url);
     let listeL = await resp.json();
     console.log(type)
-    console.log(listeL[0])
+//    console.log(listeL[0])
     listeL.sort((a,b) => {
         const atime = new Date(a.histdatum);
         const btime = new Date(b.histdatum);
@@ -150,7 +150,7 @@ return leads;
         let liste2 = await resp.json();
         liste2.map(z => {
             z.histdatum = z.datumlead
-            z.histtext = 'Lead: ' + z.datumlead
+            z.histtext = 'Lead' + (z.adminLead ? (': ' + z.recallma) : '')
 //            z.histdatum = z.datumlead
         })
         listeL = listeL.concat(liste2)

@@ -143,7 +143,7 @@
 	}
 	//	console.log(data)
 	const showLead = (z) => {
-		if (data.liste == 'allil') {
+		if (data.liste == 'log') {
 			goto('/lead/' + z.guid);
 		} else {
 			if (z.recallmaid && z.recallmaid != data.user.id) {
@@ -208,7 +208,7 @@
 		{loading}{data.liste} {data}
 	-->
 			<span class="header">
-				{#if data.liste == 'allil'}
+				{#if data.liste == 'log'}
 					<b>History </b>
 				{/if}
 				{#if data.liste == 'waiting'}
@@ -262,7 +262,7 @@
 					<div
 						class="panel-row"
 						class:recall={zeile.recall}
-						class:res={data.liste != 'allil' &&
+						class:res={data.liste != 'log' &&
 							zeile.recallmaid != 0 &&
 							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}

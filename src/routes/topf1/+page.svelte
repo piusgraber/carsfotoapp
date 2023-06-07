@@ -90,7 +90,9 @@
 				{rec.garage_firma}, {rec.garage_ort}
 			</div>
 			<div class="cell" title={rec.reason}>
+<!--
 				{rec.freiegaragenwahl ? 'FG' : ''}
+-->				
 				{rec.whitelabel ? 'WL' : ''}
 				{#if rec.firma}
 					F
