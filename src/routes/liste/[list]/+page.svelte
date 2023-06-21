@@ -103,11 +103,6 @@
 					z.abgabeDatum = z.abgabe ? dateFormatter.format(new Date(z.abgabe)) : '';
 					z.leadDatum = z.datumlead ? timeSecFormatter.format(new Date(z.datumlead)) : '';
 					z.erfasst = z.datumerf ? timeSecFormatter.format(new Date(z.datumerf)) : '';
-					/*
-					if (z.recallmaid == data.user.id) {
-						z.zclass = 'resme';
-					} else {
-*/
 					if (z.recallmaid != 0) {
 						z.zclass = 'res';
 					}
@@ -211,6 +206,9 @@
 				{#if data.liste == 'log'}
 					<b>History </b>
 				{/if}
+				{#if data.liste == 'not'}
+					<b>nicht erreicht </b>
+				{/if}
 				{#if data.liste == 'waiting'}
 					<b>wartende</b>
 				{/if}
@@ -261,7 +259,7 @@
 				{#each filteredList as zeile, index}
 					<div
 						class="panel-row"
-						class:recall={zeile.recall}
+						class:recall={zeile.recall && !zeile.datumlead}
 						class:res={data.liste != 'log' &&
 							zeile.recallmaid != 0 &&
 							zeile.recallmaid != data.user.id}

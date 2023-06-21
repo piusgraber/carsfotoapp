@@ -41,6 +41,9 @@
 	const showLog = () => {
 		goto('/liste/log');
 	};
+	const showNot = () => {
+		goto('/liste/not');
+	};
 
 	const refresh = () => {
 		invalidateAll();
@@ -93,6 +96,9 @@
 				{/if}
 				{#if !$navigating && $page.params.list != 'leads'}
 					<button on:click={showLeads}>Leads anzeigen </button>
+				{/if}
+				{#if !$navigating && $page.params.list != 'not'}
+					<button on:click={showNot}>nicht erreicht</button>
 				{/if}
 
 				{#if !$navigating && $page.params.list != 'log'}

@@ -158,15 +158,32 @@ return leads;
 //    url += '&userid=' + userid
 
 
-    if (type==0) {
-        listeL.sort((a,b) => {
-            const atime = new Date(a.histdatum);
-            const btime = new Date(b.histdatum);
-            return btime - atime;
-        })
-    }
-    let liste: [] = listeL;
-//    // console.log(liste.length);
+if (type==0) {
+    listeL.sort((a,b) => {
+        const atime = new Date(a.histdatum);
+        const btime = new Date(b.histdatum);
+        return btime - atime;
+    })
+}
+if (type==-2) {
+    listeL.sort((a,b) => {
+        const atime = new Date(a.histdatum);
+        const btime = new Date(b.histdatum);
+        return atime - btime;
+    })
+}
+
+if (type==9) {
+    // Leads
+    listeL.sort((a,b) => {
+        const atime = new Date(a.datumlead);
+        const btime = new Date(b.datumlead);
+        return btime - atime;
+    })
+}
+
+let liste: [] = listeL;
+    // console.log(liste[0]);
     return liste;
 };
 
