@@ -163,7 +163,7 @@
 					Lead
 					<span title={lead.tip}>ID</span>
 				</div>
-				<div>{lead.id}</div>
+				<div>{lead.id}&#160;&#160;&#160;{lead.freiegaragenwahl ? 'freie Garagenwahl' : 'KEINE freie Garagenwahl'}</div>
 
 				<div>Garage</div>
 				<div>{lead.garagename}</div>

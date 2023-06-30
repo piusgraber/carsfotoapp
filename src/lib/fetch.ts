@@ -28,6 +28,8 @@ export const fetchSQL_CW: FetchSQL = async sql => {
 }
 
 
+// einen einzelnen Lead holen für Bearbeitung
+
 export const fetchALead: FetchALead = async guid => {
     // console.log('fetchALead');
     const url = urlBase + "recallLead?gid=" + guid + ""
@@ -123,7 +125,7 @@ return leads;
 
 
 
-
+// Leads für Liste holen
 
  export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, userid) => {
     // console.log('fetchLeadsByRecallStatus')
@@ -135,7 +137,7 @@ return leads;
     console.log(url);
     let resp = await fetch(url);
     let listeL = await resp.json();
-    console.log(type)
+//    console.log(type)
 //    console.log(listeL[0])
     listeL.sort((a,b) => {
         const atime = new Date(a.histdatum);
