@@ -356,7 +356,7 @@
 	</div>
 	<br />
 	{#each leadLogRecs as log}
-		<div>{dateTimeFormatter.format(new Date(log.logdate))} : {log.logtext}</div>
+		<div>{dateTimeFormatterMEZ.format(new Date(log.logdate))} : {log.logtext}</div>
 	{/each}
 	{#if showJSON}
 		<br />
