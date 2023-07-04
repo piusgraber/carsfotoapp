@@ -48,7 +48,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     let lead = await reserveALead(guid, prnt.user.id);
     // die Daten zurückgeben -> $page.data
     let leadLog = await getLeadLog(lead.id);
-    if (leadLog.length) {
+    if (false && leadLog.length) {
         const log = leadLog[leadLog.length - 1]
         const ldate = new Date(log.datum);
         console.log('log', ldate);
