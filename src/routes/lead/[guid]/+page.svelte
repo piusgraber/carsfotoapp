@@ -355,11 +355,9 @@
 		</div>
 	</div>
 	<br />
-	<!--
 	{#each leadLogRecs as log}
-		<div>{dateTimeFormatter.format(new Date(log.datum))} : {log.bemerkung}</div>
+		<div>{dateTimeFormatter.format(new Date(log.logdate))} : {log.logtext}</div>
 	{/each}
-	-->
 	{#if showJSON}
 		<br />
 		Datum formatieren generell Funktion wo? Formatierung wo?<br />

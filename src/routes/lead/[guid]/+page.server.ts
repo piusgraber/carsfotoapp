@@ -48,19 +48,15 @@ export const load: PageServerLoad = async ({ params, parent }) => {
     let lead = await reserveALead(guid, prnt.user.id);
     // die Daten zurückgeben -> $page.data
     let leadLog = await getLeadLog(lead.id);
-    if (false && leadLog.length) {
+    if (leadLog.length) {
         const log = leadLog[leadLog.length - 1]
-        const ldate = new Date(log.datum);
-        console.log('log', ldate);
+        console.log('log', log.logdate);
+        const ldate = new Date(log.logdate);
         const now = new Date();
         console.log('jetzt', new Date(formatDate(now, 'm')));
 
 
-        const options = { timeZone: 'Europe/Berlin' };
-        const mezNow = now.toLocaleString('de-DE', options);
-        console.log(mezNow);
-
-        if( log.datum) {
+        if( log.logdate) {
             lead.available = false;
         }
     } else {
