@@ -32,6 +32,10 @@
 				return false;
 			});
 			filteredList = filteredList.filter((l) => {
+				if (data.liste == 'open' && !(l.freiegaragenwahl || l.recall || l.whitelabel)) return false;
+				return true;
+			});
+			filteredList = filteredList.filter((l) => {
 				if (filter) {
 					if (l.srch) {
 						const srchString = l.srch;
