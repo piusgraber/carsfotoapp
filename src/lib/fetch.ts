@@ -128,17 +128,13 @@ return leads;
 // Leads für Liste holen
 
  export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, userid) => {
-    // console.log('fetchLeadsByRecallStatus')
     let url = urlBase + 'recallLeads?type=' + type
     if (type==0) {
         url += '&all=1'
     }
-//    url += '&userid=' + userid
     console.log(url);
     let resp = await fetch(url);
     let listeL = await resp.json();
-//    console.log(type)
-//    console.log(listeL[0])
     listeL.sort((a,b) => {
         const atime = new Date(a.histdatum);
         const btime = new Date(b.histdatum);
@@ -185,7 +181,6 @@ if (type==9) {
 }
 
 let liste: [] = listeL;
-    // console.log(liste[0]);
     return liste;
 };
 

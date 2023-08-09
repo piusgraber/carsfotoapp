@@ -20,7 +20,6 @@
 		if (data.user) {
 			filteredList = data.leads;
 			if (data.liste=='leads' && data.user.id > 1000 && data.user.id != 4533) {
-				console.log('uuuuuuuuuuuuuuuuuuu', data.user.id)
 				filteredList = filteredList.filter((l) => {
 					return l.recallmaid==data.user.id;
 				})
@@ -32,7 +31,7 @@
 				return false;
 			});
 			filteredList = filteredList.filter((l) => {
-				if (data.liste == 'open' && !(l.freiegaragenwahl || l.recall || l.whitelabel)) return false;
+				if ((data.liste == 'open' || data.liste == 'waiting') && !(l.freiegaragenwahl || l.recall || l.whitelabel)) return false;
 				return true;
 			});
 			filteredList = filteredList.filter((l) => {
@@ -214,7 +213,7 @@
 					<b>nicht erreicht </b>
 				{/if}
 				{#if data.liste == 'waiting'}
-					<b>wartende</b>
+					<b>Warteliste</b>
 				{/if}
 				{#if data.liste == 'leads'}
 					<b>gemachte</b>

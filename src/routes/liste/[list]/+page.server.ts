@@ -10,12 +10,6 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
         return {}
     }
     let userid = prnt.user.id;
-    /*
-        const url = 'https://dummyjson.com/products?linit=10';
-        console.log(url);
-        const productsResp = await fetch(url);
-        const products = await productsResp.json();
-    */
     const locale = 'de-CH';
     const options: Intl.DateTimeFormatOptions = {
         year: 'numeric',
@@ -25,7 +19,6 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
 
     const formatter = new Intl.DateTimeFormat(locale, options);
     const sessionid = cookies.get('sessionid')
-    //    const session = await event.locals.getSession()
 
     const listName = params.list;
     let status: number;
@@ -60,10 +53,8 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
         case 'log':
             status = 0;
             break;
-            break;
         case 'not':
             status = -2;
-            break;
             break;
         default:
             status = 0;
@@ -72,7 +63,5 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
     }
 
     let lead: Zeile[] = await fetchLeadsByRecallStatus(status, userid);
-    //    console.log('loaded')
-    //    console.log(prnt)
     return { liste: listName, leads: lead };
 }

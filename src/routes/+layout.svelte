@@ -86,7 +86,9 @@
 				{#if data.user.sprachen.it}IT {/if}<br />
 				{#if data.user.id==4533 && !$navigating}
 				<button on:click={showTopf}>Topf anzeigen</button>
-				<button on:click={showWaiting}>wartende anzeigen</button>
+				{/if}
+				{#if (data.user.id==15 || data.user.id==1 || data.user.id==20) && !$navigating && $page.params.list != 'waiting'}
+				<button on:click={showWaiting}>Warteliste</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'open'}
 					<button on:click={showOpenLeads}>offene Datensätze anzeigen</button>
