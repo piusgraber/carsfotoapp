@@ -163,7 +163,15 @@
 					Lead
 					<span title={lead.tip}>ID</span>
 				</div>
-				<div>{lead.id}&#160;&#160;&#160;{lead.freiegaragenwahl ? 'freie Garagenwahl' : 'KEINE freie Garagenwahl'}</div>
+				<div>
+					{lead.id}
+					&#160;&#160;&#160;{lead.freiegaragenwahl ? 'freie Garagenwahl' : 'KEINE freie Garagenwahl'}
+					{#if lead.verkaeuferok == null} 
+					&#160;&#160;&#160;verkaeufer NULL
+					{:else}
+					&#160;&#160;&#160;{lead.verkaeuferok ? 'verkaeufer OK' : 'verkaeufer NICHT OK'}
+					{/if}
+				</div>
 
 				<div>Garage</div>
 				<div>{lead.garagename}</div>

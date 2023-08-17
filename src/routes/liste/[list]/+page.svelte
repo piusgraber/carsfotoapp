@@ -31,7 +31,7 @@
 				return false;
 			});
 			filteredList = filteredList.filter((l) => {
-				if ((data.liste == 'open' || data.liste == 'waiting') && !(l.freiegaragenwahl || l.recall || l.whitelabel)) return false;
+				if ((data.liste == 'open' || data.liste == 'waiting') && !(l.freiegaragenwahl || l.verkaeuferok || l.recall || l.whitelabel)) return false;
 				return true;
 			});
 			filteredList = filteredList.filter((l) => {
@@ -268,6 +268,7 @@
 							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}
 						class:fgw = {zeile.freiegaragenwahl}
+						class:vok = {zeile.verkaeuferok}
 						on:click={() => showLead(zeile)}
 						on:keydown={() => showLead(zeile)}
 					>
@@ -403,6 +404,11 @@
 	}
 	.header {
 		font-size: 1.3rem;
+	}
+
+	.vok {
+		background-color: #a5facb;
+		grid-row: auto / span 1;
 	}
 
 	.fgw:nth-child(odd) {
