@@ -164,7 +164,8 @@
 					<span title={lead.tip}>ID</span>
 				</div>
 				<div>
-					{lead.id}
+					{lead.id} 
+					{#if lead.whitelabel}WL{/if}
 					&#160;&#160;&#160;{lead.freiegaragenwahl ? 'freie Garagenwahl' : 'KEINE freie Garagenwahl'}
 					{#if lead.verkaeuferok == null} 
 					&#160;&#160;&#160;verkaeuferok NULL
