@@ -167,9 +167,9 @@
 					{lead.id}
 					&#160;&#160;&#160;{lead.freiegaragenwahl ? 'freie Garagenwahl' : 'KEINE freie Garagenwahl'}
 					{#if lead.verkaeuferok == null} 
-					&#160;&#160;&#160;verkaeufer NULL
+					&#160;&#160;&#160;verkaeuferok NULL
 					{:else}
-					&#160;&#160;&#160;{lead.verkaeuferok ? 'verkaeufer OK' : 'verkaeufer NICHT OK'}
+					&#160;&#160;&#160;{lead.verkaeuferok ? 'verkaeuferok true' : 'verkaeuferok false'}
 					{/if}
 				</div>
 
