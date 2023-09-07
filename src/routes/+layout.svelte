@@ -23,6 +23,10 @@
 		goto('/liste/waiting');
 	};
 
+	const showEvn = () => {
+		goto('/liste/evn');
+	};
+
 	const showOpenLeads = () => {
 		goto('/liste/open');
 	};
@@ -103,6 +107,9 @@
 					<button on:click={showNot}>nicht erreicht</button>
 				{/if}
 
+				{#if (data.user.id==15 || data.user.id==1 || data.user.id==20) && !$navigating && !$page.route.id?.includes('evn')}
+				<button on:click={showEvn}>eVn</button>
+				{/if}
 				{#if !$navigating && $page.params.list != 'log'}
 				{#if data.user.id==15 || data.user.id==1  || data.user.id==20  || data.user.id==4533 }
 				<button on:click={showLog}>Verlauf </button>

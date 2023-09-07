@@ -12,15 +12,17 @@
 		myDate.setTime(myDate.getTime() - dateOffset);
         console.log('Date:', new Date(z.evnsent), myDate, new Date(z.evnsent) < myDate)
 		z.overdue = !z.evnok && (new Date(z.evnsent) < myDate);
+		z.evndone = z.evnok;
+		z.sent = formatDate(new Date(z.evnsent), 'x')
+		z.delay = ((new Date(z.evnok).getTime() - new Date(z.sent).getTime()) / 1000 / 60 - 240) / 60  ;
 	});
 
 	import type { PageData } from './$types';
 	export let data: PageData;
-	import { dateTimeFormatterMEZ, dateTimeFormatter, dateFormatter } from '$lib/myfuncs';
+	import { formatDate, dateTimeFormatterMEZ, dateTimeFormatterMEZT, dateTimeFormatter, dateFormatter } from '$lib/myfuncs';
 	import { extractPhoneNumberIntl } from '$lib/dbFunc';
 </script>
 
-Hallo
 <!--
 {JSON.stringify($page)}
 -->
@@ -36,7 +38,8 @@ Hallo
 		<div class="titel">Halter</div>
 		<div class="titel">Marke</div>
 		<div class="titel">Stammnr</div>
-		<div class="titel" />
+		<div class="titel">ausgeführt</div>
+		<div class="titel">Dauer</div>
 	</div>
 	<div class="scrollable">
 		{#each filteredList as zeile, index}
@@ -45,6 +48,7 @@ Hallo
 				on:click={() => showLead(zeile)}
 				on:keydown={() => showLead(zeile)}
 				class:overdue={zeile.overdue}
+				class:evnok={zeile.evndone}
 			>
 				<div>
 					{dateTimeFormatterMEZ.format(new Date(zeile.evnsent))}
@@ -64,7 +68,7 @@ Hallo
 				<div class="cell-kunde">
 					<span> {zeile.kennzeichen}</span>
 				</div>
-				<div class="cell-telefon" title={$page.data.user.id == 4533 ? zeile.srch : ''}>
+				<div class="cell-halter" title={$page.data.user.id == 4533 ? zeile.srch : ''}>
 					<span
 						>{zeile.halteranrede}
 						{zeile.haltername}
@@ -75,6 +79,9 @@ Hallo
 				<div class="cell-garage"><span> {zeile.stammnr}</span></div>
 				<div class="cell-log">
 					<span> {zeile.evnok ? dateTimeFormatter.format(new Date(zeile.evnok)) : ''}</span>
+				</div>
+				<div class="cell-logr">
+					{zeile.evnok ? zeile.delay.toFixed(2) + ' Std.' : ''} 
 				</div>
 				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} />
 				<div />
@@ -96,7 +103,7 @@ Hallo
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 145px 110px 255px 150px 120px 140px 310px 150px 140px 20px auto;
+		grid-template-columns: 145px 110px 255px 150px 120px 140px 310px 150px 140px 170px 130px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
@@ -115,8 +122,8 @@ Hallo
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.cell-telefon {
-		width: 190px;
+	.cell-halter {
+		width: 250px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -139,6 +146,13 @@ Hallo
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	.cell-logr {
+		width: 100px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: right;
+	}
 	.link {
 		cursor: pointer;
 	}
@@ -155,7 +169,12 @@ Hallo
 		cursor: no-drop;
 	}
 	.overdue {
+        font-weight:500;
 		color: red;
+	}
+	.evnok {
+        font-weight:500;
+		color: rgb(6, 133, 6);
 	}
 	.resme {
 		cursor: pointer;
