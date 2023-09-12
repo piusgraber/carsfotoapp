@@ -48,7 +48,9 @@
 
 	let lpsrc;
 	const showEvnPDF = () => {
-			lpsrc = `https://lead.car-ware.ch/fop/ngDok?irenehassuchasmile&type=nachweis&id=${lead.id}`
+//		lpsrc = `https://lead.car-ware.ch/fop/ngDok?irenehassuchasmile&type=nachweis&id=${lead.id}`
+		lpsrc = `https://lead.car-ware.ch/pavServer/ngDok?type=nachweis&irenehassuchasmile&id=${lead.id}`
+			
 	};
 	let reminderOk = false;
 	$: {
