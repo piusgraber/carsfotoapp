@@ -281,6 +281,24 @@
 		</div>
 	</div>
 	<br />
+
+	<hr/>
+
+<a href="mailto:{lead.dispo_email}?subject=Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}">{lead.dispo_email}</a><br/>
+<br/>
+<b>Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}</b> <br/>
+<br/>
+<br/>
+Guten Tag<br/>
+Im Zusammenhang mit der Bestellung des Versicherungsnachweis für:<br/>
+Fahrzeug:    {lead.marke} {lead.typ}, Stammnummer: {lead.stammnr}<br/>
+Halter:         {lead.halteranrede} {lead.haltername}, {lead.halteradresse}, {lead.halterplz} {lead.halterort}<br/>
+<br/>
+Die {lead.versicherung} hat uns mündlich bestätigt, dass der Nachweis für Ihren oben aufgeführten Kunden erstellt wurde.<br/>
+<br/>
+Beste Grüsse<br/>
+Ihre CARWARE<br/>
+
 	{#if showJSON}
 		<br />
 		Datum formatieren generell Funktion wo? Formatierung wo?<br />
