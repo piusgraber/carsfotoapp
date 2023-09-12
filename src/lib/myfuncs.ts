@@ -59,6 +59,9 @@ export const formatDate = (d, f) => {
         if (f == 'm') {
             return dateTimeFormatter.format(new Date(d))
         }
+        if (f == 'mu') {
+            return dateTimeFormatterMEZ.format(new Date(d))
+        }
         if (f == 's') {
             return timeSecFormatter.format(new Date(d))
         }
@@ -67,6 +70,11 @@ export const formatDate = (d, f) => {
         }
         if (f == 'x') {
             let dt = dateTimeFormatter.format(new Date(d))
+            const ddd = dt.substring(6, 10) + '-' + dt.substring(3, 5) + '-' + dt.substring(0,2) + 'T' + dt.substring(12,14)  + ':' + dt.substring(15,17) 
+            return ddd;
+        }
+        if (f == 'xu') {
+            let dt = dateTimeFormatterMEZ.format(new Date(d))
             const ddd = dt.substring(6, 10) + '-' + dt.substring(3, 5) + '-' + dt.substring(0,2) + 'T' + dt.substring(12,14)  + ':' + dt.substring(15,17) 
             return ddd;
         }

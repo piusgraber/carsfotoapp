@@ -7,10 +7,13 @@
 
 	filteredList.map((z) => {
 		z.evntelefon = extractPhoneNumberIntl(z.evntelefon);
-		var dateOffset = 24 * 60 * 60 * 1000 * 1; //5 days
+		var dateOffset = 4 * 60 * 60 * 1000 * 1;   // 4 Std
 		var myDate = new Date();
 		myDate.setTime(myDate.getTime() - dateOffset);
-        console.log('Date:', new Date(z.evnsent), myDate, new Date(z.evnsent) < myDate)
+
+
+		formatDate(new Date(z.evnsent), 'x')
+
 		z.overdue = !z.evnok && (new Date(z.evnsent) < myDate);
 		z.evndone = z.evnok;
 		z.sent = formatDate(new Date(z.evnsent), 'x')
@@ -21,6 +24,12 @@
 	export let data: PageData;
 	import { formatDate, dateTimeFormatterMEZ, dateTimeFormatterMEZT, dateTimeFormatter, dateFormatter } from '$lib/myfuncs';
 	import { extractPhoneNumberIntl } from '$lib/dbFunc';
+	import { goto } from '$app/navigation';
+
+
+	function showLead(zeile: any): any {
+			goto('/evn/' + zeile.guid);
+	}
 </script>
 
 <!--
@@ -29,6 +38,7 @@
 
 <div class="panel">
 	<div class="panel-row">
+		<div class="titel"></div>
 		<div class="titel">Bestellung</div>
 		<div class="titel">Versicherung</div>
 		<div class="titel">Mail</div>
@@ -50,7 +60,8 @@
 				class:overdue={zeile.overdue}
 				class:evnok={zeile.evndone}
 			>
-				<div>
+			<div>{zeile.evnok_code==1 ? '🗣' : zeile.evnok_code==2 ? '☎' : ''}</div>
+			<div title={zeile.guid}>
 					{dateTimeFormatterMEZ.format(new Date(zeile.evnsent))}
 				</div>
 				<div>
@@ -103,7 +114,7 @@
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 145px 110px 255px 150px 120px 140px 310px 150px 140px 170px 130px auto;
+		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 140px 170px 130px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {

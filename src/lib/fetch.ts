@@ -8,22 +8,22 @@ import { dateTimeFormatterMEZ, dateTimeFormatterMEZT, formatDate } from '$lib/my
 
 const prod = true;
 
-export const urlBase = prod? 'https://api.car-ware.ch/' : 'http://localhost:3344/';
+export const urlBase = prod ? 'https://api.car-ware.ch/' : 'http://localhost:3344/';
 
 export const fetchSQL_CW: FetchSQL = async sql => {
 
-//    // console.log('fetchSQL_CW');
+    //    // console.log('fetchSQL_CW');
     const respss = await fetch(urlBase + "set-session");
-//    // console.log(respss);
+    //    // console.log(respss);
     const respgs = await fetch(urlBase + "get-session");
-//    // console.log(respgs);
+    //    // console.log(respgs);
     sql = encodeURIComponent(sql);
     const url = urlBase + "sql?sql=" + sql + ""
-//    // console.log(url);
-	const resp = await fetch(url);
-//    // console.log('rsr', resp);
+    //    // console.log(url);
+    const resp = await fetch(url);
+    //    // console.log('rsr', resp);
     let recs = await resp.json();
-//    // console.log(recs);
+    //    // console.log(recs);
     return recs;
 }
 
@@ -33,11 +33,11 @@ export const fetchSQL_CW: FetchSQL = async sql => {
 export const fetchALead: FetchALead = async guid => {
     // console.log('fetchALead');
     const url = urlBase + "recallLead?gid=" + guid + ""
-//    // console.log(url);
-	const resp = await fetch(url);
+    //    // console.log(url);
+    const resp = await fetch(url);
     let leads = await resp.json();
     let lead = leads.length ? leads[0] : {}
-//    // console.log(lead);
+    //    // console.log(lead);
     return lead;
 }
 
@@ -46,10 +46,10 @@ export const reserveALead: ReserveALead = async (guid, userid) => {
     // console.log('reserveALead');
     let url = urlBase + "reserveLead?gid=" + guid + "&userid=" + userid
     // console.log(url);
-	const resp = await fetch(url);
+    const resp = await fetch(url);
     let leads = await resp.json();
     let lead = leads.length ? leads[0] : {}
-//    // console.log(lead);
+    //    // console.log(lead);
     return lead;
 }
 
@@ -57,17 +57,17 @@ export const reserveALead: ReserveALead = async (guid, userid) => {
 export const getLeadLog: ReserveALead = async (id) => {
     // console.log('getLeadLog');
     let url = urlBase + "recallLeadHistory?id=" + id
-//    // console.log(url);
-	const resp = await fetch(url);
+    //    // console.log(url);
+    const resp = await fetch(url);
     let leads = await resp.json();
-//    // console.log(lead);
+    //    // console.log(lead);
     return leads;
 }
 
 
 
 
-export const verifyEmail :any = async (leadid: number, userid: number, email: string) => {
+export const verifyEmail: any = async (leadid: number, userid: number, email: string) => {
     // console.log('verify')
     let url = urlBase + `sql?sql=update lead set emailverified=1, email='${email}', recallmaid=${userid} where id=${leadid}`
     // console.log(url)
@@ -80,68 +80,76 @@ export const verifyEmail :any = async (leadid: number, userid: number, email: st
 
 
 
-export const addLogEntry :any = async (leadid: number, user: number, text: string, reminder: Date) => {
+export const addLogEntry: any = async (leadid: number, user: number, text: string, reminder: Date) => {
     // console.log('addLogEntry');
-/*   
-    let reminderXML = 'null';
-//     // console.log('entry', user, text, reminder)
- const sql = "insert into leadlog(leadid, userid, bemerkung, datumnext ) VALUES (0, " + user + ", '" + text + "', " + reminderXML + ")";
- //// console.log(sql)
-    const sres = await fetchSQL_CW( sql)
-    //// console.log('sres ', sres)
-    return { }
-*/
-let url = urlBase + "addLeadHistoryRec"
-//// console.log(url);
-reminder = reminder ? reminder: null
-const data = {leadid: leadid, userid: user, bemerkung: text, reminder: reminder}
-//url = '/api/form'
-const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-    'content-type': 'application/json;charset=UTF-8'
-    },
-    body: JSON.stringify(data)
-});
+    /*   
+        let reminderXML = 'null';
+    //     // console.log('entry', user, text, reminder)
+     const sql = "insert into leadlog(leadid, userid, bemerkung, datumnext ) VALUES (0, " + user + ", '" + text + "', " + reminderXML + ")";
+     //// console.log(sql)
+        const sres = await fetchSQL_CW( sql)
+        //// console.log('sres ', sres)
+        return { }
+    */
+    let url = urlBase + "addLeadHistoryRec"
+    //// console.log(url);
+    reminder = reminder ? reminder : null
+    const data = { leadid: leadid, userid: user, bemerkung: text, reminder: reminder }
+    //url = '/api/form'
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json;charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    });
 
-const resp = await fetch(url);
-let leads = await resp.json();
-//    // console.log(lead);
-return leads;
+    const resp = await fetch(url);
+    let leads = await resp.json();
+    //    // console.log(lead);
+    return leads;
 
 }
- 
- 
- export const getLogEntry :any = async (id: number) => {
-   
- const sql = "select * from leadlog where id=" + id + "";
- // console.log('getLogEntry')
-    const sres = await fetchSQL_CW( sql)
-//    // console.log('sres ', sres)
-    return { }
- }
- 
- 
+
+
+export const setEvnCode: any = async (guid: string, code: number) => {
+    const sql = `update leadRaw set evnok = getdate(), evnok_code = ${code} where guid = '${guid}'`
+    const sres = await fetchSQL_CW(sql)
+    console.log(sres)
+    return {}
+}
+
+
+export const getLogEntry: any = async (id: number) => {
+
+    const sql = "select * from leadlog where id=" + id + "";
+    // console.log('getLogEntry')
+    const sres = await fetchSQL_CW(sql)
+    //    // console.log('sres ', sres)
+    return {}
+}
+
+
 
 
 
 // Leads für Liste holen
 
- export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, userid) => {
+export const fetchLeadsByRecallStatus: FetchLeadsByRecallStatus = async (type, userid) => {
     let url = urlBase + 'recallLeads?type=' + type
-    if (type==0) {
+    if (type == 0) {
         url += '&all=1'
     }
     console.log(url);
     let resp = await fetch(url);
     let listeL = await resp.json();
-    listeL.sort((a,b) => {
+    listeL.sort((a, b) => {
         const atime = new Date(a.histdatum);
         const btime = new Date(b.histdatum);
         return btime - atime;
     })
 
-    if (type==0) {
+    if (type == 0) {
         let url = urlBase + 'recallLeads?type=' + 9
         console.log(url);
         let resp = await fetch(url);
@@ -149,54 +157,54 @@ return leads;
         liste2.map(z => {
             z.histdatum = z.datumlead
             z.histtext = 'Lead' + (z.adminLead ? (': ' + z.recallma) : '')
-//            z.histdatum = z.datumlead
+            //            z.histdatum = z.datumlead
         })
         listeL = listeL.concat(liste2)
     }
-//    url += '&userid=' + userid
+    //    url += '&userid=' + userid
 
 
-if (type==0) {
-    listeL.sort((a,b) => {
-        const atime = new Date(a.histdatum);
-        const btime = new Date(b.histdatum);
-        return btime - atime;
-    })
-}
-if (type==-2) {
-    listeL.sort((a,b) => {
-        const atime = new Date(a.histdatum);
-        const btime = new Date(b.histdatum);
-        return atime - btime;
-    })
-}
+    if (type == 0) {
+        listeL.sort((a, b) => {
+            const atime = new Date(a.histdatum);
+            const btime = new Date(b.histdatum);
+            return btime - atime;
+        })
+    }
+    if (type == -2) {
+        listeL.sort((a, b) => {
+            const atime = new Date(a.histdatum);
+            const btime = new Date(b.histdatum);
+            return atime - btime;
+        })
+    }
 
-if (type==9) {
-    // Leads
-    listeL.sort((a,b) => {
-        const atime = new Date(a.datumlead);
-        const btime = new Date(b.datumlead);
-        return btime - atime;
-    })
-}
+    if (type == 9) {
+        // Leads
+        listeL.sort((a, b) => {
+            const atime = new Date(a.datumlead);
+            const btime = new Date(b.datumlead);
+            return btime - atime;
+        })
+    }
 
-let liste: [] = listeL;
+    let liste: [] = listeL;
     return liste;
 };
 
 export const fetchLeadsByRecallStatusJunk: FetchLeadsByRecallStatus = async (type, junk) => {
     // console.log('fetchLeadsByRecallStatus')
     let url = urlBase + 'recallLeadsJunk?type=' + type + '&junk=' + junk + ''
-    if (type==0) {
+    if (type == 0) {
         url += '&all=1'
     }
-//    url += '&userid=' + userid
+    //    url += '&userid=' + userid
     console.log(url);
     const resp = await fetch(url);
     let listeL = await resp.json();
-//    // console.log(listeL[0])
+    //    // console.log(listeL[0])
     let liste: [] = listeL;
-//    // console.log(liste.length);
+    //    // console.log(liste.length);
     return liste;
 };
 
@@ -206,9 +214,9 @@ export const fetchLeadsHistory: FetchLeadsHistory = async (srch) => {
     // console.log(url);
     const resp = await fetch(url);
     let listeL = await resp.json();
-//    // console.log(listeL[0])
+    //    // console.log(listeL[0])
     let liste: [] = listeL;
-//    // console.log(liste.length);
+    //    // console.log(liste.length);
     return liste;
 };
 
