@@ -59,7 +59,8 @@
 		<div class="titel">Marke</div>
 		<div class="titel">Stammnr</div>
 		<div class="titel">ausgeführt</div>
-		<div class="titel">Dauer</div>
+		<div class="titel cell-logr">Dauer</div>
+		<div class="titel"></div>
 	</div>
 	<div class="scrollable">
 		{#each filteredList as zeile, index}
@@ -101,14 +102,14 @@
 				<div class="cell-log">
 					<span> {zeile.evnok ? dateTimeFormatter.format(new Date(zeile.evnok)) : ''}</span>
 				</div>
-				<div class="cell-logr" title={JSON.stringify(zeile.diff)}>
+				<div class="cell-logr">
 					{#if zeile.evnok}
 					{zeile.diff.delayS}
 					{:else}
 					<span class="ital">{zeile.diff.delayS}</span>
 					{/if}
 				</div>
-				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} />
+				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} ></div>
 				<div />
 			</div>
 		{/each}
@@ -131,7 +132,7 @@
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 140px 170px 130px auto;
+		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 130px 120px 80px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
@@ -151,7 +152,7 @@
 		text-overflow: ellipsis;
 	}
 	.cell-halter {
-		width: 250px;
+		width: 290px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
