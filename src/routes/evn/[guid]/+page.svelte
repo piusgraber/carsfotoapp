@@ -87,6 +87,9 @@
 		addLog(1);
 	};
 	$: pius = data.user?.id == 4533 || data.user?.id == 1;
+	const back = async (guid) => {
+		goto('/liste/evn')
+	};
 	const verbalOk = async (guid) => {
 		await setCode(guid, 1);
 		goto('/liste/evn')
@@ -283,6 +286,9 @@
 				>
 				<br />
 				<br />
+				<button class="exit" on:click={() => back()}>zurück zur Liste</button>
+				<br />
+				<br />
 			</div>
 			<div>
 				{#if lpsrc}
@@ -382,6 +388,10 @@ Ihre CARWARE<br/>
 	}
 	.forelsa {
 		background-color: rgb(255, 176, 176);
+	}
+
+	button.exit {
+		background-color: rgb(187, 187, 255);
 	}
 	.phonegrid {
 		display: grid;

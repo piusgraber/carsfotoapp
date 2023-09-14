@@ -13,7 +13,6 @@
 
 
 
-		z.overdue = !z.evnok && z.diff?.delaym > 180;  // länger als 3 Stunden
 		z.evndone = z.evnok;
 		z.sent = formatDate(new Date(z.evnsent), 'xu') + 'Z'
 		z.done = formatDate(new Date(z.evnok), 'x')+'Z'
@@ -26,6 +25,7 @@
 			let now = formatDate(new Date(), 'xu')+'Z'
 			z.diff = calcDiff(z.sent, now)
 		}
+		z.overdue = !z.evnok && z.diff?.delaym > 180;  // länger als 3 Stunden
 
 	});
 
@@ -109,7 +109,7 @@
 					<span class="ital">{zeile.diff.delayS}</span>
 					{/if}
 				</div>
-				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} ></div>
+				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} >{zeile.overdue}</div>
 				<div />
 			</div>
 		{/each}
@@ -132,7 +132,7 @@
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 130px 120px 80px auto;
+		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 130px 120px 130px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {

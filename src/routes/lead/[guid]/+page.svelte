@@ -6,7 +6,10 @@
 		fetchALead,
 		fetchSQL_CW,
 		getLeadLog,
-		getLogEntry
+		getLogEntry,
+
+		markAsXxxxxx
+
 	} from '$lib/fetch';
 	import type { PageData } from './$types';
 
@@ -99,6 +102,13 @@
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
 				//				console.log(rs);
 				break;
+			case 6:
+				// weg
+				text += 'gelöscht';
+				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
+				rs = markAsXxxxxx(lead.guid)
+				//				console.log(rs);
+				break;
 			case 4:
 				// nicht erreicht
 				let rm = new Date(reminder);
@@ -118,6 +128,7 @@
 	};
 
 	$: autocall = true; //data.user.id == 4533;
+	$: admin = data.user?.id == 15 || data.user?.id == 20 || data.user?.id == 1 || data.user?.id == 4533 
 	const notThere = () => {
 		addLog(1);
 	};
@@ -133,6 +144,12 @@
 	const cleanAway = () => {
 		addLog(5);
 	};
+	const markXxxxxx = () => {
+		addLog(6);
+	};
+	const preMarkXxxxxx = () => {
+		premarked = true
+	};
 	let showJSON: boolean = false;
 
 	let reminderdate = new Date().toISOString().substring(0, 10);
@@ -147,6 +164,8 @@
 		await verifyEmail(lead.id, user.id, lead.email);
 		invalidateAll();
 	};
+
+	let premarked=false
 </script>
 
 {#if $navigating}
@@ -335,6 +354,15 @@
 		</div>
 -->
 			<div>
+				{#if admin}
+				{#if !premarked}
+				<button on:click={preMarkXxxxxx}>Personendaten löschen</button>
+				{:else}
+				<button class="premarked" on:click={markXxxxxx}>wirklich löschen?</button>
+				{/if}
+				<br />
+				<br />
+				{/if}
 				<button on:click={cleanAway}>wegklicken</button>
 				<br />
 				<br />
@@ -428,6 +456,9 @@
 		color: rgb(255, 255, 255);
 	}
 
+	button.premarked {
+		background-color: rgb(255, 140, 140);
+	}
 	.forme {
 		background-color: rgb(194, 236, 183);
 	}

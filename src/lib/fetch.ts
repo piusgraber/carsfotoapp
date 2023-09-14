@@ -80,6 +80,32 @@ export const verifyEmail: any = async (leadid: number, userid: number, email: st
 
 
 
+export const markAsXxxxxx: any = async (guid: string) => {
+    const sql = `update lead 
+                set nachname='Xxxxxx'
+                , vorname='Xxxxxx'
+                , strasse='Xxxxxx'
+                , hausnummer='0'
+                , plz='0000'
+                , ort='Xxxxxx'
+                , email = 'x@x.xx'
+                , telefon = null
+                , telefonart = null
+                , telefon2 = null
+                , telefonart2 = null
+                , telefon3 = null
+                , telefonart3 = null
+                , srchString=''
+                  , geburtstag=null 
+                where guid = '${guid}'`
+    console.log(sql)                
+    const sres = await fetchSQL_CW(sql)
+    return {}
+}
+
+
+
+
 export const addLogEntry: any = async (leadid: number, user: number, text: string, reminder: Date) => {
     // console.log('addLogEntry');
     /*   
