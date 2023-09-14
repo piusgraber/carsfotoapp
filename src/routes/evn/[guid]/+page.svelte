@@ -16,9 +16,8 @@
 	import { extractPhoneNumberIntl } from '$lib/dbFunc';
 	import { json } from '@sveltejs/kit';
 
-	import {
-	setEvnCode
-	} from '$lib/fetch';
+	import { setEvnCode	} from '$lib/fetch';
+	import { calcDiff } from '$lib/datediff';
 
 	//	import { addLogEntry } from '$lib/dbFunc';
 	let lead;
@@ -45,6 +44,16 @@
 	$: mobile = extractPhoneNumberIntl(lead.evntelefon)
 	$: vktel = extractPhoneNumberIntl(lead.user_telefon)
 	$: lead = data.lead;
+	$: {
+		lead.sent = formatDate(new Date(lead.evnsent), 'xu') + 'Z'
+		lead.done = formatDate(new Date(lead.evnok), 'x')+'Z'
+		if (lead.evnok) {
+			lead.diff = calcDiff(lead.sent, lead.done)
+		} else {
+			let now = formatDate(new Date(), 'xu')+'Z'
+			lead.diff = calcDiff(lead.sent, now)
+		}
+	}
 
 	let lpsrc;
 	const showEvnPDF = () => {
@@ -77,7 +86,7 @@
 	const notThere = () => {
 		addLog(1);
 	};
-
+	$: pius = data.user?.id == 4533 || data.user?.id == 1;
 	const verbalOk = async (guid) => {
 		await setCode(guid, 1);
 		goto('/liste/evn')
@@ -284,6 +293,12 @@
 	</div>
 	<br />
 
+	{#if pius}
+	{#each lead.diff.arr as e}
+<div>{e.b} - {e.e} {e.time} {e.break}		</div>
+	{/each}
+	{JSON.stringify(lead.diff)}
+	{/if}
 	<hr/>
 
 <a href="mailto:{lead.dispo_email}?subject=Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}">{lead.dispo_email}</a><br/>

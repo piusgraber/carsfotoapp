@@ -12,12 +12,21 @@
 		myDate.setTime(myDate.getTime() - dateOffset);
 
 
-		formatDate(new Date(z.evnsent), 'x')
 
-		z.overdue = !z.evnok && (new Date(z.evnsent) < myDate);
+		z.overdue = !z.evnok && z.diff?.delaym > 180;  // länger als 3 Stunden
 		z.evndone = z.evnok;
-		z.sent = formatDate(new Date(z.evnsent), 'x')
+		z.sent = formatDate(new Date(z.evnsent), 'xu') + 'Z'
+		z.done = formatDate(new Date(z.evnok), 'x')+'Z'
+		console.log('s', z.sent, 'd', z.done)
+
 		z.delay = ((new Date(z.evnok).getTime() - new Date(z.sent).getTime()) / 1000 / 60 - 240) / 60  ;
+		if (z.evnok) {
+			z.diff = calcDiff(z.sent, z.done)
+		} else {
+			let now = formatDate(new Date(), 'xu')+'Z'
+			z.diff = calcDiff(z.sent, now)
+		}
+
 	});
 
 	import type { PageData } from './$types';
@@ -25,6 +34,7 @@
 	import { formatDate, dateTimeFormatterMEZ, dateTimeFormatterMEZT, dateTimeFormatter, dateFormatter } from '$lib/myfuncs';
 	import { extractPhoneNumberIntl } from '$lib/dbFunc';
 	import { goto } from '$app/navigation';
+	import { calcDiff } from '$lib/datediff';
 
 
 	function showLead(zeile: any): any {
@@ -91,8 +101,12 @@
 				<div class="cell-log">
 					<span> {zeile.evnok ? dateTimeFormatter.format(new Date(zeile.evnok)) : ''}</span>
 				</div>
-				<div class="cell-logr">
-					{zeile.evnok ? zeile.delay.toFixed(2) + ' Std.' : ''} 
+				<div class="cell-logr" title={JSON.stringify(zeile.diff)}>
+					{#if zeile.evnok}
+					{zeile.diff.delayS}
+					{:else}
+					<span class="ital">{zeile.diff.delayS}</span>
+					{/if}
 				</div>
 				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} />
 				<div />
@@ -107,7 +121,10 @@
 		/*		width: 2000px;  */
 		overflow: auto;
 	}
-
+.ital {
+	font-weight: normal;
+	color: #999999;
+}
 	.liste {
 		font-size: 0.9rem;
 	}
