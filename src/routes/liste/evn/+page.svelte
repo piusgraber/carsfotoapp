@@ -68,10 +68,10 @@
 				class="panel-row"
 				on:click={() => showLead(zeile)}
 				on:keydown={() => showLead(zeile)}
-				class:overdue={zeile.overdue}
-				class:evnok={zeile.evndone}
+				class:overdue={zeile.overdue || zeile.evnok_code==2}
+				class:evnok={zeile.evndone &&  zeile.evnok_code!=2}
 			>
-			<div>{zeile.evnok_code==1 ? '🗣' : zeile.evnok_code==2 ? '☎' : ''}</div>
+			<div>{zeile.evnok_code==1 ? '🗣' : zeile.evnok_code==2 ? '⏳' : ''}</div>
 			<div title={zeile.guid}>
 					{dateTimeFormatterMEZ.format(new Date(zeile.evnsent))}
 				</div>
@@ -109,7 +109,7 @@
 					<span class="ital">{zeile.diff.delayS}</span>
 					{/if}
 				</div>
-				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} >{zeile.overdue}</div>
+				<div class="link" on:click={() => showLead(zeile)} on:keydown={() => showLead(zeile)} ></div>
 				<div />
 			</div>
 		{/each}
