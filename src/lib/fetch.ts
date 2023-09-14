@@ -82,12 +82,10 @@ export const verifyEmail: any = async (leadid: number, userid: number, email: st
 
 export const markAsXxxxxx: any = async (guid: string) => {
     const sql = `update lead 
-                set nachname='Xxxxxx'
-                , vorname='Xxxxxx'
+                set nachname=SUBSTRING(nachname, 1, 1) + 'xxxxx'
+                , vorname=SUBSTRING(vorname, 1, 1) + 'xxxxx'
                 , strasse='Xxxxxx'
                 , hausnummer='0'
-                , plz='0000'
-                , ort='Xxxxxx'
                 , email = 'x@x.xx'
                 , telefon = null
                 , telefonart = null

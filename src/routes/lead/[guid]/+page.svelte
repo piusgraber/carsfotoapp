@@ -104,7 +104,7 @@
 				break;
 			case 6:
 				// weg
-				text += 'gelöscht';
+				text += 'Die Personendaten im Datensatz wurden anonymisiert!';
 				rs = await addLogEntry(lead.id, $page.data.user.id, text, null);
 				rs = markAsXxxxxx(lead.guid)
 				//				console.log(rs);
