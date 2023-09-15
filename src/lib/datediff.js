@@ -101,7 +101,7 @@ export const calcDiff = (t1, t2) => {
                     console.log('1')
                     dbreak = false
                 }
-                if (bhour >= 17 && bminute > 30 ) {
+                if (bhour == 17 && bminute > 30 || bhour > 17) {
                     r.b = r.d + 'T17:30:00.000Z'
                     console.log('2')
                     dbreak = false

@@ -16,7 +16,7 @@
 	import { extractPhoneNumberIntl } from '$lib/dbFunc';
 	import { json } from '@sveltejs/kit';
 
-	import { setEvnCode	} from '$lib/fetch';
+	import { setEvnCode } from '$lib/fetch';
 	import { calcDiff } from '$lib/datediff';
 
 	//	import { addLogEntry } from '$lib/dbFunc';
@@ -24,42 +24,27 @@
 
 	let min = '';
 	let delay = 0;
-	let diff = 0
-	let now
-	let diffs = ''
-	$: {
-		
-		now = new Date(formatDate(new Date(), 'xu')).getTime()		
+	let diff = 0;
+	let now;
 
-	delay = new Date(formatDate(new Date(lead.evnsent), 'x')).getTime()	
-	diff = now - delay
-	let diffh = Math.floor(diff / 1000 / 60 / 60)
-	min = 	'0' + Math.floor((diff / 1000 / 60 / 60 - Math.floor(diff / 1000 / 60 / 60)) * 60)
-	if (min.length == 3) {
-		min = min.substring(1)
-	}
-	diffs = diffh + ':' + min
-	}
-
-	$: mobile = extractPhoneNumberIntl(lead.evntelefon)
-	$: vktel = extractPhoneNumberIntl(lead.user_telefon)
+	$: mobile = extractPhoneNumberIntl(lead.evntelefon);
+	$: vktel = extractPhoneNumberIntl(lead.user_telefon);
 	$: lead = data.lead;
 	$: {
-		lead.sent = formatDate(new Date(lead.evnsent), 'xu') + 'Z'
-		lead.done = formatDate(new Date(lead.evnok), 'x')+'Z'
+		lead.sent = formatDate(new Date(lead.evnsent), 'xu') + 'Z';
+		lead.done = formatDate(new Date(lead.evnok), 'x') + 'Z';
 		if (lead.evnok) {
-			lead.diff = calcDiff(lead.sent, lead.done)
+			lead.diff = calcDiff(lead.sent, lead.done);
 		} else {
-			let now = formatDate(new Date(), 'xu')+'Z'
-			lead.diff = calcDiff(lead.sent, now)
+			let now = formatDate(new Date(), 'xu') + 'Z';
+			lead.diff = calcDiff(lead.sent, now);
 		}
 	}
 
 	let lpsrc;
 	const showEvnPDF = () => {
-//		lpsrc = `https://lead.car-ware.ch/fop/ngDok?irenehassuchasmile&type=nachweis&id=${lead.id}`
-		lpsrc = `https://lead.car-ware.ch/pavServer/ngDok?type=nachweis&irenehassuchasmile&id=${lead.id}`
-			
+		//		lpsrc = `https://lead.car-ware.ch/fop/ngDok?irenehassuchasmile&type=nachweis&id=${lead.id}`
+		lpsrc = `https://lead.car-ware.ch/pavServer/ngDok?type=nachweis&irenehassuchasmile&id=${lead.id}`;
 	};
 	let reminderOk = false;
 	$: {
@@ -79,7 +64,7 @@
 	}
 
 	const setCode = async (guid, code) => {
-		await setEvnCode(guid, code)
+		await setEvnCode(guid, code);
 	};
 
 	$: autocall = true; //data.user.id == 4533;
@@ -88,15 +73,15 @@
 	};
 	$: pius = data.user?.id == 4533 || data.user?.id == 1;
 	const back = async (guid) => {
-		goto('/liste/evn')
+		goto('/liste/evn');
 	};
 	const verbalOk = async (guid) => {
 		await setCode(guid, 1);
-		goto('/liste/evn')
+		goto('/liste/evn');
 	};
 	const commitOk = async (guid) => {
 		await setCode(guid, 2);
-		goto('/liste/evn')
+		goto('/liste/evn');
 	};
 	const whenLater = () => {
 		addLog(4);
@@ -130,11 +115,9 @@
 	<div class="main" class:forelsa={reserved} class:forme={user.id == 4533 && reservedForMe}>
 		<div class="grid">
 			<div class="xgrid">
+				<div>GUID</div>
 				<div>
-					GUID
-				</div>
-				<div>
-					#{lead.guid} 
+					#{lead.guid}
 				</div>
 				<div>&#160;</div>
 				<div>&#160;</div>
@@ -147,40 +130,37 @@
 				<div>{lead.dispo_email}</div>
 				<div>Telefon</div>
 				<div>
-					
 					<div class="phonegrid">
+						<div />
 						<div>
-						</div><div>
 							{#if autocall}
 								<a href="tel:{vktel}">{vktel}</a>
 							{:else}
 								{mobile}
-							{/if}</div>
-							<div>{lead.user_telefon}</div>
-					</div>
+							{/if}
 						</div>
+						<div>{lead.user_telefon}</div>
+					</div>
+				</div>
 
-						<div>&#160;</div>
-						<div>&#160;</div>
-						<div>Datum eVn gesandt</div>
-				<div>
-				{formatDate(new Date(lead.evnsent), 'm')}
-				<i>vor {diffs} </i>
-				</div>
-<!--
-				<div>delay</div>
-				<div>
-				{formatDate(new Date(), 'xu')}
-				</div>
--->
+				<div>&#160;</div>
+				<div>&#160;</div>
 				<div>eVn ab</div>
 				<div>
-						{dateFormatter.format(new Date(lead.vnab))}
+					{dateFormatter.format(new Date(lead.vnab))}
+				</div>
+				<div>Datum eVn gesandt</div>
+				<div>
+					{formatDate(new Date(lead.evnsent), 'mu')}
+				</div>
+				<div>Datum eVn erledigt</div>
+				<div>
+					{lead.evnok ? formatDate(new Date(lead.evnok), 'm') : '--'}
 				</div>
 				<div>&#160;</div>
 				<div>&#160;</div>
 				<div>Fahrzeug</div>
-				<div>{lead.marke} {lead.modell} {lead.typ} </div>
+				<div>{lead.marke} {lead.modell} {lead.typ}</div>
 				<div>Stammnummer</div>
 				<div>{lead.stammnr}</div>
 				<div>Kennzeichen</div>
@@ -190,10 +170,11 @@
 				<div>Kunde</div>
 
 				<div>
-					{lead.halteranrede}<br/>
-					{lead.haltername}<br/>
-					{lead.halteradresse}<br/>
-					{lead.halterplz} {lead.halterort}
+					{lead.halteranrede}<br />
+					{lead.haltername}<br />
+					{lead.halteradresse}<br />
+					{lead.halterplz}
+					{lead.halterort}
 				</div>
 				<div>&#160;</div>
 				<div>&#160;</div>
@@ -201,22 +182,22 @@
 				<div>{lead.versicherung}</div>
 				<div>Telefon</div>
 				<div class="phonegrid">
+					<div />
 					<div>
-					</div>		<div>
 						{#if autocall}
 							<a href="tel:{mobile}">{mobile}</a>
 						{:else}
 							{mobile}
-						{/if}</div>
-						<div>{lead.evntelefon}</div>
+						{/if}
+					</div>
+					<div>{lead.evntelefon}</div>
 				</div>
 				<div>&#160;</div>
-				<div>
-				</div>
-<!--
+				<div />
+				<!--
 				<div>{JSON.stringify(lead)}</div>
 -->
-</div> 
+			</div>
 			<!--
 			{JSON.stringify(lead)}
 		<div class="kunde">
@@ -275,15 +256,13 @@
 		</div>
 -->
 			<div>
-				<button disabled="{lead.evnok}" on:click={() => commitOk(lead.guid)}>OK</button>
+				<button disabled={lead.evnok} on:click={() => commitOk(lead.guid)}>OK</button>
 				<br />
 				<br />
-				<button disabled="{lead.evnok}" on:click={() => verbalOk(lead.guid)}>mündliches OK</button>
+				<button disabled={lead.evnok} on:click={() => verbalOk(lead.guid)}>mündliches OK</button>
 				<br />
 				<br />
-				<button on:click={showEvnPDF}
-					>eVn Formular</button
-				>
+				<button on:click={showEvnPDF}>eVn Formular</button>
 				<br />
 				<br />
 				<button class="exit" on:click={() => back()}>zurück zur Liste</button>
@@ -300,27 +279,37 @@
 	<br />
 
 	{#if pius}
-	{#each lead.diff.arr as e}
-<div>{e.b} - {e.e} {e.time} {e.break}		</div>
-	{/each}
-	{JSON.stringify(lead.diff)}
+		{#each lead.diff.arr as e}
+			<div>{e.b} - {e.e} {e.time} {e.break}</div>
+		{/each}
+		{JSON.stringify(lead.diff)}
 	{/if}
-	<hr/>
+	<hr />
 
-<a href="mailto:{lead.dispo_email}?subject=Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}">{lead.dispo_email}</a><br/>
-<br/>
-<b>Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}</b> <br/>
-<br/>
-<br/>
-Guten Tag<br/>
-Im Zusammenhang mit der Bestellung des Versicherungsnachweis für:<br/>
-Fahrzeug:    {lead.marke} {lead.typ}, Stammnummer: {lead.stammnr}<br/>
-Halter:         {lead.halteranrede} {lead.haltername}, {lead.halteradresse}, {lead.halterplz} {lead.halterort}<br/>
-<br/>
-Die {lead.versicherung} hat uns mündlich bestätigt, dass der Nachweis für Ihren oben aufgeführten Kunden erstellt wurde.<br/>
-<br/>
-Beste Grüsse<br/>
-Ihre CARWARE<br/>
+	<a
+		href="mailto:{lead.dispo_email}?subject=Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton} {lead.kennzeichen}"
+		>{lead.dispo_email}</a
+	><br />
+	<br />
+	<b
+		>Ihre Nachweisbestellung für {lead.haltername} bei {lead.versicherung}, {lead.kanton}
+		{lead.kennzeichen}</b
+	> <br />
+	<br />
+	<br />
+	Guten Tag<br />
+	Im Zusammenhang mit der Bestellung des Versicherungsnachweis für:<br />
+	Fahrzeug:    {lead.marke}
+	{lead.typ}, Stammnummer: {lead.stammnr}<br />
+	Halter:         {lead.halteranrede}
+	{lead.haltername}, {lead.halteradresse}, {lead.halterplz}
+	{lead.halterort}<br />
+	<br />
+	Die {lead.versicherung} hat uns mündlich bestätigt, dass der Nachweis für Ihren oben aufgeführten Kunden
+	erstellt wurde.<br />
+	<br />
+	Beste Grüsse<br />
+	Ihre CARWARE<br />
 
 	{#if showJSON}
 		<br />
@@ -361,7 +350,7 @@ Ihre CARWARE<br/>
 	input[type='date'],
 	input[type='time'] {
 		font-size: 1rem;
-/*
+		/*
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 */
 	}
