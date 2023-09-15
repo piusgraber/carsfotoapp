@@ -151,7 +151,7 @@
 				</div>
 				<div>Datum eVn gesandt</div>
 				<div>
-					{formatDate(new Date(lead.evnsent), 'mu')}
+					{formatDate(new Date(lead.evnsent), 'mu')} an <b>{lead.evnemail}</b>
 				</div>
 				<div>Datum eVn erledigt</div>
 				<div>
@@ -258,13 +258,13 @@
 		</div>
 -->
 			<div>
-				<button disabled={lead.evnok} on:click={() => commitOk(lead.guid)}>OK</button>
+				<button disabled={lead.evnok} on:click={() => commitOk(lead.guid)}>sendet OK</button>
 				<br />
 				<br />
-				<button disabled={lead.evnok} on:click={() => verbalOk(lead.guid)}>mündliches OK</button>
+				<button on:click={() => verbalOk(lead.guid)}>mündliches OK</button>
 				<br />
 				<br />
-				<button on:click={showEvnPDF}>eVn Formular</button>
+				<button on:click={showEvnPDF}>eVn-Bestellung (PDF)</button>
 				<br />
 				<br />
 				<button class="exit" on:click={() => back()}>zurück zur Liste</button>
