@@ -76,8 +76,17 @@ export const calcDiff = (t1, t2) => {
                     dbreak = false
                 }
                 if (ehour == 12 || ehour == 13 && eminute < 30) {
-                    r.e = r.d + 'T12:00:00.000Z'
-                    dbreak = false
+                    // Ende übver Mittag
+                    if (bhour == 12 && bminute > 0 || bhour == 13 && bminute < 30) {
+                        // Beginn über Mittag
+                        r.e = r.d + 'T13:30:00.000Z'
+                        console.log('4')
+                        dbreak = false
+                    } else {
+                        r.e = r.d + 'T12:00:00.000Z'
+                        console.log('4')
+                        dbreak = false
+                    }
                 }
                 if (ehour < 8 && ehour != 0) {
                     r.e = r.d + 'T08:00:00.000Z'
@@ -114,9 +123,16 @@ export const calcDiff = (t1, t2) => {
                 }
                 if (ehour == 12 || ehour == 13 && eminute < 30) {
                     // Ende übver Mittag
-                    r.e = r.d + 'T12:00:00.000Z'
-                    console.log('4')
-                    dbreak = false
+                    if (bhour == 12 && bminute > 0 || bhour == 13 && bminute < 30) {
+                        // Beginn über Mittag
+                        r.e = r.d + 'T13:30:00.000Z'
+                        console.log('4')
+                        dbreak = false
+                    } else {
+                        r.e = r.d + 'T12:00:00.000Z'
+                        console.log('4')
+                        dbreak = false
+                    }
                 }
                 if (ehour < 8 && ehour != 0) {
                     r.e = r.d + 'T08:00:00.000Z'
