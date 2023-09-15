@@ -170,7 +170,9 @@
 				<div>Kunde</div>
 
 				<div>
+					{#if !lead.isfirma}
 					{lead.halteranrede}<br />
+					{/if}
 					{lead.haltername}<br />
 					{lead.halteradresse}<br />
 					{lead.halterplz}
