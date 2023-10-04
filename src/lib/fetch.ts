@@ -1,5 +1,6 @@
 type FetchALead = (guid: string) => Promise<{}>;
 type FetchSQL = (sql: string) => Promise<{}>;
+type FetchSQLArray = (sql: string) => Promise<[]>;
 type ReserveALead = (guid: string, userid: number) => Promise<{}>;
 type getLeadLog = (id: number) => Promise<{}>;
 export type FetchLeadsByRecallStatus = (type: number, userid: number) => Promise<[]>;
@@ -11,6 +12,24 @@ const prod = true;
 export const urlBase = prod ? 'https://api.car-ware.ch/' : 'http://localhost:3344/';
 
 export const fetchSQL_CW: FetchSQL = async sql => {
+
+    //    // console.log('fetchSQL_CW');
+    const respss = await fetch(urlBase + "set-session");
+    //    // console.log(respss);
+    const respgs = await fetch(urlBase + "get-session");
+    //    // console.log(respgs);
+    sql = encodeURIComponent(sql);
+    const url = urlBase + "sql?sql=" + sql + ""
+    //    // console.log(url);
+    const resp = await fetch(url);
+    //    // console.log('rsr', resp);
+    let recs = await resp.json();
+    //    // console.log(recs);
+    return recs;
+}
+
+
+export const fetchSQL_Array: FetchSQLArray = async sql => {
 
     //    // console.log('fetchSQL_CW');
     const respss = await fetch(urlBase + "set-session");

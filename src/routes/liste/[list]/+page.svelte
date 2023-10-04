@@ -267,7 +267,7 @@
 							zeile.recallmaid != 0 &&
 							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}
-						class:fgw = {zeile.freiegaragenwahl}
+						class:fgw = {zeile.freiegaragenwahl && !zeile.verkaeuferok}
 						class:vok = {zeile.verkaeuferok}
 						on:click={() => showLead(zeile)}
 						on:keydown={() => showLead(zeile)}
@@ -406,8 +406,13 @@
 		font-size: 1.3rem;
 	}
 
-	.vok {
-		background-color: #a5facb;
+	.vok:nth-child(odd) {
+		background-color: #d8a5fa;
+		grid-row: auto / span 1;
+	}
+
+	.vok:nth-child(even) {
+		background-color: #c78bf0;
 		grid-row: auto / span 1;
 	}
 
@@ -417,7 +422,8 @@
 	}
 
 	.fgw:nth-child(even)  {
-		background-color: #7edfd7;
+/*		background-color: #7edfd7; */
+		background-color: #7fe7dc;
 		grid-row: auto / span 1;
 	}
 

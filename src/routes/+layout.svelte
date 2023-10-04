@@ -161,7 +161,7 @@
 		padding: 5px;
 		font-size: 1.3rem;
 		display: grid;
-		grid-template-columns: 300px 400px 920px auto;
+		grid-template-columns: 300px 400px auto;
 	}
 
 	.open {
