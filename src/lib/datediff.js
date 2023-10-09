@@ -54,7 +54,8 @@ export const calcDiff = (t1, t2) => {
         const eminute = parseInt(r.e.substring(14, 16));
         let dbreak = true;
         switch (r.wd) {
-            case 0, 6:
+            case 0:
+            case 6:
                 r.t = 0
                 dbreak = false
                 break;
