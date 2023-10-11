@@ -144,9 +144,13 @@
 		if (data.liste == 'log') {
 			goto('/lead/' + z.guid);
 		} else {
-			if (z.recallmaid && z.recallmaid != data.user.id) {
-			} else {
+			if ( data.user.id < 1000) {
 				goto('/lead/' + z.guid);
+			} else {
+					if (z.recallmaid && z.recallmaid != data.user.id) {
+				} else {
+					goto('/lead/' + z.guid);
+				}
 			}
 		}
 	};
@@ -263,7 +267,8 @@
 					<div
 						class="panel-row"
 						class:recall={zeile.recall && !zeile.datumlead}
-						class:res={data.liste != 'log' &&
+						class:res={
+							data.liste != 'log' &&
 							zeile.recallmaid != 0 &&
 							zeile.recallmaid != data.user.id}
 						class:resme={zeile.recallmaid == data.user.id}
