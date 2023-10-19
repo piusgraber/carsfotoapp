@@ -37,7 +37,7 @@
 					<label for="username">Benutzer</label>
 				</div>
 				<div>
-					<input id="username" bind:value={username} autofocus="true" />
+					<input id="username" name="username" bind:value={username} autofocus="true" />
 				</div>
 				<div>
 					<label for="password">Passwort: </label>
