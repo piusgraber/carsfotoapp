@@ -13,7 +13,7 @@
 	let filteredList: Zeile[];
 	let sprachen = [];
 	if (data.user) {
-		sprachen = data.user.sprachen;
+		sprachen = data.user?.sprachen;
 	}
 
 	$: {
@@ -25,9 +25,9 @@
 				})
 			}
 			filteredList = filteredList.filter((l) => {
-				if (sprachen.de && l.spracheid == 1) return true;
-				if (sprachen.fr && l.spracheid == 2) return true;
-				if (sprachen.it && l.spracheid == 3) return true;
+				if (sprachen?.de && l.spracheid == 1) return true;
+				if (sprachen?.fr && l.spracheid == 2) return true;
+				if (sprachen?.it && l.spracheid == 3) return true;
 				return false;
 			});
 			filteredList = filteredList.filter((l) => {

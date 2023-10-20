@@ -41,11 +41,10 @@
 			goto('/evn/' + zeile.guid);
 	}
 </script>
-
 <!--
-{JSON.stringify($page)}
+{JSON.stringify($page.data.user)}
 -->
-
+{#if $page.data.user?.id}
 <div class="panel">
 	<div class="panel-row">
 		<div class="titel"></div>
@@ -115,6 +114,9 @@
 		{/each}
 	</div>
 </div>
+{:else}
+<div></div>
+{/if}
 
 <style>
 	div.scrollable {
