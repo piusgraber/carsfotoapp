@@ -57,6 +57,7 @@
 		<div class="titel">Halter</div>
 		<div class="titel">Marke</div>
 		<div class="titel">Stammnr</div>
+		<div class="titel">Händler</div>
 		<div class="titel">ausgeführt</div>
 		<div class="titel cell-logr">Dauer</div>
 		<div class="titel"></div>
@@ -77,7 +78,7 @@
 				<div>
 					{zeile.versicherung}
 				</div>
-				<div>
+				<div class="cell-mail">
 					{zeile.evnemail}
 				</div>
 				<div>
@@ -97,7 +98,8 @@
 					>
 				</div>
 				<div class="cell-fahrzeug"><span> {zeile.marke} </span></div>
-				<div class="cell-garage"><span> {zeile.stammnr}</span></div>
+				<div class="cell-stammnr"><span> {zeile.stammnr}</span></div>
+				<div class="cell-halter"><span> {zeile.garage} </span></div>
 				<div class="cell-log">
 					<span> {zeile.evnok ? dateTimeFormatter.format(new Date(zeile.evnok)) : ''}</span>
 				</div>
@@ -134,7 +136,7 @@
 	.panel-row {
 		cursor: pointer;
 		display: grid;
-		grid-template-columns: 20px 145px 110px 255px 150px 120px 140px 310px 150px 130px 120px 130px auto;
+		grid-template-columns: 20px 145px 110px 225px 150px 120px 110px 310px 150px 130px 310px 120px 130px auto;
 		user-select: none;
 	}
 	.panel-row:nth-child(odd) {
@@ -148,7 +150,13 @@
 	}
 
 	.cell-kunde {
-		width: 240px;
+		width: 100px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.cell-mail {
+		width: 200px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -165,7 +173,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.cell-garage {
+	.cell-stammnr {
 		width: 340px;
 		white-space: nowrap;
 		overflow: hidden;

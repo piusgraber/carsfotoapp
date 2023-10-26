@@ -111,13 +111,13 @@
 					}
 					//z.freiegaragenwahl = true;
 					z.srch =
-						//						z.telefonm +
+//						z.telefonm +
 						'#' +
 						z.garage +
 						'#' +
 						z.mainPhone + // Intl Telefonnummer
 						'#' +
-						//						z.mainPhoneCH +   // CH Telefonnummer
+//						z.mainPhoneCH +   // CH Telefonnummer
 						'#' +
 						z.kunde +
 						'#' +
