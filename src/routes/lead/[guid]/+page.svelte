@@ -366,10 +366,9 @@
 				<button on:click={cleanAway}>wegklicken</button>
 				<br />
 				<br />
+				<br />
 				<button on:click={notThere}>nicht erreicht</button>
 				<br />
-				<br />
-				<button on:click={noInterest}>kein Interesse</button>
 				<br />
 				<br />
 				<input type="date" bind:value={reminderdate} />
@@ -378,10 +377,16 @@
 				<button disabled={!reminderOk} on:click={whenLater}>später anrufen</button>
 				<br />
 				<br />
+				<br />
+				<br />
+				<br />
+				<button on:click={noInterest}>kein Interesse</button>
+				<br />
+				<br />
+				<br />
 				<button disabled={!lead.emailverified} on:click={showLanding}
 					>Landing-Page {lpsrc ? '' : ''}</button
 				>
-				<br />
 				<br />
 			</div>
 			<div>
