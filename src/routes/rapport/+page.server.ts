@@ -8,9 +8,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
     let sres = await fetchSQL_Array(sql)
     console.log(sres)
     sres.sort((a, b) => {
-        console.log(a.datum)
-        console.log(b.datum)
-        console.log(a.datum > b.datum)
         return new Date(b.datum) - new Date(a.datum)
     })
     console.log(sres)
