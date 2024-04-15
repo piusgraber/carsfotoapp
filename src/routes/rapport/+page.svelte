@@ -16,14 +16,13 @@
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve('resolved');
-    }, 1000);
+    }, 2000);
   });
 }
 
     async function subscribe(event: Event) {
       const form = event.target as HTMLFormElement
       const data = new FormData(form)
-        console.log("subscribe")
       await fetch('/rapport', {
         method: 'POST',
         body: data
