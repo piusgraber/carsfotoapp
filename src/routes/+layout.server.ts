@@ -28,7 +28,7 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
                 const sprachen = settings.sprachen;
                 user = {
                     login: cookies.get('authRoot'),
-                    name: user.vorname + ' ' + user.nachname, id: user.id, cwTelefon: settings.telefon, initialen: 'pg', sprachen: sprachen
+                    name: user.vorname + ' ' + user.nachname, id: user.id, cwTelefon: settings.telefon, sprachen: sprachen
                 }
 //                console.log(user)
                 return { user }

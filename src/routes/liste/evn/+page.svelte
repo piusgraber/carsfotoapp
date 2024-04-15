@@ -16,7 +16,7 @@
 		z.evndone = z.evnok;
 		z.sent = formatDate(new Date(z.evnsent), 'xu') + 'Z'
 		z.done = formatDate(new Date(z.evnok), 'x')+'Z'
-		console.log('s', z.sent, 'd', z.done)
+//		console.log('s', z.sent, 'd', z.done)
 
 		z.delay = ((new Date(z.evnok).getTime() - new Date(z.sent).getTime()) / 1000 / 60 - 240) / 60  ;
 		if (z.evnok) {

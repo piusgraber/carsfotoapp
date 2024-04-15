@@ -15,7 +15,6 @@ const config = {
 
 
 export const fetchSQL_DB = sqlString => {
-    console.log("HI")
     console.log(sqlString)
     return new Promise(
         function (resolve, reject) {

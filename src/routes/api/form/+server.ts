@@ -19,13 +19,6 @@ export const POST: RequestHandler = async (event) => {
     const data: FormData = await event.request.formData();
     console.log(data)
     let userName = 'oooo';
-/*
-    if (data.get('initialen') !== undefined) {
-        userName = data.get("initialen")?.toString();
-    }
-    if (userName === undefined) {
-    }
-*/
     const user = { initialen: userName }
     console.log(user)
     storeData.set({ user: { initialen: userName } })

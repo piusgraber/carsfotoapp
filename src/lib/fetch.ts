@@ -23,7 +23,7 @@ export const fetchSQL_CW: FetchSQL = async sql => {
     //    // console.log(url);
     const resp = await fetch(url);
     //    // console.log('rsr', resp);
-    let recs = await resp.json();
+    let recs : [] = await resp.json();
     //    // console.log(recs);
     return recs;
 }

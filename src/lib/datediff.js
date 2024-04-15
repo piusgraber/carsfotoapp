@@ -81,11 +81,11 @@ export const calcDiff = (t1, t2) => {
                     if (bhour == 12 && bminute > 0 || bhour == 13 && bminute < 30) {
                         // Beginn über Mittag
                         r.e = r.d + 'T13:30:00.000Z'
-                        console.log('4')
+//                        console.log('4')
                         dbreak = false
                     } else {
                         r.e = r.d + 'T12:00:00.000Z'
-                        console.log('4')
+//                        console.log('4')
                         dbreak = false
                     }
                 }
@@ -108,18 +108,18 @@ export const calcDiff = (t1, t2) => {
                     r.b = r.d + 'T08:00:00.000Z'
                 }
                 if (bhour >= 13) {
-                    console.log('1')
+//                    console.log('1')
                     dbreak = false
                 }
                 if (bhour == 17 && bminute > 30 || bhour > 17) {
                     r.b = r.d + 'T17:30:00.000Z'
-                    console.log('2')
+//                    console.log('2')
                     dbreak = false
                 }
                 if (bhour == 12 && bminute > 0 || bhour == 13 && bminute < 30) {
                     // Beginn über Mittag
                     r.b = r.d + 'T13:30:00.000Z'
-                    console.log('3')
+//                    console.log('3')
                     dbreak = false
                 }
                 if (ehour == 12 || ehour == 13 && eminute < 30) {
@@ -127,22 +127,22 @@ export const calcDiff = (t1, t2) => {
                     if (bhour == 12 && bminute > 0 || bhour == 13 && bminute < 30) {
                         // Beginn über Mittag
                         r.e = r.d + 'T13:30:00.000Z'
-                        console.log('4')
+//                        console.log('4')
                         dbreak = false
                     } else {
                         r.e = r.d + 'T12:00:00.000Z'
-                        console.log('4')
+//                        console.log('4')
                         dbreak = false
                     }
                 }
                 if (ehour < 8 && ehour != 0) {
                     r.e = r.d + 'T08:00:00.000Z'
-                    console.log('5')
+//                    console.log('5')
                     dbreak = false
                 }
 
                 if (ehour <= 12 && ehour != 0) {
-                    console.log('6')
+//                    console.log('6')
                     dbreak = false
                 }
                 if (ehour >= 17 && eminute > 30 || ehour == 0) {
