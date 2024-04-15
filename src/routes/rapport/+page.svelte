@@ -8,6 +8,9 @@
 
     let datum: Date
     let stunden: string
+    let minuten: string
+
+    datum = formatDate(new Date(), 'x').substring(0, 10)
 
     function waitAWhile() {
   return new Promise((resolve) => {
@@ -26,6 +29,8 @@
         body: data
       })
       working = true
+      stunden=''
+      datum = formatDate(new Date(), 'x').substring(0, 10)
       await waitAWhile()
       invalidateAll()
       working = false
@@ -34,7 +39,7 @@
 
 
 
-
+$: invalidData = !datum || !stunden || !stunden.includes(':') || stunden.length < 4;
 
 
 
@@ -42,6 +47,21 @@
 
 </script>
 <b>Rapport</b>
+
+<form on:submit|preventDefault={subscribe}>
+    <div class="gridH">
+
+    <div>Datum:</div><div> <input name="datum" type="date" bind:value={datum} /> TT.MM.JJJJ </div>
+    <div>Stunden:Minuten:</div><div> <input name="stunden" type="text" class="hours" bind:value={stunden} placeholder="0:00"/>  zB. 3:30</div>
+    <div></div>
+    <div>
+    <button disabled={invalidData}>erfassen</button> {#if working}...wird gespeichert{/if}
+</div>
+    
+</div>
+</form>
+
+    
 <div class="grid">
 
 {#each data.res as d}
@@ -53,26 +73,22 @@
     </div>
 
 
-<form on:submit|preventDefault={subscribe}>
-
-<div>Datum: <input name="datum" type="date" bind:value={datum} /></div>
-<div>Stunden: <input name="stunden" type="text" class="hours" bind:value={stunden} /></div>
-<button>erfassen</button> {#if working}...wird gespeichert{/if}
-
-</form>
-
 
   
 
 
 <style>
     .hours {
-        width: 80px;
+        width: 50px;
     }
 
 
     .grid {
         display: grid;
         grid-template-columns: 80px 20px;
+    }
+    .gridH {
+        display: grid;
+        grid-template-columns: 130px 260px;
     }
 </style>

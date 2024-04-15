@@ -49,6 +49,10 @@
 		goto('/liste/not');
 	};
 
+	const showRap = () => {
+		goto('/rapport');
+	};
+
 	const refresh = () => {
 		invalidateAll();
 	};
@@ -105,6 +109,9 @@
 				{/if}
 				{#if !$navigating && $page.params.list != 'not'}
 					<button on:click={showNot}>nicht erreicht</button>
+				{/if}
+				{#if data.user.login=='temp' && !$navigating && !$page.route.id?.includes('rapport')}
+					<button on:click={showRap}>Rapport</button>
 				{/if}
 				{#if (data.user.id==15 || data.user.id==1 || data.user.id==20 || data.user.login=='lo') && !$navigating && !$page.route.id?.includes('evn')}
 				<button on:click={showEvn}>eVn</button>
