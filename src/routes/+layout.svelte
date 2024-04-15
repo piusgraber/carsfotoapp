@@ -106,8 +106,7 @@
 				{#if !$navigating && $page.params.list != 'not'}
 					<button on:click={showNot}>nicht erreicht</button>
 				{/if}
-
-				{#if (data.user.id==15 || data.user.id==1 || data.user.id==20) && !$navigating && !$page.route.id?.includes('evn')}
+				{#if (data.user.id==15 || data.user.id==1 || data.user.id==20 || data.user.login=='lo') && !$navigating && !$page.route.id?.includes('evn')}
 				<button on:click={showEvn}>eVn</button>
 				{/if}
 				{#if !$navigating && $page.params.list != 'log'}
@@ -134,7 +133,8 @@
 	<!--
 <div>
     Benutzer: 
-    {data.user.initialen} <i>{data.user.name}</i>  ( {data.user.initialen} {data.user.cwTelefon} )
+    
+	<i>{data.user.name}</i>  ( {data.user.cwTelefon} )
     {#if data.user.sprachen.de}DE {/if}
     {#if data.user.sprachen.fr}FR {/if}
     {#if data.user.sprachen.it}IT {/if}
