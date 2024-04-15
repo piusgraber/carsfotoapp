@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
+	import { invalidate, invalidateAll } from '$app/navigation';
 	import { formatDate } from '$lib/myfuncs';
 
     export let data;
@@ -16,7 +16,7 @@
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve('resolved');
-    }, 10000);
+    }, 1000);
   });
 }
 
@@ -31,7 +31,7 @@
       stunden=''
       datum = formatDate(new Date(), 'x').substring(0, 10)
       await waitAWhile()
-      invalidateAll()
+      invalidateAll()//('/rapport')
       working = false
     }
 
@@ -45,7 +45,7 @@ $: invalidData = !datum || !stunden || !stunden.includes(':') || stunden.length 
 
 
 </script>
-<b>Rapport</b>
+<b>Rapport</b>  (F5 zum aktualisieren)
 
 <form on:submit|preventDefault={subscribe}>
     <div class="gridH">
