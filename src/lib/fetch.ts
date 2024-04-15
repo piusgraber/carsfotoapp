@@ -174,6 +174,14 @@ export const getLogEntry: any = async (id: number) => {
 
 
 
+export const addRapport: any = async (datum: Date, stunden: number, person: string) => {
+    const sql = `INSERT INTO Rapport(datum, stunden, person) VALUES ('${datum}', '${stunden}', '${person}')`
+    console.log(sql)
+    const sres = await fetchSQL_CW(sql)
+    console.log(sres)
+    return {}
+}
+
 
 
 // Leads für Liste holen
