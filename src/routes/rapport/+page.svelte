@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invalidate, invalidateAll } from '$app/navigation';
+	import { goto, invalidate, invalidateAll } from '$app/navigation';
 	import { formatDate } from '$lib/myfuncs';
 
     export let data;
@@ -31,7 +31,8 @@
       stunden=''
       datum = formatDate(new Date(), 'x').substring(0, 10)
       await waitAWhile()
-      invalidateAll()//('/rapport')
+      goto('/rapport?' + new Date().getTime())
+//      invalidateAll()//('/rapport')
       working = false
     }
 
