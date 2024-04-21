@@ -4,7 +4,8 @@ import * as sql from 'mssql';
 const config = {
     user: 'carwareadmin',
     password: '%pavDBaws',
-    server: 'carware-db-instance.cmiag32fgcgo.eu-west-1.rds.amazonaws.com',
+//    server: 'carware-db-instance.cmiag32fgcgo.eu-west-1.rds.amazonaws.com',
+    server: 'carware-db.c9qimmyow173.eu-central-2.rds.amazonaws.com',
     port: 1433,
     database: 'carware_lead',
     "options": {
