@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     let sres = await fetchSQL_Array(sql)
     if (cookies.get('authRoot') == 'lo') {
         sres = sres.filter(r => {
-            if (r.evnok) return false
+            if (r.evnok && r.evnok_code != 2) return false
             return true
         })
     }
