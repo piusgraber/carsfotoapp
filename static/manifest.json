@@ -1,0 +1,18 @@
+{
+    "id": "CARS-FOTO",
+    "name": "Cars Foto App",
+    "short_name": "Cars Foto",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "theme_color": "#990134",
+    "background_color": "#dddddd",
+    "icons": [
+        {
+          "src": "144am.png",
+          "sizes": "144x144",
+          "type": "image/png"
+        }
+      ]
+}
