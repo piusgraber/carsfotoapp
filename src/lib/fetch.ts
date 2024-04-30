@@ -1,5 +1,5 @@
-//export const urlBase = 'https://infos.ottoscars.ch/pneu16/'
-export const urlBase = `http://127.0.0.1:8888/`
+export const urlBase = 'https://infos.ottoscars.ch/pneu16/'
+//export const urlBase = `http://127.0.0.1:8888/`
 
 // einen einzelnen Lead holen für Bearbeitung
 
